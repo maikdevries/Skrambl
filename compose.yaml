@@ -1,6 +1,6 @@
 services:
-  spluff:
-    container_name: spluff
+  skrambl:
+    container_name: skrambl
     env_file:
       - .env
     build: .
