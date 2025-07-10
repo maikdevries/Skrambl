@@ -7,7 +7,7 @@ services:
     expose:
       - ${DENO_PORT:?error}
     networks:
-      - public
+      - network
     healthcheck:
       test: ["CMD", "deno", "eval", "try { await fetch('http://127.0.0.1:${DENO_PORT:?error}') } catch { Deno.exit(1) }"]
       interval: 30s
@@ -21,6 +21,6 @@ services:
       - no-new-privileges:true
 
 networks:
-  public:
-    name: public
+  network:
+    name: ${COMPOSE_NETWORK:?error}
     external: true
