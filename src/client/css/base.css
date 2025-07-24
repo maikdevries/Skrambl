@@ -1,0 +1,98 @@
+@layer reset;
+
+@layer reset {
+	*, *::before, *::after {
+		box-sizing: border-box;
+	}
+
+	* {
+		margin: 0;
+		padding: 0;
+		overscroll-behavior: none;
+		scrollbar-gutter: stable both-edges;
+	}
+
+	html {
+		-moz-text-size-adjust: none;
+		-webkit-text-size-adjust: none;
+		text-size-adjust: none;
+
+		color-scheme: light dark;
+		accent-color: var(--accent-colour-base, auto);
+
+		font-family: var(--font-family-base, system-ui);
+		line-height: var(--font-line-height-base, 1.5);
+		interpolate-size: allow-keywords;
+	}
+
+	@media (prefers-reduced-motion: no-preference) {
+		html {
+			scroll-behavior: smooth;
+		}
+	}
+
+	body {
+		min-block-size: 100dvh;
+		-webkit-font-smoothing: antialiased;
+	}
+
+	header, footer, main,
+	section, article {
+		container-type: inline-size;
+	}
+
+	h1, h2, h3, h4, h5, h6,
+	input, label, button {
+		line-height: var(--font-line-height-heading, 1.2);
+	}
+
+	h1, h2, h3, h4, h5, h6,
+	p, li, figcaption {
+		overflow-wrap: break-word;
+	}
+
+	h1, h2, h3, h4, h5, h6 {
+		font-size: inherit;
+		text-wrap: balance;
+	}
+
+	p, li, figcaption {
+		text-wrap: pretty;
+	}
+
+	code {
+		font-family: var(--font-family-mono, monospace);
+	}
+
+	ul, ol, menu {
+		list-style: none;
+	}
+
+	input, button, textarea, select {
+		color: inherit;
+		font-family: inherit;
+		font-size: inherit;
+	}
+
+	button:not(:disabled) {
+		cursor: pointer;
+	}
+
+	img, picture, video, canvas, svg {
+		min-inline-size: min-content;
+		max-inline-size: 100%;
+		display: block;
+	}
+
+	table {
+		border-collapse: collapse;
+	}
+
+	td, math, time[datetime*=':'] {
+		font-variant-numeric: tabular-nums lining-nums;
+	}
+
+	:target {
+		scroll-margin-block: 3rlh;
+	}
+}
