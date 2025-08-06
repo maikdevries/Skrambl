@@ -1,5 +1,5 @@
-import type { Session } from '@maikdevries/server-sessions';
 import type { Credentials, PKCE } from '../common/types.ts';
+import type { Context } from '../router.ts';
 
 import { encodeBase64Url } from '@std/encoding';
 import * as auth from '../services/auth.services.ts';
@@ -7,7 +7,7 @@ import * as auth from '../services/auth.services.ts';
 const DENO_ORIGIN = Deno.env.get('DENO_ORIGIN') ?? '';
 const SPOTIFY_CLIENT_ID = Deno.env.get('SPOTIFY_CLIENT_ID') ?? '';
 
-export async function login(_: Request, session: Session): Promise<Response> {
+export async function login(_: Request, context: Context): Promise<Response> {
 	// [FUTURE] https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Uint8Array/toBase64#browser_compatibility
 	const state = encodeBase64Url(crypto.getRandomValues(new Uint8Array(128)));
 
@@ -25,7 +25,7 @@ export async function login(_: Request, session: Session): Promise<Response> {
 		'code_challenge': challenge,
 	});
 
-	session.flash('pkce', {
+	context.session.flash('pkce', {
 		'state': state,
 		'verifier': verifier,
 	});
@@ -33,33 +33,31 @@ export async function login(_: Request, session: Session): Promise<Response> {
 	return Response.redirect(`https://accounts.spotify.com/authorize?${params}`);
 }
 
-export async function process(request: Request, session: Session): Promise<Response> {
-	const url = URL.parse(request.url) as URL;
-
-	const code = url.searchParams.get('code');
-	const pkce = session.get<PKCE>('pkce');
+export async function process(_: Request, context: Context): Promise<Response> {
+	const code = context.url.searchParams.get('code');
+	const pkce = context.session.get<PKCE>('pkce');
 
 	if (!code || !pkce) return Response.redirect(new URL('/auth/login', DENO_ORIGIN));
-	else if (url.searchParams.get('state') !== pkce.state) return Response.redirect(new URL('/auth/csrf', DENO_ORIGIN));
+	else if (context.url.searchParams.get('state') !== pkce.state) return Response.redirect(new URL('/auth/csrf', DENO_ORIGIN));
 
 	const credentials = await auth.retrieve(code, pkce.verifier);
-	session.regenerate().set('credentials', credentials);
+	context.session.regenerate().set('credentials', credentials);
 
 	return Response.redirect(new URL('/playlists', DENO_ORIGIN));
 }
 
-export async function refresh(_: Request, session: Session): Promise<Response> {
-	const token = session.get<Credentials>('credentials')?.refresh;
+export async function refresh(_: Request, context: Context): Promise<Response> {
+	const token = context.session.get<Credentials>('credentials')?.refresh;
 	if (!token) return Response.redirect(new URL('/auth/login', DENO_ORIGIN));
 
 	const credentials = await auth.refresh(token);
-	session.regenerate().set('credentials', credentials);
+	context.session.regenerate().set('credentials', credentials);
 
 	return Response.redirect(new URL('/', DENO_ORIGIN));
 }
 
-export function logout(_: Request, session: Session): Response {
-	session.terminate();
+export function logout(_: Request, context: Context): Response {
+	context.session.terminate();
 
 	return Response.redirect(new URL('/', DENO_ORIGIN));
 }
