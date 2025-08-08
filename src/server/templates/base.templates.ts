@@ -18,7 +18,8 @@ export const Base = (() => render.html`
 			</main>
 
 			<footer>
-				<!-- [TODO] Define footer template -->
+				&copy; 2025
+				<a href='https://maikdevries.com'>Maik de Vries</a>
 			</footer>
 		</body>
 	</html>
