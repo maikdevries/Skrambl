@@ -5,10 +5,10 @@ import { List } from './components.templates.ts';
 
 export const Home = (() => Base(render.html`
 	<section>
-		${ List('Playlists') }
+		${ List('Playlists', []) }
 	</section>
 
 	<aside>
-		${ List('Queue') }
+		${ List('Queue', []) }
 	</aside>
 `));
