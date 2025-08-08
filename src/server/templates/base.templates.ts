@@ -1,6 +1,6 @@
 import { render } from '@maikdevries/server-render';
 
-export const Base = render.html`
+export const Base = (() => render.html`
 	<!DOCTYPE html>
 	<html lang='en'>
 		<head>
@@ -22,4 +22,4 @@ export const Base = render.html`
 			</footer>
 		</body>
 	</html>
-`;
+`);
