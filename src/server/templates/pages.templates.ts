@@ -1,13 +1,14 @@
 import { render } from '@maikdevries/server-render';
 
 import { Base } from './base.templates.ts';
+import { List } from './components.templates.ts';
 
 export const Home = (() => Base(render.html`
 	<section>
-		<!-- [TODO] Define list template for playlists -->
+		${ List('Playlists') }
 	</section>
 
 	<aside>
-		<!-- [TODO] Define list template for selected playlists -->
+		${ List('Queue') }
 	</aside>
 `));
