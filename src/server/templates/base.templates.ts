@@ -1,6 +1,6 @@
 import { render } from '@maikdevries/server-render';
 
-export const Base = (() => render.html`
+export const Base = ((content: unknown) => render.html`
 	<!DOCTYPE html>
 	<html lang='en'>
 		<head>
@@ -14,7 +14,7 @@ export const Base = (() => render.html`
 			</header>
 
 			<main>
-				<!-- [TODO] Support insertion of main content -->
+				 ${ content }
 			</main>
 
 			<footer>
