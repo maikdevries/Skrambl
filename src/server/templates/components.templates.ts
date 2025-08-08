@@ -11,3 +11,14 @@ export const List = ((heading: string, items: unknown[]) => render.html`
 		</ul>
 	</article>
 `);
+
+export const Playlist = ((description: string, image: string, name: string, url: string) => render.html`
+	<article class='playlist'>
+		<img src='${ image }'>
+
+		<span class='details'>
+			<a href='${ url }'>${ name }</a>
+			<span>${ description }</span>
+		</span>
+	</article>
+`);
