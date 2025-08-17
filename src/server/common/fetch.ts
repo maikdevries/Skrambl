@@ -1,4 +1,5 @@
-import type { HTTP_METHOD, JSON, Page, TokenResponse } from './types.ts';
+import type { TokenResponse } from '../types/auth.types.ts';
+import type { HTTP_METHOD, JSON, Page } from './types.ts';
 
 export async function api<T>(token: string, method: keyof typeof HTTP_METHOD, endpoint: string, payload?: JSON): Promise<T> | never {
 	return await json(

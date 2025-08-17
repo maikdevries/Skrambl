@@ -1,5 +1,6 @@
-import type { Credentials, PKCE } from '../common/types.ts';
+import type { Credentials } from '../common/types.ts';
 import type { Context } from '../router.ts';
+import type { PKCE } from '../types/auth.types.ts';
 
 import { encodeBase64Url } from '@std/encoding';
 import * as auth from '../services/auth.services.ts';

@@ -1,4 +1,4 @@
-import type { Playlist, PlaylistTrack, Snapshot } from '../common/types.ts';
+import type { Playlist, PlaylistTrack, Snapshot } from '../types/spotify.types.ts';
 
 import * as fetch from '../common/fetch.ts';
 
