@@ -22,7 +22,7 @@ interface Page<T> {
 	'total': number;
 }
 
-export async function api<T>(token: string, method: HTTP_METHOD, endpoint: string, payload?: JSON): Promise<T> | never {
+export async function api<T>(token: string, method: HTTP_METHOD, endpoint: string, payload?: JSON): Promise<T> {
 	return await json<T>(
 		method,
 		new URL(endpoint, 'https://api.spotify.com/v1/'),
@@ -34,7 +34,7 @@ export async function api<T>(token: string, method: HTTP_METHOD, endpoint: strin
 	);
 }
 
-export async function auth(params: URLSearchParams): Promise<AuthorisationResponse> | never {
+export async function auth(params: URLSearchParams): Promise<AuthorisationResponse> {
 	return await json<AuthorisationResponse>(
 		'POST',
 		new URL('https://accounts.spotify.com/api/token'),
@@ -45,7 +45,7 @@ export async function auth(params: URLSearchParams): Promise<AuthorisationRespon
 	);
 }
 
-export async function pull<T>(token: string, method: HTTP_METHOD, endpoint: string, offset = 0): Promise<T[]> | never {
+export async function pull<T>(token: string, method: HTTP_METHOD, endpoint: string, offset = 0): Promise<T[]> {
 	const params = new URLSearchParams({
 		'limit': '50',
 		'offset': String(offset),
@@ -66,7 +66,7 @@ export async function push<T>(token: string, method: HTTP_METHOD, endpoint: stri
 	else return response;
 }
 
-async function json<T>(method: HTTP_METHOD, url: URL, headers: HeadersInit, body?: BodyInit): Promise<T> | never {
+async function json<T>(method: HTTP_METHOD, url: URL, headers: HeadersInit, body?: BodyInit): Promise<T> {
 	let response: Response;
 
 	try {
