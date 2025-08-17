@@ -8,7 +8,7 @@ export async function getPlaylists(token: string): Promise<Playlist[]> {
 
 	return items.map((x) => ({
 		'description': x.description,
-		'image': x.images.at(0)?.url ?? '',
+		'image': x.images?.at(0)?.url ?? '',
 		'name': x.name,
 		'url': x.external_urls.spotify,
 	}));

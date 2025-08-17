@@ -67,7 +67,7 @@ export interface BasePlaylist {
 	};
 	'href': string;
 	'id': string;
-	'images': Image[];
+	'images': Image[] | null;
 	'name': string;
 	'owner': User;
 	'public': boolean;
