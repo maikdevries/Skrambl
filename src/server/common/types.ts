@@ -1,7 +1,7 @@
 export interface Credentials {
-	'token': string;
 	'expires': number;
 	'refresh': string;
+	'token': string;
 }
 
 export const HTTP_METHOD = {

@@ -48,7 +48,7 @@ interface Episode {
 	'name': string;
 	'release_date': string;
 	'release_date_precision': string;
-	'show': Show;
+	'show': BaseShow;
 	'type': 'episode';
 	'uri': string;
 }
@@ -59,7 +59,7 @@ interface Image {
 	'width': number | null;
 }
 
-export interface Playlist {
+export interface BasePlaylist {
 	'collaborative': boolean;
 	'description': string;
 	'external_urls': {
@@ -80,14 +80,14 @@ export interface Playlist {
 	'uri': string;
 }
 
-export interface PlaylistTrack {
+export interface PlaylistItem {
 	'added_at': string | null;
 	'added_by': BaseUser | null;
 	'is_local': boolean;
 	'track': Episode | Track;
 }
 
-interface Show {
+interface BaseShow {
 	'available_markets': string[];
 	'copyrights': Copyright[];
 	'description': string;

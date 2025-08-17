@@ -1,4 +1,4 @@
-import type { TokenResponse } from '../types/auth.types.ts';
+import type { AuthorisationResponse } from '../types/auth.types.ts';
 import type { HTTP_METHOD, JSON, Page } from './types.ts';
 
 export async function api<T>(token: string, method: keyof typeof HTTP_METHOD, endpoint: string, payload?: JSON): Promise<T> | never {
@@ -13,7 +13,7 @@ export async function api<T>(token: string, method: keyof typeof HTTP_METHOD, en
 	) as unknown as T;
 }
 
-export async function auth(params: URLSearchParams): Promise<TokenResponse> | never {
+export async function auth(params: URLSearchParams): Promise<AuthorisationResponse> | never {
 	return await json(
 		'POST',
 		new URL('https://accounts.spotify.com/api/token'),
@@ -21,7 +21,7 @@ export async function auth(params: URLSearchParams): Promise<TokenResponse> | ne
 			'Content-Type': 'application/x-www-form-urlencoded',
 		},
 		params,
-	) as unknown as TokenResponse;
+	) as unknown as AuthorisationResponse;
 }
 
 export async function pull<T>(token: string, method: keyof typeof HTTP_METHOD, endpoint: string, offset = 0): Promise<T[]> | never {

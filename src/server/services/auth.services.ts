@@ -17,9 +17,9 @@ export async function retrieve(code: string, verifier: string): Promise<Credenti
 	const data = await fetch.auth(params);
 
 	return {
-		'token': data.access_token,
 		'expires': Date.now() + data.expires_in * 1000,
 		'refresh': data.refresh_token ?? '',
+		'token': data.access_token,
 	};
 }
 
@@ -33,8 +33,8 @@ export async function refresh(token: string): Promise<Credentials> {
 	const data = await fetch.auth(params);
 
 	return {
-		'token': data.access_token,
 		'expires': Date.now() + data.expires_in * 1000,
 		'refresh': data.refresh_token ?? token,
+		'token': data.access_token,
 	};
 }
