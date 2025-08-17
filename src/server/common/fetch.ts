@@ -23,7 +23,7 @@ interface Page<T> {
 }
 
 export async function api<T>(token: string, method: HTTP_METHOD, endpoint: string, payload?: JSON): Promise<T> | never {
-	return await json(
+	return await json<T>(
 		method,
 		new URL(endpoint, 'https://api.spotify.com/v1/'),
 		{
@@ -31,18 +31,18 @@ export async function api<T>(token: string, method: HTTP_METHOD, endpoint: strin
 			'Content-Type': 'application/json',
 		},
 		payload ? JSON.stringify(payload) : undefined,
-	) as unknown as T;
+	);
 }
 
 export async function auth(params: URLSearchParams): Promise<AuthorisationResponse> | never {
-	return await json(
+	return await json<AuthorisationResponse>(
 		'POST',
 		new URL('https://accounts.spotify.com/api/token'),
 		{
 			'Content-Type': 'application/x-www-form-urlencoded',
 		},
 		params,
-	) as unknown as AuthorisationResponse;
+	);
 }
 
 export async function pull<T>(token: string, method: HTTP_METHOD, endpoint: string, offset = 0): Promise<T[]> | never {
@@ -66,7 +66,7 @@ export async function push<T>(token: string, method: HTTP_METHOD, endpoint: stri
 	else return response;
 }
 
-async function json(method: HTTP_METHOD, url: URL, headers: HeadersInit, body?: BodyInit): Promise<JSON> | never {
+async function json<T>(method: HTTP_METHOD, url: URL, headers: HeadersInit, body?: BodyInit): Promise<T> | never {
 	let response: Response;
 
 	try {
@@ -82,7 +82,7 @@ async function json(method: HTTP_METHOD, url: URL, headers: HeadersInit, body?: 
 		throw new FetchError(503, method, url.toString());
 	}
 
-	if (response.ok) return await response.json() as JSON;
+	if (response.ok) return await response.json() as T;
 	else throw new FetchError(response.status, method, response.url);
 }
 
