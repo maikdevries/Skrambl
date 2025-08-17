@@ -1,5 +1,30 @@
-import type { AuthorisationResponse } from '../types/auth.types.ts';
-import type { HTTP_METHOD, JSON, Page } from './types.ts';
+interface AuthorisationResponse {
+	'access_token': string;
+	'expires_in': number;
+	'refresh_token': string | undefined;
+	'scope': string;
+	'token_type': 'Bearer';
+}
+
+const HTTP_METHOD = {
+	'DELETE': 'DELETE',
+	'GET': 'GET',
+	'POST': 'POST',
+} as const;
+
+type JSON = string | number | boolean | null | JSON[] | {
+	[key: string]: JSON;
+};
+
+interface Page<T> {
+	'href': string;
+	'items': T[];
+	'limit': number;
+	'next': string | null;
+	'offset': number;
+	'previous': string | null;
+	'total': number;
+}
 
 export async function api<T>(token: string, method: keyof typeof HTTP_METHOD, endpoint: string, payload?: JSON): Promise<T> | never {
 	return await json(

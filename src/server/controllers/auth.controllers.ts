@@ -1,12 +1,16 @@
 import type { Credentials } from '../common/types.ts';
 import type { Context } from '../router.ts';
-import type { PKCE } from '../types/auth.types.ts';
 
 import { encodeBase64Url } from '@std/encoding';
 import * as auth from '../services/auth.services.ts';
 
 const DENO_ORIGIN = Deno.env.get('DENO_ORIGIN') ?? '';
 const SPOTIFY_CLIENT_ID = Deno.env.get('SPOTIFY_CLIENT_ID') ?? '';
+
+interface PKCE {
+	'state': string;
+	'verifier': string;
+}
 
 export async function login(_: Request, context: Context): Promise<Response> {
 	// [FUTURE] https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Uint8Array/toBase64#browser_compatibility
