@@ -6,11 +6,7 @@ interface AuthorisationResponse {
 	'token_type': 'Bearer';
 }
 
-const HTTP_METHOD = {
-	'DELETE': 'DELETE',
-	'GET': 'GET',
-	'POST': 'POST',
-} as const;
+type HTTP_METHOD = 'DELETE' | 'GET' | 'POST';
 
 type JSON = string | number | boolean | null | JSON[] | {
 	[key: string]: JSON;
@@ -26,7 +22,7 @@ interface Page<T> {
 	'total': number;
 }
 
-export async function api<T>(token: string, method: keyof typeof HTTP_METHOD, endpoint: string, payload?: JSON): Promise<T> | never {
+export async function api<T>(token: string, method: HTTP_METHOD, endpoint: string, payload?: JSON): Promise<T> | never {
 	return await json(
 		method,
 		new URL(endpoint, 'https://api.spotify.com/v1/'),
@@ -49,7 +45,7 @@ export async function auth(params: URLSearchParams): Promise<AuthorisationRespon
 	) as unknown as AuthorisationResponse;
 }
 
-export async function pull<T>(token: string, method: keyof typeof HTTP_METHOD, endpoint: string, offset = 0): Promise<T[]> | never {
+export async function pull<T>(token: string, method: HTTP_METHOD, endpoint: string, offset = 0): Promise<T[]> | never {
 	const params = new URLSearchParams({
 		'limit': '50',
 		'offset': String(offset),
@@ -61,7 +57,7 @@ export async function pull<T>(token: string, method: keyof typeof HTTP_METHOD, e
 	else return data.items;
 }
 
-export async function push<T>(token: string, method: keyof typeof HTTP_METHOD, endpoint: string, key: string, payload: JSON[]): Promise<T> {
+export async function push<T>(token: string, method: HTTP_METHOD, endpoint: string, key: string, payload: JSON[]): Promise<T> {
 	const response = await api<T>(token, method, endpoint, {
 		[key]: payload.slice(0, 100),
 	});
@@ -70,7 +66,7 @@ export async function push<T>(token: string, method: keyof typeof HTTP_METHOD, e
 	else return response;
 }
 
-async function json(method: keyof typeof HTTP_METHOD, url: URL, headers: HeadersInit, body?: BodyInit): Promise<JSON> | never {
+async function json(method: HTTP_METHOD, url: URL, headers: HeadersInit, body?: BodyInit): Promise<JSON> | never {
 	let response: Response;
 
 	try {
@@ -91,7 +87,7 @@ async function json(method: keyof typeof HTTP_METHOD, url: URL, headers: Headers
 }
 
 class FetchError extends Error {
-	constructor(status: number, method: keyof typeof HTTP_METHOD, url: string) {
+	constructor(status: number, method: HTTP_METHOD, url: string) {
 		super(`Fetch request failed with status ${status}. URL: ${method} ${url}`);
 		this.name = this.constructor.name;
 	}
