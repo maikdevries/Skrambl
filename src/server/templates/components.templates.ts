@@ -1,6 +1,6 @@
 import { render } from '@maikdevries/server-render';
 
-export const List = ((heading: string, items: unknown[]) => render.html`
+export const ListComponent = ((heading: string, items: unknown[]) => render.html`
 	<article class='list'>
 		<header>
 			<h2>${ heading }</h2>
@@ -12,7 +12,7 @@ export const List = ((heading: string, items: unknown[]) => render.html`
 	</article>
 `);
 
-export const Playlist = ((description: string, image: string, name: string, url: string) => render.html`
+export const PlaylistComponent = ((description: string, image: string, name: string, url: string) => render.html`
 	<article class='playlist'>
 		<img src='${ image }'>
 
