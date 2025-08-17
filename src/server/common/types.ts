@@ -3,3 +3,10 @@ export interface Credentials {
 	'refresh': string;
 	'token': string;
 }
+
+export interface Playlist {
+	description: string;
+	image: string;
+	name: string;
+	url: string;
+}

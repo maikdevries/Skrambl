@@ -1,3 +1,5 @@
+import type { Playlist } from '../common/types.ts';
+
 import { render } from '@maikdevries/server-render';
 
 export const ListComponent = ((heading: string, items: unknown[]) => render.html`
@@ -12,7 +14,7 @@ export const ListComponent = ((heading: string, items: unknown[]) => render.html
 	</article>
 `);
 
-export const PlaylistComponent = ((description: string, image: string, name: string, url: string) => render.html`
+export const PlaylistComponent = (({ description, image, name, url }: Playlist) => render.html`
 	<article class='playlist'>
 		<img src='${ image }'>
 

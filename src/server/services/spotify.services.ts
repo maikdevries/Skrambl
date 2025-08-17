@@ -1,9 +1,17 @@
+import type { Playlist } from '../common/types.ts';
 import type { BasePlaylist, PlaylistItem, Snapshot } from '../types/spotify.types.ts';
 
 import * as fetch from '../common/fetch.ts';
 
-export async function getPlaylists(token: string): Promise<BasePlaylist[]> {
-	return await fetch.pull<BasePlaylist>(token, 'GET', 'me/playlists');
+export async function getPlaylists(token: string): Promise<Playlist[]> {
+	const items = await fetch.pull<BasePlaylist>(token, 'GET', 'me/playlists');
+
+	return items.map((x) => ({
+		'description': x.description,
+		'image': x.images.at(0)?.url ?? '',
+		'name': x.name,
+		'url': x.external_urls.spotify,
+	}));
 }
 
 export async function addPlaylistItems(token: string, id: string, tracks: PlaylistItem[]): Promise<Snapshot> {
