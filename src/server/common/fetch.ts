@@ -66,7 +66,7 @@ export async function push<T>(token: string, method: HTTP_METHOD, endpoint: stri
 	else return response;
 }
 
-async function json<T>(method: HTTP_METHOD, url: URL, headers: HeadersInit, body?: BodyInit): Promise<T> {
+async function json<T>(method: HTTP_METHOD, url: URL, headers: HeadersInit, body?: BodyInit, retries = 0): Promise<T> {
 	let response: Response;
 
 	try {
@@ -80,6 +80,11 @@ async function json<T>(method: HTTP_METHOD, url: URL, headers: HeadersInit, body
 		});
 	} catch {
 		throw new FetchError(503, method, url.toString());
+	}
+
+	if (response.status === 429 && retries < 3) {
+		await new Promise((resolve) => setTimeout(() => resolve, Number.parseInt(response.headers.get('Retry-After') ?? '0') * 1000));
+		return await json<T>(method, url, headers, body, retries + 1);
 	}
 
 	if (response.ok) return await response.json() as T;
