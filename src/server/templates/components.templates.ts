@@ -1,20 +1,20 @@
 import type { Playlist } from '../common/types.ts';
 
-import { render } from '@maikdevries/server-render';
+import { html } from '@maikdevries/server-render';
 
-export const ListComponent = ((heading: string, items: unknown[]) => render.html`
+export const ListComponent = ((heading: string, items: unknown[]) => html`
 	<article class='list'>
 		<header>
 			<h2>${ heading }</h2>
 		</header>
 
 		<ul>
-			${ items.map((x) => render.html`<li>${ x }</li>`) }
+			${ items.map((x) => html`<li>${ x }</li>`) }
 		</ul>
 	</article>
 `);
 
-export const PlaylistComponent = (({ description, image, name, url }: Playlist) => render.html`
+export const PlaylistComponent = (({ description, image, name, url }: Playlist) => html`
 	<article class='playlist'>
 		<img src='${ image }'>
 

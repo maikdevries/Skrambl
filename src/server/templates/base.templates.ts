@@ -1,6 +1,8 @@
-import { render } from '@maikdevries/server-render';
+import type { Template } from '@maikdevries/server-render';
 
-export const Base = ((content: unknown) => render.html`
+import { html } from '@maikdevries/server-render';
+
+export const Base = ((content: Template) => html`
 	<!DOCTYPE html>
 	<html lang='en'>
 		<head>
