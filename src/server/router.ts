@@ -1,16 +1,15 @@
 import type { RouteContext } from '@maikdevries/server-router';
 import type { Session } from '@maikdevries/server-sessions';
 
-import { chain, route } from '@maikdevries/server-router';
-import { session } from '@maikdevries/server-sessions';
+import { route } from '@maikdevries/server-router';
 import { STATUS_CODE, STATUS_TEXT } from '@std/http';
 
 import * as auth from './controllers/auth.controllers.ts';
 import * as spotify from './controllers/spotify.controllers.ts';
 
-export type Context = RouteContext<{ 'session': Session }>;
+import middleware from './middleware/base.middleware.ts';
 
-const middleware = chain(session());
+export type Context = RouteContext<{ 'session': Session }>;
 
 const router = route<{ 'session': Session }>(
 	[
