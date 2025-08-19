@@ -1,5 +1,5 @@
 import type { RouteContext } from '@maikdevries/server-router';
-import type { Session } from '@maikdevries/server-sessions';
+import type { BaseContext } from './middleware/base.middleware.ts';
 
 import { route } from '@maikdevries/server-router';
 import { STATUS_CODE, STATUS_TEXT } from '@std/http';
@@ -9,9 +9,9 @@ import * as spotify from './controllers/spotify.controllers.ts';
 
 import middleware from './middleware/base.middleware.ts';
 
-export type Context = RouteContext<{ 'session': Session }>;
+export type Context = RouteContext<BaseContext>;
 
-const router = route<{ 'session': Session }>(
+const router = route<BaseContext>(
 	[
 		{
 			'method': ['GET'],
