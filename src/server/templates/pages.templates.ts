@@ -5,7 +5,7 @@ import { html } from '@maikdevries/server-render';
 import { Base } from './base.templates.ts';
 import { ListComponent, PlaylistComponent } from './components.templates.ts';
 
-export const Authorisation = (() => Base(html`
+export const Connect = (() => Base(html`
 	<section>
 		${
 			ListComponent('Plug into a streaming service', [
