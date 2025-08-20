@@ -1,4 +1,3 @@
-import type { RouteContext } from '@maikdevries/server-router';
 import type { BaseContext } from '../middleware/base.middleware.ts';
 
 import { route } from '@maikdevries/server-router';
@@ -8,8 +7,6 @@ import middleware from '../middleware/base.middleware.ts';
 
 import auth from './auth.routes.ts';
 import * as Page from '../templates/pages.templates.ts';
-
-export type Context = RouteContext<BaseContext>;
 
 const router = route<BaseContext>(
 	[

@@ -1,5 +1,5 @@
 import type { Template } from '@maikdevries/server-render';
-import type { Empty, Middleware } from '@maikdevries/server-router';
+import type { Empty, Middleware, RouteContext } from '@maikdevries/server-router';
 import type { Session } from '@maikdevries/server-sessions';
 
 import { stringify } from '@maikdevries/server-render';
@@ -10,6 +10,8 @@ export interface BaseContext {
 	'render': (template: Template) => Promise<string>;
 	'session': Session;
 }
+
+export type Context = RouteContext<BaseContext>;
 
 const error: Middleware = async (request, context, next) => {
 	try {
