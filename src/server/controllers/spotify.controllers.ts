@@ -1,5 +1,5 @@
 import type { Credentials } from '../common/types.ts';
-import type { Context } from '../router.ts';
+import type { Context } from '../routes/base.routes.ts';
 
 import * as spotify from '../services/spotify.services.ts';
 

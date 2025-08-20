@@ -1,23 +1,12 @@
-import type { RouteContext } from '@maikdevries/server-router';
-import type { BaseContext } from './middleware/base.middleware.ts';
+import type { BaseContext } from '../middleware/base.middleware.ts';
 
 import { route } from '@maikdevries/server-router';
 import { STATUS_CODE, STATUS_TEXT } from '@std/http';
 
-import * as auth from './controllers/auth.controllers.ts';
-import * as spotify from './controllers/spotify.controllers.ts';
-
-import middleware from './middleware/base.middleware.ts';
-
-export type Context = RouteContext<BaseContext>;
+import * as auth from '../controllers/auth.controllers.ts';
 
 const router = route<BaseContext>(
 	[
-		{
-			'method': ['GET'],
-			'pattern': new URLPattern({ 'pathname': '/' }),
-			'handler': (_, context) => new Response(`Welcome to ${context.url.hostname}`),
-		},
 		{
 			'method': ['GET'],
 			'pattern': new URLPattern({ 'pathname': '/auth/setup' }),
@@ -38,13 +27,8 @@ const router = route<BaseContext>(
 			'pattern': new URLPattern({ 'pathname': '/auth/logout' }),
 			'handler': auth.logout,
 		},
-		{
-			'method': ['GET'],
-			'pattern': new URLPattern({ 'pathname': '/playlists' }),
-			'handler': spotify.playlists,
-		},
 	],
 	() => new Response(STATUS_TEXT[STATUS_CODE.NotFound], { 'status': STATUS_CODE.NotFound }),
 );
 
-export default middleware.add(router);
+export default router;
