@@ -12,7 +12,7 @@ interface PKCE {
 	'verifier': string;
 }
 
-export async function login(_: Request, context: Context): Promise<Response> {
+export async function setup(_: Request, context: Context): Promise<Response> {
 	// [FUTURE] https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Uint8Array/toBase64#browser_compatibility
 	const state = encodeBase64Url(crypto.getRandomValues(new Uint8Array(128)));
 
@@ -42,7 +42,7 @@ export async function process(_: Request, context: Context): Promise<Response> {
 	const code = context.url.searchParams.get('code');
 	const pkce = context.session.get<PKCE>('pkce');
 
-	if (!code || !pkce) return Response.redirect(new URL('/auth/login', DENO_ORIGIN));
+	if (!code || !pkce) return Response.redirect(new URL('/auth', DENO_ORIGIN));
 	else if (context.url.searchParams.get('state') !== pkce.state) return Response.redirect(new URL('/auth/csrf', DENO_ORIGIN));
 
 	const credentials = await auth.retrieve(code, pkce.verifier);
@@ -53,7 +53,7 @@ export async function process(_: Request, context: Context): Promise<Response> {
 
 export async function refresh(_: Request, context: Context): Promise<Response> {
 	const token = context.session.get<Credentials>('credentials')?.refresh;
-	if (!token) return Response.redirect(new URL('/auth/login', DENO_ORIGIN));
+	if (!token) return Response.redirect(new URL('/auth', DENO_ORIGIN));
 
 	const credentials = await auth.refresh(token);
 	context.session.regenerate().set('credentials', credentials);

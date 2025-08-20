@@ -7,7 +7,7 @@ const DENO_ORIGIN = Deno.env.get('DENO_ORIGIN') ?? '';
 
 export async function playlists(_: Request, context: Context): Promise<Response> {
 	const credentials = context.session.get<Credentials>('credentials');
-	if (!credentials?.token) return Response.redirect(new URL('/auth/login', DENO_ORIGIN));
+	if (!credentials?.token) return Response.redirect(new URL('/auth', DENO_ORIGIN));
 
 	return Response.json(await spotify.getPlaylists(credentials.token));
 }

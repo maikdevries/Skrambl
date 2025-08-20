@@ -9,7 +9,7 @@ export const Authorisation = (() => Base(html`
 	<section>
 		${
 			ListComponent('Plug into a streaming service', [
-				html`<a href='/auth/login'>Connect with Spotify</a>`,
+				html`<a href='/auth/setup'>Connect with Spotify</a>`,
 			])
 		}
 

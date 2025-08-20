@@ -20,8 +20,8 @@ const router = route<BaseContext>(
 		},
 		{
 			'method': ['GET'],
-			'pattern': new URLPattern({ 'pathname': '/auth/login' }),
-			'handler': auth.login,
+			'pattern': new URLPattern({ 'pathname': '/auth/setup' }),
+			'handler': auth.setup,
 		},
 		{
 			'method': ['GET'],
