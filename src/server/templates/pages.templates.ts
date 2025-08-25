@@ -1,4 +1,4 @@
-import type { Playlist } from '../common/types.ts';
+import type { Playlist } from '../types/base.types.ts';
 
 import { html } from '@maikdevries/server-render';
 

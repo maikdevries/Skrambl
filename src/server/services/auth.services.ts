@@ -1,4 +1,4 @@
-import type { Credentials } from '../common/types.ts';
+import type { Credentials } from '../types/base.types.ts';
 
 import * as fetch from '../common/fetch.ts';
 

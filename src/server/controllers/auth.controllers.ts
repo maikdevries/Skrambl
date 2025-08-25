@@ -1,5 +1,5 @@
-import type { Credentials } from '../common/types.ts';
 import type { Context } from '../middleware/base.middleware.ts';
+import type { Credentials } from '../types/base.types.ts';
 
 import { encodeBase64Url } from '@std/encoding';
 import * as auth from '../services/auth.services.ts';
