@@ -1,8 +1,6 @@
-import type { BaseContext } from '../middleware/base.middleware.ts';
-
 import { route } from '@maikdevries/server-router';
-import { STATUS_CODE, STATUS_TEXT } from '@std/http';
 
+import type { BaseContext } from '../middleware/base.middleware.ts';
 import middleware from '../middleware/base.middleware.ts';
 
 import auth from './auth.routes.ts';
@@ -26,7 +24,7 @@ const router = route<BaseContext>(
 				}),
 		},
 	],
-	() => new Response(STATUS_TEXT[STATUS_CODE.NotFound], { 'status': STATUS_CODE.NotFound }),
+	() => new Response('Not found', { 'status': 404 }),
 );
 
 export default middleware.add(router);

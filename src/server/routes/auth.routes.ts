@@ -1,7 +1,6 @@
 import type { BaseContext } from '../middleware/base.middleware.ts';
 
 import { route } from '@maikdevries/server-router';
-import { STATUS_CODE, STATUS_TEXT } from '@std/http';
 
 import * as auth from '../controllers/auth.controllers.ts';
 
@@ -28,7 +27,7 @@ const router = route<BaseContext>(
 			'handler': auth.logout,
 		},
 	],
-	() => new Response(STATUS_TEXT[STATUS_CODE.NotFound], { 'status': STATUS_CODE.NotFound }),
+	() => new Response('Not found', { 'status': 404 }),
 );
 
 export default router;
