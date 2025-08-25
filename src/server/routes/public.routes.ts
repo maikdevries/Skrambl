@@ -11,7 +11,7 @@ import * as Page from '../templates/pages.templates.ts';
 const router = route<BaseContext>(
 	[
 		{
-			'method': ['GET'],
+			'method': ['*'],
 			'pattern': new URLPattern({ 'pathname': '/auth/*' }),
 			'handler': auth,
 		},
