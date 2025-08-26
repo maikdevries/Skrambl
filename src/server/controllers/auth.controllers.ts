@@ -1,4 +1,4 @@
-import type { Context } from '../middleware/base.middleware.ts';
+import type { Context } from '../routes/auth.routes.ts';
 import type { Credentials } from '../types/base.types.ts';
 
 import { encodeBase64Url } from '@std/encoding';
