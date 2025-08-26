@@ -1,6 +1,6 @@
 import type { Credentials } from '../types/base.types.ts';
 
-import * as fetch from '../common/fetch.ts';
+import * as fetch from '../controllers/fetch.controllers.ts';
 
 export async function retrieve(code: string, verifier: string, origin: string): Promise<Credentials> {
 	const params = new URLSearchParams({
