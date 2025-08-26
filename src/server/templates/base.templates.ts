@@ -2,6 +2,7 @@ import type { Template } from '@maikdevries/server-render';
 
 import { html } from '@maikdevries/server-render';
 
+// deno-fmt-ignore: Results in undesired formatting of template structure
 export const Base = ((content: Template) => html`
 	<!DOCTYPE html>
 	<html lang='en'>

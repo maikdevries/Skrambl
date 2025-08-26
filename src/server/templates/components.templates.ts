@@ -2,6 +2,7 @@ import type { Playlist } from '../types/base.types.ts';
 
 import { html } from '@maikdevries/server-render';
 
+// deno-fmt-ignore: Results in undesired formatting of template structure
 export const ListComponent = ((heading: string, items: unknown[]) => html`
 	<article class='list'>
 		<header>
@@ -14,6 +15,7 @@ export const ListComponent = ((heading: string, items: unknown[]) => html`
 	</article>
 `);
 
+// deno-fmt-ignore: Results in undesired formatting of template structure
 export const PlaylistComponent = (({ description, image, name, url }: Playlist) => html`
 	<article class='playlist'>
 		<img src='${ image }'>

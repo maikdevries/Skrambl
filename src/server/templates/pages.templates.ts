@@ -5,6 +5,7 @@ import { html } from '@maikdevries/server-render';
 import { Base } from './base.templates.ts';
 import { ListComponent, PlaylistComponent } from './components.templates.ts';
 
+// deno-fmt-ignore: Results in undesired formatting of template structure
 export const Connect = (() => Base(html`
 	<section>
 		${
@@ -19,6 +20,7 @@ export const Connect = (() => Base(html`
 	</section>
 `));
 
+// deno-fmt-ignore: Results in undesired formatting of template structure
 export const Dashboard = ((items: Playlist[]) => Base(html`
 	<section>
 		${ ListComponent('Playlists', items.map(PlaylistComponent)) }
