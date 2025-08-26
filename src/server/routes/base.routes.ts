@@ -3,11 +3,17 @@ import { route } from '@maikdevries/server-router';
 import type { BaseContext } from '../middleware/base.middleware.ts';
 import middleware from '../middleware/base.middleware.ts';
 
+import api from './api.routes.ts';
 import auth from './auth.routes.ts';
 import * as Page from '../templates/pages.templates.ts';
 
 const router = route<BaseContext>(
 	[
+		{
+			'method': ['*'],
+			'pattern': new URLPattern({ 'pathname': '/api/*' }),
+			'handler': api,
+		},
 		{
 			'method': ['*'],
 			'pattern': new URLPattern({ 'pathname': '/auth/*' }),
