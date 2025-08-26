@@ -5,7 +5,8 @@ import middleware from '../middleware/base.middleware.ts';
 
 import api from './api.routes.ts';
 import auth from './auth.routes.ts';
-import * as Page from '../templates/pages.templates.ts';
+
+import * as base from '../controllers/base.controllers.ts';
 
 const router = route<BaseContext>(
 	[
@@ -22,12 +23,12 @@ const router = route<BaseContext>(
 		{
 			'method': ['GET'],
 			'pattern': new URLPattern({ 'pathname': '/connect' }),
-			'handler': async (_, context) =>
-				new Response(await context.render(Page.Connect()), {
-					'headers': {
-						'Content-Type': 'text/html; charset=utf-8',
-					},
-				}),
+			'handler': base.connect,
+		},
+		{
+			'method': ['GET'],
+			'pattern': new URLPattern({ 'pathname': '/dashboard' }),
+			'handler': base.dashboard,
 		},
 	],
 	() => new Response('Not found', { 'status': 404 }),

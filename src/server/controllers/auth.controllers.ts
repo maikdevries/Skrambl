@@ -48,7 +48,7 @@ export async function process(_: Request, context: Context): Promise<Response> {
 	const credentials = await auth.retrieve(code, pkce.verifier);
 	context.session.regenerate().set('credentials', credentials);
 
-	return Response.redirect(new URL('/playlists', DENO_ORIGIN));
+	return Response.redirect(new URL('/dashboard', DENO_ORIGIN));
 }
 
 export async function refresh(_: Request, context: Context): Promise<Response> {
