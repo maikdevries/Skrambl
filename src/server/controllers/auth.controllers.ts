@@ -4,9 +4,6 @@ import type { Credentials } from '../types/base.types.ts';
 import { encodeBase64Url } from '@std/encoding';
 import * as auth from '../services/auth.services.ts';
 
-const DENO_ORIGIN = Deno.env.get('DENO_ORIGIN') ?? '';
-const SPOTIFY_CLIENT_ID = Deno.env.get('SPOTIFY_CLIENT_ID') ?? '';
-
 interface PKCE {
 	'state': string;
 	'verifier': string;
@@ -21,9 +18,9 @@ export async function setup(_: Request, context: Context): Promise<Response> {
 	const challenge = encodeBase64Url(await crypto.subtle.digest('SHA-256', new TextEncoder().encode(verifier)));
 
 	const params = new URLSearchParams({
-		'client_id': SPOTIFY_CLIENT_ID,
+		'client_id': Deno.env.get('SPOTIFY_CLIENT_ID') ?? '',
 		'response_type': 'code',
-		'redirect_uri': `${DENO_ORIGIN}/auth/process`,
+		'redirect_uri': `${context.url.origin}/auth/process`,
 		'state': state,
 		'scope': 'playlist-modify-private playlist-modify-public playlist-read-private',
 		'code_challenge_method': 'S256',
@@ -42,27 +39,27 @@ export async function process(_: Request, context: Context): Promise<Response> {
 	const code = context.url.searchParams.get('code');
 	const pkce = context.session.get<PKCE>('pkce');
 
-	if (!code || !pkce) return Response.redirect(new URL('/connect', DENO_ORIGIN));
-	else if (context.url.searchParams.get('state') !== pkce.state) return Response.redirect(new URL('/auth/csrf', DENO_ORIGIN));
+	if (!code || !pkce) return Response.redirect(new URL('/connect', context.url.origin));
+	else if (context.url.searchParams.get('state') !== pkce.state) return Response.redirect(new URL('/auth/csrf', context.url.origin));
 
-	const credentials = await auth.retrieve(code, pkce.verifier);
+	const credentials = await auth.retrieve(code, pkce.verifier, context.url.origin);
 	context.session.regenerate().set('credentials', credentials);
 
-	return Response.redirect(new URL('/dashboard', DENO_ORIGIN));
+	return Response.redirect(new URL('/dashboard', context.url.origin));
 }
 
 export async function refresh(_: Request, context: Context): Promise<Response> {
 	const token = context.session.get<Credentials>('credentials')?.refresh;
-	if (!token) return Response.redirect(new URL('/connect', DENO_ORIGIN));
+	if (!token) return Response.redirect(new URL('/connect', context.url.origin));
 
 	const credentials = await auth.refresh(token);
 	context.session.regenerate().set('credentials', credentials);
 
-	return Response.redirect(new URL('/', DENO_ORIGIN));
+	return Response.redirect(new URL('/', context.url.origin));
 }
 
 export function logout(_: Request, context: Context): Response {
 	context.session.terminate();
 
-	return Response.redirect(new URL('/', DENO_ORIGIN));
+	return Response.redirect(new URL('/', context.url.origin));
 }
