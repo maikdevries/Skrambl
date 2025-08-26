@@ -4,9 +4,21 @@ import type { Credentials } from '../types/base.types.ts';
 import { encodeBase64Url } from '@std/encoding';
 import * as auth from '../services/auth.services.ts';
 
+import { stringify as render } from '@maikdevries/server-render';
+import * as templates from '../templates/pages.templates.ts';
+
 interface PKCE {
 	'state': string;
 	'verifier': string;
+}
+
+export async function connect(_: Request, __: Context): Promise<Response> {
+	// [TODO] In case the user has already connected, redirect to the dashboard automatically
+	return new Response(await render(templates.Connect()), {
+		'headers': {
+			'Content-Type': 'text/html; charset=utf-8',
+		},
+	});
 }
 
 export async function setup(_: Request, context: Context): Promise<Response> {
@@ -39,18 +51,18 @@ export async function process(_: Request, context: Context): Promise<Response> {
 	const code = context.url.searchParams.get('code');
 	const pkce = context.session.get<PKCE>('pkce');
 
-	if (!code || !pkce) return Response.redirect(new URL('/connect', context.url.origin));
+	if (!code || !pkce) return Response.redirect(new URL('/auth/connect', context.url.origin));
 	else if (context.url.searchParams.get('state') !== pkce.state) return Response.redirect(new URL('/auth/csrf', context.url.origin));
 
 	const credentials = await auth.retrieve(code, pkce.verifier, context.url.origin);
 	context.session.regenerate().set('credentials', credentials);
 
-	return Response.redirect(new URL('/dashboard', context.url.origin));
+	return Response.redirect(new URL('/dashboard/', context.url.origin));
 }
 
 export async function refresh(_: Request, context: Context): Promise<Response> {
 	const token = context.session.get<Credentials>('credentials')?.refresh;
-	if (!token) return Response.redirect(new URL('/connect', context.url.origin));
+	if (!token) return Response.redirect(new URL('/auth/connect', context.url.origin));
 
 	const credentials = await auth.refresh(token);
 	context.session.regenerate().set('credentials', credentials);

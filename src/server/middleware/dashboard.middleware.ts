@@ -10,7 +10,7 @@ export interface BaseContext extends BC {
 
 const authorised: Middleware<BC & { 'url': URL }, { 'credentials': Credentials }> = async (request, context, next) => {
 	const credentials = context.session.get<Credentials>('credentials');
-	if (!credentials) return Response.redirect(new URL('/connect', context.url.origin));
+	if (!credentials) return Response.redirect(new URL('/auth/connect', context.url.origin));
 
 	if (credentials.expires < Date.now()) return Response.redirect(new URL('/auth/refresh', context.url.origin));
 

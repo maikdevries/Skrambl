@@ -3,12 +3,10 @@ import { route } from '@maikdevries/server-router';
 
 import type { BaseContext } from '../middleware/base.middleware.ts';
 import middleware from '../middleware/base.middleware.ts';
-import dashboardMiddleware from '../middleware/dashboard.middleware.ts';
 
 import api from './api.routes.ts';
 import auth from './auth.routes.ts';
-
-import * as base from '../controllers/base.controllers.ts';
+import dashboard from './dashboard.routes.ts';
 
 export type Context = RouteContext<BaseContext>;
 
@@ -25,14 +23,9 @@ const router = route<BaseContext>(
 			'handler': auth,
 		},
 		{
-			'method': ['GET'],
-			'pattern': new URLPattern({ 'pathname': '/connect' }),
-			'handler': base.connect,
-		},
-		{
-			'method': ['GET'],
-			'pattern': new URLPattern({ 'pathname': '/dashboard' }),
-			'handler': dashboardMiddleware.add(base.dashboard),
+			'method': ['*'],
+			'pattern': new URLPattern({ 'pathname': '/dashboard/*' }),
+			'handler': dashboard,
 		},
 	],
 	() => new Response('Not found', { 'status': 404 }),

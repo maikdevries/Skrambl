@@ -11,6 +11,11 @@ const router = route<BaseContext>(
 	[
 		{
 			'method': ['GET'],
+			'pattern': new URLPattern({ 'pathname': '/auth/connect' }),
+			'handler': auth.connect,
+		},
+		{
+			'method': ['GET'],
 			'pattern': new URLPattern({ 'pathname': '/auth/setup' }),
 			'handler': auth.setup,
 		},
