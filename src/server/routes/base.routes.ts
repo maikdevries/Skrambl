@@ -3,6 +3,7 @@ import { route } from '@maikdevries/server-router';
 
 import type { BaseContext } from '../middleware/base.middleware.ts';
 import middleware from '../middleware/base.middleware.ts';
+import dashboardMiddleware from '../middleware/dashboard.middleware.ts';
 
 import api from './api.routes.ts';
 import auth from './auth.routes.ts';
@@ -31,7 +32,7 @@ const router = route<BaseContext>(
 		{
 			'method': ['GET'],
 			'pattern': new URLPattern({ 'pathname': '/dashboard' }),
-			'handler': base.dashboard,
+			'handler': dashboardMiddleware.add(base.dashboard),
 		},
 	],
 	() => new Response('Not found', { 'status': 404 }),

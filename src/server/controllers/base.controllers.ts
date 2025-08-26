@@ -14,7 +14,6 @@ export async function connect(_: Request, __: Context): Promise<Response> {
 }
 
 export async function dashboard(_: Request, __: Context): Promise<Response> {
-	// [TODO] Enforce the user has already connected, else prompt for authorisation
 	return new Response(await render(templates.Dashboard([])), {
 		'headers': {
 			'Content-Type': 'text/html; charset=utf-8',
