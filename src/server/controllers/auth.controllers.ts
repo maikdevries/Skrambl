@@ -13,7 +13,7 @@ interface PKCE {
 }
 
 export async function connect(_: Request, __: Context): Promise<Response> {
-	// [TODO] In case the user has already connected, redirect to the dashboard automatically
+	// [TODO] In case the user has already connected, redirect to the tool automatically
 	return new Response(await render(templates.Connect()), {
 		'headers': {
 			'Content-Type': 'text/html; charset=utf-8',
@@ -57,7 +57,7 @@ export async function process(_: Request, context: Context): Promise<Response> {
 	const credentials = await auth.retrieve(code, pkce.verifier, context.url.origin);
 	context.session.regenerate().set('credentials', credentials);
 
-	return Response.redirect(new URL('/dashboard/', context.url.origin));
+	return Response.redirect(new URL('/tool/', context.url.origin));
 }
 
 export async function refresh(_: Request, context: Context): Promise<Response> {

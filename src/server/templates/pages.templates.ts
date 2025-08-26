@@ -21,7 +21,7 @@ export const Connect = (() => Base(html`
 `));
 
 // deno-fmt-ignore: Results in undesired formatting of template structure
-export const Dashboard = ((items: Playlist[]) => Base(html`
+export const Tool = ((items: Playlist[]) => Base(html`
 	<section>
 		${ ListComponent('Playlists', items.map(PlaylistComponent)) }
 	</section>

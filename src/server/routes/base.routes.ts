@@ -6,7 +6,7 @@ import middleware from '../middleware/base.middleware.ts';
 
 import api from './api.routes.ts';
 import auth from './auth.routes.ts';
-import dashboard from './dashboard.routes.ts';
+import tool from './tool.routes.ts';
 
 export type Context = RouteContext<BaseContext>;
 
@@ -24,8 +24,8 @@ const router = route<BaseContext>(
 		},
 		{
 			'method': ['*'],
-			'pattern': new URLPattern({ 'pathname': '/dashboard/*' }),
-			'handler': dashboard,
+			'pattern': new URLPattern({ 'pathname': '/tool/*' }),
+			'handler': tool,
 		},
 	],
 	() => new Response('Not found', { 'status': 404 }),
