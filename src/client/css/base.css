@@ -1,4 +1,11 @@
-@layer reset;
+@layer reset, variables;
+
+@layer variables {
+	:root {
+		--colour-black: oklch(from #121212 l c h);
+		--colour-white: oklch(from #FFFFFF l c h);
+	}
+}
 
 @layer reset {
 	*, *::before, *::after {
