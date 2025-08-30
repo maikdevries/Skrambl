@@ -6,7 +6,10 @@ export interface Credentials {
 
 export interface Playlist {
 	'description': string;
-	'image': string;
+	'image': {
+		'size': number;
+		'url': string;
+	};
 	'name': string;
 	'url': string;
 }
