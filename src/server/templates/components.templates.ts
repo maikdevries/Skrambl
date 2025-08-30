@@ -2,6 +2,15 @@ import type { Playlist } from '../types/base.types.ts';
 
 import { html } from '@maikdevries/server-render';
 
+import * as icons from './icons.templates.ts';
+
+export const AnchorComponent = ((url: string, text: string) => html`
+	<article class='anchor'>
+		<a href='${ url }'>${ text }</a>
+		${ icons.Link() }
+	</article>
+`);
+
 // deno-fmt-ignore: Results in undesired formatting of template structure
 export const ListComponent = ((heading: string, items: unknown[]) => html`
 	<article class='list'>

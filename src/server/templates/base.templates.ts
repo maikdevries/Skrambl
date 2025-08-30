@@ -1,6 +1,8 @@
 import type { Template } from '@maikdevries/server-render';
 import { html } from '@maikdevries/server-render';
 
+import { AnchorComponent } from './components.templates.ts';
+
 // deno-fmt-ignore: Results in undesired formatting of template structure
 export const Base = ((imports: Template[], content: Template) => html`
 	<!DOCTYPE html>
@@ -24,7 +26,7 @@ export const Base = ((imports: Template[], content: Template) => html`
 
 			<footer>
 				&copy; 2025
-				<a href='https://maikdevries.com'>Maik de Vries</a>
+				${ AnchorComponent('https://maikdevries.com', 'Maik de Vries') }
 			</footer>
 		</body>
 	</html>

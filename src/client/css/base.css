@@ -1,4 +1,25 @@
-@layer reset, variables, layout, paint;
+@layer reset, variables, layout, paint, components;
+
+@layer components {
+	article.anchor {
+		display: inline flex;
+		gap: 4px;
+		align-items: center;
+
+		& > a {
+			text-decoration-line: none;
+		}
+
+		& > svg {
+			block-size: 12px;
+			inline-size: 12px;
+		}
+
+		&:not(:has(> a:hover)) > svg {
+			visibility: hidden;
+		}
+	}
+}
 
 @layer paint {
 	html {
@@ -53,6 +74,28 @@
 
 		--colour-black: oklch(from #121212 l c h);
 		--colour-white: oklch(from #FFFFFF l c h);
+
+		/* Typography scale */
+		/* --font-size-xxs: 0.625rem; */
+		--font-size-xs: 0.75rem;
+		--font-size-s: 0.875rem;
+		--font-size-m: 1rem;
+		--font-size-l: 1.25rem;
+		--font-size-xl: 1.5rem;
+		--font-size-xxl: 2rem;
+		/* --font-size-3xl: 2rem; */
+		/* --font-size-4xl: 2.5rem; */
+
+		/* Spacing scale */
+		/* --spacing-xxs: 0.125rem; */
+		--spacing-xs: 0.25rem;
+		--spacing-s: 0.5rem;
+		--spacing-m: 1rem;
+		--spacing-l: 1.5rem;
+		--spacing-xl: 2rem;
+		--spacing-2xl: 2.5rem;
+		--spacing-3xl: 3rem;
+		--spacing-4xl: 4rem;
 	}
 }
 
@@ -94,7 +137,7 @@
 
 	header, footer, main,
 	section, article {
-		container-type: inline-size;
+		/* container-type: inline-size; */
 	}
 
 	h1, h2, h3, h4, h5, h6,
