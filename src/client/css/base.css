@@ -1,4 +1,31 @@
-@layer reset, variables;
+@layer reset, variables, layout;
+
+@layer layout {
+	body {
+		display: grid;
+		gap: 32px;
+		grid-template:
+			'header' 48px
+			'main' auto
+			'footer' 32px;
+
+		& > :is(header, main, footer) {
+			padding-inline: 48px;
+		}
+
+		& > header {
+			display: flex;
+			align-items: center;
+		}
+
+		& > footer {
+			display: flex;
+			gap: 8px;
+			align-items: center;
+			justify-content: center;
+		}
+	}
+}
 
 @layer variables {
 	:root {
