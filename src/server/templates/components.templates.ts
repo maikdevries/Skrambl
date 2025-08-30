@@ -35,7 +35,7 @@ export const PlaylistComponent = (({ description, image, name, url }: Playlist) 
 		<img src='${ image.url }' width='${ image.size }' height='${ image.size }'>
 
 		<span class='details'>
-			<a href='${ url }'>${ name }</a>
+			${ AnchorComponent(url, name) }
 			<span>${ description }</span>
 		</span>
 	</article>
