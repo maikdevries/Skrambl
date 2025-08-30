@@ -1,0 +1,56 @@
+@layer layout, paint, components;
+
+@layer components {
+	article.callout {
+		inline-size: 100%;
+
+		display: flex;
+		gap: 16px;
+		align-items: center;
+		justify-content: space-evenly;
+		padding: 8px 16px;
+
+		border: 1px solid oklch(from currentColor l c h / 0.5);
+	}
+
+	article.dialog {
+		display: grid;
+		gap: 24px;
+		grid-template:
+			'header' 32px
+			'main' auto
+			'footer' max-content;
+		padding: 16px 16px;
+
+		border: 1px solid oklch(from currentColor l c h / 0.25);
+
+		& > header {
+			display: flex;
+			align-items: center;
+			justify-content: space-between;
+
+			font-weight: 800;
+		}
+
+		& > footer {
+			display: flex;
+			font-size: 14px;
+		}
+	}
+}
+
+@layer paint {
+	.spotify {
+		--background-colour: var(--brand-spotify);
+		--background-colour-hover: light-dark(oklch(from var(--background-colour) calc(l * 0.95) c h), oklch(from var(--background-colour) calc(l * 1.075) c h));
+		color: var(--background-colour-base);
+	}
+}
+
+@layer layout {
+	main {
+		display: grid;
+		grid-template: 'content' / 0.5fr;
+		place-content: center center;
+	}
+}

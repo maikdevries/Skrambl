@@ -1,12 +1,38 @@
 @layer reset, variables, layout, paint, components;
 
 @layer components {
+	a.button, button {
+		min-inline-size: fit-content;
+
+		display: inline flex;
+		gap: 4px;
+		align-items: center;
+		justify-content: center;
+		padding: 4px 8px;
+
+		background-color: var(--background-colour, inherit);
+		border: var(--border, none);
+
+		font-weight: 600;
+		text-decoration-line: none;
+
+		&:hover {
+			background-color: var(--background-colour-hover, var(--background-colour-hover-base));
+		}
+
+		& > svg {
+			color: var(--accent-colour, currentColor);
+		}
+	}
+
 	article.anchor {
+		container-type: normal;
 		display: inline flex;
 		gap: 4px;
 		align-items: center;
 
 		& > a {
+			font-weight: 600;
 			text-decoration-line: none;
 		}
 
@@ -17,6 +43,15 @@
 
 		&:not(:has(> a:hover)) > svg {
 			visibility: hidden;
+		}
+	}
+
+	ul.base {
+		overflow-block: auto;
+		display: flex;
+
+		& > li:hover {
+			background-color: var(--background-colour-hover, var(--background-colour-hover-base));
 		}
 	}
 }
@@ -70,6 +105,8 @@
 @layer variables {
 	:root {
 		--background-colour-base: light-dark(var(--colour-white), var(--colour-black));
+		--background-colour-hover-base: light-dark(oklch(from var(--background-colour-base) calc(l * 0.95) c h), oklch(from var(--background-colour-base) calc(l * 1.375) c h));
+
 		--contrast-colour-base: light-dark(var(--colour-black), var(--colour-white));
 
 		--colour-black: oklch(from #121212 l c h);
@@ -137,7 +174,7 @@
 
 	header, footer, main,
 	section, article {
-		/* container-type: inline-size; */
+		container-type: inline-size;
 	}
 
 	h1, h2, h3, h4, h5, h6,
