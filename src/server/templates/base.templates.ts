@@ -1,9 +1,8 @@
 import type { Template } from '@maikdevries/server-render';
-
 import { html } from '@maikdevries/server-render';
 
 // deno-fmt-ignore: Results in undesired formatting of template structure
-export const Base = ((content: Template) => html`
+export const Base = ((imports: Template[], content: Template) => html`
 	<!DOCTYPE html>
 	<html lang='en'>
 		<head>
@@ -11,6 +10,7 @@ export const Base = ((content: Template) => html`
 			<meta name='viewport' content='width = device-width, initial-scale = 1.0'>
 
 			<link rel='stylesheet' href='/static/css/base.css'>
+			${ imports }
 		</head>
 
 		<body>

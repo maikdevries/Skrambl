@@ -6,7 +6,11 @@ import { Base } from './base.templates.ts';
 import { ListComponent, PlaylistComponent } from './components.templates.ts';
 
 // deno-fmt-ignore: Results in undesired formatting of template structure
-export const Connect = (() => Base(html`
+export const Connect = (() => Base(
+	[
+		html`<link rel='stylesheet' href='/static/css/connect.css'>`,
+	],
+	html`
 	<section>
 		${
 			ListComponent('Plug into a streaming service', [
@@ -21,7 +25,11 @@ export const Connect = (() => Base(html`
 `));
 
 // deno-fmt-ignore: Results in undesired formatting of template structure
-export const Tool = ((items: Playlist[]) => Base(html`
+export const Tool = ((items: Playlist[]) => Base(
+	[
+		html`<link rel='stylesheet' href='/static/css/tool.css'>`,
+	],
+	html`
 	<section>
 		${ ListComponent('Playlists', items.map(PlaylistComponent)) }
 	</section>
