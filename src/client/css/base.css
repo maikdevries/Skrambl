@@ -1,4 +1,23 @@
-@layer reset, variables, layout;
+@layer reset, variables, layout, paint;
+
+@layer paint {
+	html {
+		background: var(--background-colour-base);
+		color: var(--contrast-colour-base);
+	}
+
+	body > header {
+		border-block-end: 1px solid oklch(from var(--contrast-colour-base) l c h / 0.25);
+	}
+
+	body > footer {
+		border-block-start: 1px solid oklch(from var(--contrast-colour-base) l c h / 0.25);
+
+		color: oklch(from currentColor l c h / 0.75);
+		font-size: 12px;
+		font-weight: 600;
+	}
+}
 
 @layer layout {
 	body {
@@ -29,6 +48,9 @@
 
 @layer variables {
 	:root {
+		--background-colour-base: light-dark(var(--colour-white), var(--colour-black));
+		--contrast-colour-base: light-dark(var(--colour-black), var(--colour-white));
+
 		--colour-black: oklch(from #121212 l c h);
 		--colour-white: oklch(from #FFFFFF l c h);
 	}
