@@ -14,11 +14,11 @@ export const Connect = (() => Base(
 	html`
 	<article class='dialog'>
 		<header>
-			<button class='ghost'>${ icons.Rewind() }</button>
+			<button type='button' class='ghost'>${ icons.Rewind() }</button>
 
 			<h2>Connect a streaming service</h2>
 
-			<button class='ghost'>${ icons.Close() }</button>
+			<button type='button' class='ghost'>${ icons.Close() }</button>
 		</header>
 
 		${
@@ -52,12 +52,12 @@ export const Tool = ((items: Playlist[]) => Base(
 		${ ListComponent('Queue', []) }
 
 		<footer>
-			<button class='danger border surface'>
+			<button type='button' class='danger border surface'>
 				${ icons.Stop() }
 				CANCEL
 			</button>
 
-			<button class='safe border surface'>
+			<button type='button' class='safe border surface'>
 				${ icons.Play() }
 				PLAY
 			</button>

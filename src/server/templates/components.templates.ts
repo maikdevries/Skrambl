@@ -41,10 +41,10 @@ export const PlaylistComponent = (({ description, image, name, url }: Playlist) 
 
 		<menu>
 			<li>
-				<button class='ghost' data-action='ADD'>${ icons.Add() }</button>
+				<button type='button' class='ghost' data-action='ADD'>${ icons.Add() }</button>
 			</li>
 			<li>
-				<button class='danger ghost' data-action='REMOVE'>${ icons.Close() }</button>
+				<button type='button' class='danger ghost' data-action='REMOVE'>${ icons.Close() }</button>
 			</li>
 		</menu>
 	</article>
