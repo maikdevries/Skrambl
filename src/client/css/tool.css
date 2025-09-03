@@ -1,0 +1,92 @@
+@layer layout, components;
+
+@layer components {
+	article.list {
+		max-block-size: 100%;
+		overflow-block: hidden;
+
+		display: flex;
+		flex-direction: column;
+		gap: 16px;
+
+		& > header > h2 {
+			text-transform: uppercase;
+		}
+
+		& > ul.base {
+			flex-direction: column;
+		}
+	}
+
+	article.playlist {
+		display: flex;
+		gap: 16px;
+		align-items: center;
+		padding: 16px 16px;
+
+		& > img {
+			block-size: 48px;
+			inline-size: 48px;
+		}
+
+		& > span.details {
+			overflow-inline: hidden;
+
+			display: inline flex;
+			flex: 1 1 fit-content;
+			flex-direction: column;
+
+			& > span {
+				overflow-inline: hidden;
+
+				font-size: 12px;
+				text-overflow: ellipsis;
+				white-space: nowrap;
+			}
+		}
+
+		& > menu {
+			display: inline flex;
+
+			section & button[data-action='REMOVE'] {
+				display: none;
+			}
+
+			aside & button[data-action='ADD'] {
+				display: none;
+			}
+		}
+
+		aside li:not(:hover) > & > menu {
+			display: none;
+		}
+	}
+}
+
+@layer layout {
+	main {
+		display: grid;
+		gap: 48px;
+		grid-template: 'content aside' / 1fr 0.67fr;
+
+		& > :is(section, aside) {
+			max-block-size: calc(100dvb - 48px - 2 * 32px);
+		}
+
+		& > aside {
+			block-size: fit-content;
+
+			display: grid;
+			gap: 16px;
+			grid-template:
+				'list' auto
+				'footer' fit-content;
+
+			& > footer {
+				display: flex;
+				gap: 16px;
+				justify-content: end;
+			}
+		}
+	}
+}

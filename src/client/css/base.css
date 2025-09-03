@@ -17,7 +17,7 @@
 		text-decoration-line: none;
 
 		&:hover {
-			background-color: var(--background-colour-hover, var(--background-colour-hover-base));
+			background-color: var(--background-colour-hover, var(--background-colour, inherit));
 		}
 
 		& > svg {
@@ -51,7 +51,7 @@
 		display: flex;
 
 		& > li:hover {
-			background-color: var(--background-colour-hover, var(--background-colour-hover-base));
+			background-color: var(--background-colour-hover, var(--background-colour, inherit));
 		}
 	}
 }
@@ -72,6 +72,27 @@
 		color: oklch(from currentColor l c h / 0.75);
 		font-size: 12px;
 		font-weight: 600;
+	}
+
+	.border {
+		--border: 1px solid oklch(from currentColor l c h);
+	}
+
+	.ghost {
+		--background-colour-hover: oklch(from currentColor l c h / 0.125);
+	}
+
+	.surface {
+		--background-colour: oklch(from currentColor l c h / 0.125);
+		--background-colour-hover: oklch(from currentColor l c h / 0.25);
+	}
+
+	.danger {
+		color: var(--colour-red);
+	}
+
+	.safe {
+		color: var(--colour-green);
 	}
 }
 
@@ -105,11 +126,13 @@
 @layer variables {
 	:root {
 		--background-colour-base: light-dark(var(--colour-white), var(--colour-black));
-		--background-colour-hover-base: light-dark(oklch(from var(--background-colour-base) calc(l * 0.95) c h), oklch(from var(--background-colour-base) calc(l * 1.375) c h));
-
 		--contrast-colour-base: light-dark(var(--colour-black), var(--colour-white));
 
+		--brand-spotify: oklch(from #1ED760 l c h);
+
 		--colour-black: oklch(from #121212 l c h);
+		--colour-green: oklch(from #3BA55C l c h);
+		--colour-red: oklch(from #ED4245 l c h);
 		--colour-white: oklch(from #FFFFFF l c h);
 
 		/* Typography scale */

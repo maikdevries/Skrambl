@@ -14,16 +14,16 @@ export const Connect = (() => Base(
 	html`
 	<article class='dialog'>
 		<header>
-			<button>${ icons.Rewind() }</button>
+			<button class='ghost'>${ icons.Rewind() }</button>
 
 			<h2>Connect a streaming service</h2>
 
-			<button>${ icons.Close() }</button>
+			<button class='ghost'>${ icons.Close() }</button>
 		</header>
 
 		${
 			BaseListComponent([
-				html`<a class='button spotify' href='/auth/setup'>Connect with Spotify</a>`,
+				html`<a class='button spotify border surface' href='/auth/setup'>Connect with Spotify</a>`,
 			])
 		}
 
@@ -50,5 +50,17 @@ export const Tool = ((items: Playlist[]) => Base(
 
 	<aside>
 		${ ListComponent('Queue', []) }
+
+		<footer>
+			<button class='danger border surface'>
+				${ icons.Stop() }
+				CANCEL
+			</button>
+
+			<button class='safe border surface'>
+				${ icons.Play() }
+				PLAY
+			</button>
+		</footer>
 	</aside>
 `));

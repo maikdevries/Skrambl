@@ -41,9 +41,7 @@
 
 @layer paint {
 	.spotify {
-		--background-colour: var(--brand-spotify);
-		--background-colour-hover: light-dark(oklch(from var(--background-colour) calc(l * 0.95) c h), oklch(from var(--background-colour) calc(l * 1.075) c h));
-		color: var(--background-colour-base);
+		color: var(--brand-spotify);
 	}
 }
 
