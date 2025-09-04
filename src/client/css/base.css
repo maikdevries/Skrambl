@@ -44,6 +44,8 @@
 		& > svg {
 			block-size: 12px;
 			inline-size: 12px;
+
+			color: oklch(from currentColor l c h / 0.875);
 		}
 
 		&:not(:has(> a:hover)) > svg {
