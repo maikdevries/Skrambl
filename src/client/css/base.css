@@ -32,8 +32,12 @@
 		align-items: center;
 
 		& > a {
+			overflow-inline: hidden;
+			
 			font-weight: 600;
 			text-decoration-line: none;
+			text-overflow: ellipsis;
+			white-space: nowrap;
 		}
 
 		& > svg {
@@ -42,7 +46,7 @@
 		}
 
 		&:not(:has(> a:hover)) > svg {
-			visibility: hidden;
+			display: none;
 		}
 	}
 
