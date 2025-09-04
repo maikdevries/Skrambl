@@ -34,6 +34,7 @@
 		& > a {
 			overflow-inline: hidden;
 			
+			color: inherit;
 			font-weight: 600;
 			text-decoration-line: none;
 			text-overflow: ellipsis;
