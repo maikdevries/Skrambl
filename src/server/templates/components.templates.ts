@@ -30,8 +30,8 @@ export const ListComponent = ((heading: string, items: unknown[]) => html`
 `);
 
 // deno-fmt-ignore: Results in undesired formatting of template structure
-export const PlaylistComponent = (({ description, image, name, url }: Playlist) => html`
-	<article class='playlist'>
+export const PlaylistComponent = (({ id, description, image, name, url }: Playlist) => html`
+	<article class='playlist' data-id='${ id }'>
 		<img src='${ image.url }' width='${ image.size }' height='${ image.size }'>
 
 		<span class='details'>

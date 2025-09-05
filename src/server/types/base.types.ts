@@ -5,6 +5,7 @@ export interface Credentials {
 }
 
 export interface Playlist {
+	'id': string;
 	'description': string;
 	'image': {
 		'size': number;

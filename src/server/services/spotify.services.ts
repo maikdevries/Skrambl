@@ -7,6 +7,7 @@ export async function getPlaylists(token: string): Promise<Playlist[]> {
 	const items = await fetch.pull<BasePlaylist>(token, 'GET', 'me/playlists');
 
 	return items.map((x) => ({
+		'id': x.id,
 		'description': x.description,
 		'image': {
 			'size': x.images?.at(0)?.width ?? 0,
