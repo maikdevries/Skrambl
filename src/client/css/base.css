@@ -16,6 +16,11 @@
 		font-weight: 600;
 		text-decoration-line: none;
 
+		&:disabled {
+			filter: saturate(0);
+			pointer-events: none;
+		}
+
 		&:hover {
 			background-color: var(--background-colour-hover, var(--background-colour, inherit));
 		}
