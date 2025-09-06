@@ -13,6 +13,7 @@
 		background-color: var(--background-colour, inherit);
 		border: var(--border, none);
 
+		color: var(--colour, inherit);
 		font-weight: 600;
 		text-decoration-line: none;
 
@@ -100,11 +101,11 @@
 	}
 
 	.danger {
-		color: var(--colour-red);
+		--colour: var(--colour-red);
 	}
 
 	.safe {
-		color: var(--colour-green);
+		--colour: var(--colour-green);
 	}
 }
 
