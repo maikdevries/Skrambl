@@ -15,6 +15,6 @@ const logger: Middleware = async (request, context, next) => {
 
 	console.log(`[${(end - start).toFixed(2)} ms] ${request.method} ${request.url} - ${response.status}`);
 	return response;
-}
+};
 
 export default chain(logger).add(session());
