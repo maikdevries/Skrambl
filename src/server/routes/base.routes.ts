@@ -13,6 +13,11 @@ export type Context = RouteContext<BaseContext>;
 const router = route<BaseContext>(
 	[
 		{
+			'method': ['GET'],
+			'pattern': new URLPattern({ 'pathname': '/' }),
+			'handler': (_, context) => Response.redirect(new URL('/auth/connect', context.url.origin)),
+		},
+		{
 			'method': ['*'],
 			'pattern': new URLPattern({ 'pathname': '/api/*' }),
 			'handler': api,
