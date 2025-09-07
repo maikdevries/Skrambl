@@ -41,7 +41,7 @@
 
 @layer paint {
 	.spotify {
-		color: var(--brand-spotify);
+		--colour: var(--brand-spotify);
 	}
 }
 
