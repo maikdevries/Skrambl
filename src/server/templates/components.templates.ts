@@ -31,7 +31,7 @@ export const ListComponent = ((heading: string, items: unknown[]) => html`
 
 // deno-fmt-ignore: Results in undesired formatting of template structure
 export const PlaylistComponent = (({ id, description, image, name, url }: Playlist) => html`
-	<article class='playlist' data-id='${ id }'>
+	<x-playlist data-id='${ id }'>
 		<img src='${ image.url }' width='${ image.size }' height='${ image.size }'>
 
 		<span class='details'>
@@ -47,5 +47,5 @@ export const PlaylistComponent = (({ id, description, image, name, url }: Playli
 				<button type='button' class='danger ghost' data-action='REMOVE'>${ icons.Close() }</button>
 			</li>
 		</menu>
-	</article>
+	</x-playlist>
 `);
