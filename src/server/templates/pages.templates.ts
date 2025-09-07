@@ -23,7 +23,7 @@ export const Connect = (() => Base(
 
 		${
 			BaseListComponent([
-				html`<a class='button spotify border surface' href='/auth/setup'>Connect with Spotify</a>`,
+				html`<a href='/auth/setup' class='button spotify border surface'>Connect with Spotify</a>`,
 			])
 		}
 
