@@ -42,6 +42,7 @@ export const Connect = (() => Base(
 export const Tool = ((items: Playlist[]) => Base(
 	[
 		html`<link rel='stylesheet' href='/static/css/tool.css'>`,
+		html`<script type='module' src='/static/js/tool.js'></script>`,
 	],
 	html`
 	<section>
