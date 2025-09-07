@@ -3,7 +3,7 @@ import type { Context } from '../routes/api.routes.ts';
 import * as spotify from '../services/spotify.services.ts';
 
 const OPERATIONS = {
-	'shuffle': shuffle,
+	'SHUFFLE': shuffle,
 };
 
 export async function process(request: Request, context: Context): Promise<Response> {

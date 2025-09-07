@@ -53,12 +53,12 @@ export const Tool = ((items: Playlist[]) => Base(
 		${ ListComponent('Queue', []) }
 
 		<footer>
-			<button type='button' class='danger border surface'>
+			<button type='button' class='danger border surface' data-action='STOP' disabled>
 				${ icons.Stop() }
-				CANCEL
+				STOP
 			</button>
 
-			<button type='button' class='safe border surface'>
+			<button type='button' class='safe border surface' data-action='PLAY'>
 				${ icons.Play() }
 				PLAY
 			</button>
