@@ -1,3 +1,5 @@
+import { ServerError } from '../types/base.types.ts';
+
 interface AuthorisationResponse {
 	'access_token': string;
 	'expires_in': number;
@@ -79,7 +81,7 @@ async function json<T>(method: HTTP_METHOD, url: URL, headers: HeadersInit, body
 			...(body ? { 'body': body } : {}),
 		});
 	} catch {
-		throw new FetchError(503, method, url.toString());
+		throw new ServerError(503, method, url.toString());
 	}
 
 	if (response.status === 429 && retries < 3) {
@@ -88,12 +90,5 @@ async function json<T>(method: HTTP_METHOD, url: URL, headers: HeadersInit, body
 	}
 
 	if (response.ok) return await response.json() as T;
-	else throw new FetchError(response.status, method, response.url);
-}
-
-class FetchError extends Error {
-	constructor(status: number, method: HTTP_METHOD, url: string) {
-		super(`Fetch request failed with status ${status}. URL: ${method} ${url}`);
-		this.name = this.constructor.name;
-	}
+	else throw new ServerError(response.status, method, response.url);
 }

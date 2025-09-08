@@ -14,3 +14,18 @@ export interface Playlist {
 	'name': string;
 	'url': string;
 }
+
+export class ServerError extends Error {
+	#code: number;
+
+	constructor(code: number, method: string, url: string) {
+		super(`Request failed with code ${code}. URL: ${method} ${url}`);
+
+		this.#code = code;
+		this.name = this.constructor.name;
+	}
+
+	get code(): number {
+		return this.#code;
+	}
+}

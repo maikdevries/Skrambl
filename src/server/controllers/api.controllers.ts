@@ -1,4 +1,5 @@
 import type { Context } from '../routes/api.routes.ts';
+import { ServerError } from '../types/base.types.ts';
 
 import * as spotify from '../services/spotify.services.ts';
 
@@ -22,7 +23,7 @@ export async function process(request: Request, context: Context): Promise<Respo
 
 	if (results.every((x) => x.status === 'fulfilled')) {
 		return Response.json({ 'description': 'The operation has been processed successfully' });
-	} else return Response.json({ 'description': 'Something went terribly wrong on our side of the internet' }, { 'status': 500 });
+	} else throw new ServerError(500, request.method, request.url);
 }
 
 // [NOTE] Durstenfeld variant of the Fisher-Yates shuffle algorithm
