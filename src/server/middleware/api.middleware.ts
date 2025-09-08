@@ -2,7 +2,9 @@ import type { Middleware } from '@maikdevries/server-router';
 import { chain } from '@maikdevries/server-router';
 
 import type { BaseContext as BC } from './base.middleware.ts';
+
 import type { Credentials } from '../types/base.types.ts';
+import { ServerError } from '../types/base.types.ts';
 
 export interface BaseContext extends BC {
 	'credentials': Credentials;
@@ -19,4 +21,25 @@ const authorised: Middleware<BC, { 'credentials': Credentials }> = async (reques
 	return await next(request, { ...context, 'credentials': credentials });
 };
 
-export default chain(authorised);
+const DESCRIPTIONS: { [code: number]: string } = {
+	401: 'The authorisation for this request is missing or has expired',
+	403: 'The authorisation for this request denies access to the requested resource',
+	404: 'The requested resource could not be found',
+	502: 'The server located upstream encountered a problem while handling this request',
+	503: 'The server located upstream is currently unavailable',
+};
+
+const error: Middleware = async (request, context, next) => {
+	try {
+		return await next(request, context);
+	} catch (error: unknown) {
+		console.error(error);
+
+		const code = error instanceof ServerError ? error.code === 500 ? 502 : error.code : 500;
+		const description = DESCRIPTIONS[code] ?? 'Something went terribly wrong on our side of the internet';
+
+		return Response.json({ 'description': description }, { 'status': code });
+	}
+};
+
+export default chain(authorised).add(error);
