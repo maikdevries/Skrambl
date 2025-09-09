@@ -4,6 +4,8 @@ import { route } from '@maikdevries/server-router';
 import type { BaseContext } from '../middleware/base.middleware.ts';
 import middleware from '../middleware/base.middleware.ts';
 
+import { ServerError } from '../types/base.types.ts';
+
 import api from './api.routes.ts';
 import auth from './auth.routes.ts';
 import tool from './tool.routes.ts';
@@ -33,7 +35,9 @@ const router = route<BaseContext>(
 			'handler': tool,
 		},
 	],
-	() => new Response('Not found', { 'status': 404 }),
+	(request, _) => {
+		throw new ServerError(404, request.method, request.url);
+	},
 );
 
 export default middleware.add(router);

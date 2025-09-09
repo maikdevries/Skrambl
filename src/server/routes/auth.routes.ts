@@ -3,6 +3,7 @@ import { route } from '@maikdevries/server-router';
 
 import type { BaseContext } from '../middleware/base.middleware.ts';
 
+import { ServerError } from '../types/base.types.ts';
 import * as auth from '../controllers/auth.controllers.ts';
 
 export type Context = RouteContext<BaseContext>;
@@ -35,7 +36,9 @@ const router = route<BaseContext>(
 			'handler': auth.logout,
 		},
 	],
-	() => new Response('Not found', { 'status': 404 }),
+	(request, _) => {
+		throw new ServerError(404, request.method, request.url);
+	},
 );
 
 export default router;

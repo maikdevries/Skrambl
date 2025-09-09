@@ -4,6 +4,7 @@ import { route } from '@maikdevries/server-router';
 import type { BaseContext } from '../middleware/api.middleware.ts';
 import middleware from '../middleware/api.middleware.ts';
 
+import { ServerError } from '../types/base.types.ts';
 import * as api from '../controllers/api.controllers.ts';
 
 export type Context = RouteContext<BaseContext>;
@@ -21,7 +22,9 @@ const router = route<BaseContext>(
 			'handler': api.process,
 		},
 	],
-	() => Response.json({ 'description': 'The requested resource could not be found' }, { 'status': 404 }),
+	(request, _) => {
+		throw new ServerError(404, request.method, request.url);
+	},
 );
 
 export default middleware.add(router);
