@@ -3,7 +3,7 @@ import type { Playlist } from '../types/base.types.ts';
 import { html } from '@maikdevries/server-render';
 
 import { Base } from './base.templates.ts';
-import { BaseListComponent, CalloutComponent, ListComponent, PlaylistComponent } from './components.templates.ts';
+import { AnchorComponent, BaseListComponent, CalloutComponent, ListComponent, PlaylistComponent } from './components.templates.ts';
 import * as icons from './icons.templates.ts';
 
 // deno-fmt-ignore: Results in undesired formatting of template structure
@@ -38,6 +38,27 @@ export const Connect = (() => Base(
 			}
 		</footer>
 	</article>
+`));
+
+// deno-fmt-ignore: Results in undesired formatting of template structure
+export const Error = ((name: string, description: string) => Base(
+	[
+		html`<link rel='stylesheet' href='/static/css/error.css'>`,
+	],
+	html`
+	${
+		CalloutComponent(
+			'danger border surface',
+			icons.Error(),
+			name,
+			description,
+		)
+	}
+
+	<section>
+		If you keep finding your way back to this place, consider
+		${ AnchorComponent('mailto:support@maikdevries.com', 'sending an email') } for support
+	</section>
 `));
 
 // deno-fmt-ignore: Results in undesired formatting of template structure

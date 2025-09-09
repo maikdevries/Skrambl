@@ -1,0 +1,27 @@
+@layer layout, paint;
+
+@layer paint {
+	main > section {
+		color: oklch(from currentColor l c h / 0.75);
+		font-size: 12px;
+	}
+}
+
+@layer layout {
+	main {
+		display: grid;
+		gap: 16px;
+		grid-template:
+			'content' auto
+			'footer' 16px
+			/ 0.5fr;
+		place-content: center center;
+
+		& > section {
+			display: flex;
+			gap: 4px;
+			align-items: center;
+			justify-content: center;
+		}
+	}
+}
