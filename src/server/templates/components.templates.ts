@@ -1,3 +1,4 @@
+import type { Template } from '@maikdevries/server-render';
 import { html } from '@maikdevries/server-render';
 
 import * as icons from './icons.templates.ts';
@@ -16,6 +17,20 @@ export const BaseListComponent = ((items: unknown[]) => html`
 	<ul class='base'>
 		${ items.map((x) => html`<li class='ghost'>${ x }</li>`) }
 	</ul>
+`);
+
+// deno-fmt-ignore: Results in undesired formatting of template structure
+export const CalloutComponent = ((classes: string, icon: Template, heading: string, description: string) => html`
+	<article class='callout ${ classes }'>
+		<header>
+			${ icon }
+			<h2>${ heading }</h2>
+		</header>
+
+		<p>
+			${ description }
+		</p>
+	</article>
 `);
 
 // deno-fmt-ignore: Results in undesired formatting of template structure

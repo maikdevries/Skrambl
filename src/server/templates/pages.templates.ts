@@ -3,7 +3,7 @@ import type { Playlist } from '../types/base.types.ts';
 import { html } from '@maikdevries/server-render';
 
 import { Base } from './base.templates.ts';
-import { BaseListComponent, ListComponent, PlaylistComponent } from './components.templates.ts';
+import { BaseListComponent, CalloutComponent, ListComponent, PlaylistComponent } from './components.templates.ts';
 import * as icons from './icons.templates.ts';
 
 // deno-fmt-ignore: Results in undesired formatting of template structure
@@ -28,12 +28,14 @@ export const Connect = (() => Base(
 		}
 
 		<footer>
-			<article class='callout'>
-				${ icons.Secure() }
-				<p>
-					<strong>Don't worry</strong>, none of your private information is ever shared with us.
-				</p>
-			</article>
+			${
+				CalloutComponent(
+					'safe surface',
+					icons.Secure(),
+					'Privacy',
+					"Don't worry, none of your private information is ever shared with us"
+				)
+			}
 		</footer>
 	</article>
 `));

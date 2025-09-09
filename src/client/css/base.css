@@ -59,6 +59,35 @@
 		}
 	}
 
+	article.callout {
+		display: grid;
+		gap: 8px;
+		grid-template:
+			'header' 24px
+			'content' auto;
+		padding: 16px 16px;
+
+		background-color: var(--background-colour, inherit);
+		border: var(--border, none);
+		color: var(--colour, inherit);
+
+		& > header {
+			display: flex;
+			gap: 8px;
+			align-items: center;
+
+			& > h2 {
+				font-size: 20px;
+				font-weight: 800;
+			}
+		}
+
+		& > p {
+			font-size: 14px;
+			font-weight: 600;
+		}
+	}
+
 	ul.base {
 		overflow-block: auto;
 		display: flex;
