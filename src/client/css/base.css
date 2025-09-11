@@ -213,7 +213,9 @@
 		margin: 0;
 		padding: 0;
 		overscroll-behavior: none;
+
 		scrollbar-gutter: stable both-edges;
+		scrollbar-width: thin;
 	}
 
 	html {
