@@ -17,6 +17,11 @@ const router = route<BaseContext>(
 		},
 		{
 			'method': ['GET'],
+			'pattern': new URLPattern({ 'pathname': '/auth/csrf' }),
+			'handler': auth.csrf,
+		},
+		{
+			'method': ['GET'],
 			'pattern': new URLPattern({ 'pathname': '/auth/setup' }),
 			'handler': auth.setup,
 		},

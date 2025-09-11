@@ -21,6 +21,14 @@ export async function connect(_: Request, __: Context): Promise<Response> {
 	});
 }
 
+export async function csrf(_: Request, __: Context): Promise<Response> {
+	return new Response(await render(templates.Error('CSRF', 'Someone might have tried to tamper with your connection')), {
+		'headers': {
+			'Content-Type': 'text/html; charset=utf-8',
+		},
+	});
+}
+
 export async function setup(_: Request, context: Context): Promise<Response> {
 	// [FUTURE] https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Uint8Array/toBase64#browser_compatibility
 	const state = encodeBase64Url(crypto.getRandomValues(new Uint8Array(128)));
