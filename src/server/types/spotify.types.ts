@@ -148,6 +148,6 @@ interface BaseUser {
 	'uri': string;
 }
 
-interface User extends BaseUser {
+export interface User extends BaseUser {
 	'display_name': string | null;
 }

@@ -24,7 +24,7 @@ interface Page<T> {
 	'total': number;
 }
 
-async function api<T>(token: string, method: HTTP_METHOD, endpoint: string, payload?: JSON): Promise<T> {
+export async function api<T>(token: string, method: HTTP_METHOD, endpoint: string, payload?: JSON): Promise<T> {
 	return await json<T>(
 		method,
 		new URL(endpoint, 'https://api.spotify.com/v1/'),
