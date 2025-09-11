@@ -45,8 +45,8 @@ export const ListComponent = ((heading: string, items: unknown[]) => html`
 `);
 
 // deno-fmt-ignore: Results in undesired formatting of template structure
-export const PlaylistComponent = (({ id, description, image, name, url }: Playlist) => html`
-	<x-playlist data-id='${ id }'>
+export const PlaylistComponent = (({ id, description, image, name, supported, url }: Playlist) => html`
+	<x-playlist data-id='${ id }' ${ supported ? '' : 'data-supported=false' }>
 		<img src='${ image.url }' width='${ image.size }' height='${ image.size }'>
 
 		<span class='details'>

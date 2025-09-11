@@ -12,6 +12,7 @@ export interface Playlist {
 		'url': string;
 	};
 	'name': string;
+	'supported': boolean;
 	'url': string;
 }
 

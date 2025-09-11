@@ -3,7 +3,7 @@ import type { BasePlaylist, PlaylistItem, Snapshot, User } from '../types/spotif
 
 import * as fetch from '../controllers/fetch.controllers.ts';
 
-export async function getPlaylists(token: string): Promise<Playlist[]> {
+export async function getPlaylists(token: string, owner: string): Promise<Playlist[]> {
 	const items = await fetch.pull<BasePlaylist>(token, 'GET', 'me/playlists');
 
 	return items.map((x) => ({
@@ -14,6 +14,7 @@ export async function getPlaylists(token: string): Promise<Playlist[]> {
 			'url': x.images?.at(0)?.url ?? '',
 		},
 		'name': x.name,
+		'supported': x.owner.id === owner,
 		'url': x.external_urls.spotify,
 	}));
 }
