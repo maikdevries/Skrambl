@@ -167,6 +167,9 @@
 
 @layer variables {
 	:root {
+		--font-family-base: Inter, sans-serif;
+		font-feature-settings: 'liga' 1, 'calt' 1;
+
 		--background-colour-base: light-dark(var(--colour-white), var(--colour-black));
 		--contrast-colour-base: light-dark(var(--colour-black), var(--colour-white));
 
