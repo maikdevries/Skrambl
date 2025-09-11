@@ -31,6 +31,7 @@ const error: Middleware = async (request, context, next) => {
 		const description = DESCRIPTIONS[code] ?? 'Something went terribly wrong on our side of the internet';
 
 		return new Response(await render(templates.Error(String(code), description)), {
+			'status': code,
 			'headers': {
 				'Content-Type': 'text/html; charset=utf-8',
 			},
