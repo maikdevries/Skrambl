@@ -7,7 +7,7 @@ import { AnchorComponent, BaseListComponent, CalloutComponent, ListComponent, Pl
 import * as icons from './icons.templates.ts';
 
 // deno-fmt-ignore: Results in undesired formatting of template structure
-export const Connect = (() => Base(
+export const Connect = (() => Base('Connect',
 	[
 		html`<link rel='stylesheet' href='/static/css/connect.css'>`,
 	],
@@ -41,7 +41,7 @@ export const Connect = (() => Base(
 `));
 
 // deno-fmt-ignore: Results in undesired formatting of template structure
-export const Error = ((name: string, description: string) => Base(
+export const Error = ((name: string, description: string) => Base('Error',
 	[
 		html`<link rel='stylesheet' href='/static/css/error.css'>`,
 	],
@@ -62,7 +62,7 @@ export const Error = ((name: string, description: string) => Base(
 `));
 
 // deno-fmt-ignore: Results in undesired formatting of template structure
-export const Tool = ((items: Playlist[]) => Base(
+export const Tool = ((items: Playlist[]) => Base('Tool',
 	[
 		html`<link rel='stylesheet' href='/static/css/tool.css'>`,
 		html`<script type='module' src='/static/js/tool.js'></script>`,

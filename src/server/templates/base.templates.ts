@@ -4,12 +4,14 @@ import { html } from '@maikdevries/server-render';
 import { AnchorComponent } from './components.templates.ts';
 
 // deno-fmt-ignore: Results in undesired formatting of template structure
-export const Base = ((imports: Template[], content: Template) => html`
+export const Base = ((title: string, imports: Template[], content: Template) => html`
 	<!DOCTYPE html>
 	<html lang='en'>
 		<head>
 			<meta charset='UTF-8'>
 			<meta name='viewport' content='width = device-width, initial-scale = 1.0'>
+
+			<title>${ title } | Skrambl</title>
 
 			<link rel='preconnect' href='https://rsms.me'>
 			<link rel='stylesheet' href='https://rsms.me/inter/inter.css'>
