@@ -7,7 +7,7 @@ services:
     expose:
       - ${DENO_PORT:?error}
     networks:
-      - network
+      - internal
     healthcheck:
       test: ["CMD", "deno", "eval", "try { await fetch('http://127.0.0.1:${DENO_PORT:?error}') } catch { Deno.exit(1) }"]
       interval: 30s
@@ -20,7 +20,38 @@ services:
     security_opt:
       - no-new-privileges:true
 
+  nginx:
+    container_name: nginx
+    image: nginx:alpine
+    env_file:
+      - .env
+    expose:
+      - ${NGINX_PORT:?error}
+    networks:
+      - internal
+      - external
+    volumes:
+      - ./nginx/templates/:/etc/nginx/templates/:ro
+      - ./src/client/:/usr/share/nginx/static/:ro
+    healthcheck:
+      test: ["CMD-SHELL", "curl -f http://127.0.0.1:${NGINX_PORT:?error} || exit 1"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 10s
+    depends_on:
+      - skrambl
+    restart: unless-stopped
+    attach: false
+    security_opt:
+      - no-new-privileges:true
+
 networks:
-  network:
+  internal:
+    name: skrambl-internal
+    driver: bridge
+    attachable: false
+    internal: true
+  external:
     name: ${COMPOSE_NETWORK:?error}
     external: true
