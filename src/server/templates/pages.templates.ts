@@ -76,7 +76,7 @@ export const Tool = ((items: Playlist[]) => Base('Tool',
 		${ ListComponent('Queue', []) }
 
 		<footer>
-			<button type='button' class='danger border surface' data-action='STOP' disabled>
+			<button type='button' class='danger border surface' data-action='STOP' hidden>
 				${ icons.Stop() }
 				STOP
 			</button>
