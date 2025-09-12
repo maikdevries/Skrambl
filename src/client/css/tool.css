@@ -72,6 +72,45 @@
 			display: none;
 		}
 	}
+
+	x-progress {
+		container-type: normal;
+		display: inline flex;
+		flex-direction: column;
+		gap: 4px;
+
+		&[data-state='ERROR'] {
+			--colour: var(--colour-red);
+		}
+
+		&[data-state='HIDDEN'] {
+			visibility: hidden;
+		}
+
+		&[data-state='FINISHED'] {
+			--colour: var(--colour-green);
+		}
+
+		& > header {
+			display: flex;
+			justify-content: space-between;
+
+			font-size: 12px;
+			font-weight: 800;
+		}
+
+		& > progress {
+			max-block-size: 4px;
+
+			appearance: none;
+			background-color: var(--background-colour, inherit);
+			border: none;
+
+			&::-moz-progress-bar {
+				background-color: var(--colour, currentColor);
+			}
+		}
+	}
 }
 
 @layer layout {
@@ -95,8 +134,8 @@
 
 			& > footer {
 				display: flex;
-				gap: 16px;
-				justify-content: end;
+				align-items: center;
+				justify-content: space-between;
 			}
 		}
 	}

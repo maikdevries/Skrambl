@@ -76,6 +76,15 @@ export const Tool = ((items: Playlist[]) => Base('Tool',
 		${ ListComponent('Queue', []) }
 
 		<footer>
+			<x-progress data-state='HIDDEN'>
+				<header>
+					<span><slot name='state'></slot></span>
+					<span><slot name='percentage'></slot>%</span>
+				</header>
+
+				<progress class='surface' max='100'></progress>
+			</x-progress>
+
 			<button type='button' class='danger border surface' data-action='STOP' hidden>
 				${ icons.Stop() }
 				STOP
