@@ -1,5 +1,8 @@
 import { PlaylistElement } from './elements/playlist.elements.ts';
 
+import type { ProgressElement } from './elements/progress.elements.ts';
+import './elements/progress.elements.ts';
+
 const [playlists, queue] = Array.from(document.querySelectorAll('main > section ul.base, main > aside ul.base'));
 if (!playlists || !queue) throw new Error();
 
@@ -17,8 +20,9 @@ document.addEventListener(
 	},
 );
 
+const progress = document.querySelector<ProgressElement>('x-progress');
 const [stop, play] = Array.from(document.querySelectorAll<HTMLButtonElement>('main > aside > footer > button'));
-if (!stop || !play) throw new Error();
+if (!progress || !stop || !play) throw new Error();
 
 // [TODO] Support for aborting ongoing operation
 // stop.addEventListener('click', async (event: Event) => {});
@@ -30,6 +34,8 @@ play.addEventListener(
 		if (!button) return;
 
 		button.disabled = true;
+		progress.percentage = 0;
+		progress.state = 'PROCESSING';
 
 		try {
 			const items = Array.from(queue.querySelectorAll<PlaylistElement>('x-playlist')).map((x) => x.id);
@@ -44,6 +50,9 @@ play.addEventListener(
 					'items': items,
 				}),
 			});
+
+			progress.percentage = 100;
+			progress.state = 'FINISHED';
 		} catch (error: unknown) {
 			// [TODO] Implement proper general error handler
 			console.error(error);
