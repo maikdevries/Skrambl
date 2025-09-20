@@ -33,8 +33,11 @@
 		}
 
 		& > img {
-			block-size: 48px;
-			inline-size: 48px;
+			min-block-size: 48px;
+			max-block-size: 48px;
+
+			min-inline-size: 48px;
+			max-inline-size: 48px;
 		}
 
 		& > span.details {
