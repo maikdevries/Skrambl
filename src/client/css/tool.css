@@ -3,7 +3,10 @@
 @layer components {
 	article.list {
 		max-block-size: 100%;
+
+		/* [FUTURE] https://developer.mozilla.org/en-US/docs/Web/CSS/overflow-block#browser_compatibility */
 		overflow-block: hidden;
+		overflow-y: hidden;
 
 		display: flex;
 		flex-direction: column;
@@ -35,7 +38,9 @@
 		}
 
 		& > span.details {
+			/* [FUTURE] https://developer.mozilla.org/en-US/docs/Web/CSS/overflow-inline#browser_compatibility */
 			overflow-inline: hidden;
+			overflow-x: hidden;
 
 			display: inline flex;
 			flex: 1 1 fit-content;
@@ -47,7 +52,9 @@
 			}
 
 			& > span {
+				/* [FUTURE] https://developer.mozilla.org/en-US/docs/Web/CSS/overflow-inline#browser_compatibility */
 				overflow-inline: hidden;
+				overflow-x: hidden;
 
 				color: oklch(from currentColor l c h / 0.75);
 				font-size: 12px;

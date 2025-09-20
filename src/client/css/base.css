@@ -42,7 +42,9 @@
 		align-items: center;
 
 		& > a {
+			/* [FUTURE] https://developer.mozilla.org/en-US/docs/Web/CSS/overflow-inline#browser_compatibility */
 			overflow-inline: hidden;
+			overflow-x: hidden;
 
 			color: inherit;
 			font-weight: 600;
@@ -93,7 +95,10 @@
 	}
 
 	ul.base {
+		/* [FUTURE] https://developer.mozilla.org/en-US/docs/Web/CSS/overflow-block#browser_compatibility */
 		overflow-block: auto;
+		overflow-y: auto;
+
 		display: flex;
 
 		& > li:hover {
