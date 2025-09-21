@@ -2,7 +2,7 @@
 
 @layer components {
 	a.button, button {
-		min-inline-size: fit-content;
+		min-inline-size: max-content;
 
 		display: inline flex;
 		gap: 4px;
