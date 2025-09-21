@@ -127,6 +127,10 @@
 			&::-moz-progress-bar {
 				background-color: var(--colour, currentColor);
 			}
+
+			&::-webkit-progress-value {
+				background-color: var(--colour, currentColor);
+			}
 		}
 	}
 }
