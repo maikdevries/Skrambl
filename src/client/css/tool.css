@@ -135,7 +135,7 @@
 	main {
 		display: grid;
 		gap: 48px;
-		grid-template: 'content aside' / 1fr 0.67fr;
+		grid: 'content aside' / 1fr 0.67fr;
 
 		& > :is(section, aside) {
 			max-block-size: calc(100dvb - 48px - 2 * 32px);
@@ -146,7 +146,7 @@
 
 			display: grid;
 			gap: 16px;
-			grid-template:
+			grid:
 				'list' auto
 				'footer' fit-content;
 

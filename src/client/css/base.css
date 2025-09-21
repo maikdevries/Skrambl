@@ -71,7 +71,7 @@
 	article.callout {
 		display: grid;
 		gap: 8px;
-		grid-template:
+		grid:
 			'header' 24px
 			'content' auto;
 		padding: 16px 16px;
@@ -156,7 +156,7 @@
 	body {
 		display: grid;
 		gap: 32px;
-		grid-template:
+		grid:
 			'header' 48px
 			'main' auto
 			'footer' 32px;

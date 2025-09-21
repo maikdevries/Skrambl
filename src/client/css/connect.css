@@ -4,7 +4,7 @@
 	article.dialog {
 		display: grid;
 		gap: 24px;
-		grid-template:
+		grid:
 			'header' 32px
 			'main' auto
 			'footer' max-content;
@@ -31,7 +31,7 @@
 @layer layout {
 	main {
 		display: grid;
-		grid-template: 'content' / 0.5fr;
+		grid: 'content' / 0.5fr;
 		place-content: center center;
 	}
 }
