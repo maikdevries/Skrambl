@@ -142,13 +142,11 @@
 		}
 
 		& > aside {
-			block-size: fit-content;
-
 			display: grid;
 			gap: 16px;
 			grid:
 				'list' auto
-				'footer' fit-content;
+				'footer' minmax(min-content, max-content);
 
 			& > footer {
 				display: flex;
