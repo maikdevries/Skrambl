@@ -168,4 +168,12 @@
 			}
 		}
 	}
+
+	@media (width <= 1024px) {
+		main {
+			grid:
+				'content' calc((100dvb - 2 * 48px - 2 * 32px) / 2)
+				'aside' calc((100dvb - 2 * 48px - 2 * 32px) / 2);
+		}
+	}
 }
