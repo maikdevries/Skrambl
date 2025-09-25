@@ -1,14 +1,29 @@
-@layer layout, components;
+@layer layout, components, fallbacks;
+
+@layer fallbacks {
+	/* [FUTURE] https://developer.mozilla.org/en-US/docs/Web/CSS/overflow-block#browser_compatibility */
+	@supports not (overflow-block: hidden) {
+		article.list {
+			overflow-y: hidden;
+		}
+	}
+
+	/* [FUTURE] https://developer.mozilla.org/en-US/docs/Web/CSS/overflow-inline#browser_compatibility */
+	@supports not (overflow-inline: hidden) {
+		x-playlist > span.details {
+			overflow-x: hidden;
+
+			& > span {
+				overflow-x: hidden;
+			}
+		}
+	}
+}
 
 @layer components {
 	article.list {
 		max-block-size: 100%;
 		overflow-block: hidden;
-
-		/* [FUTURE] https://developer.mozilla.org/en-US/docs/Web/CSS/overflow-block#browser_compatibility */
-		@supports not (overflow-block: hidden) {
-			overflow-y: hidden;
-		}
 
 		display: flex;
 		flex-direction: column;
@@ -45,11 +60,6 @@
 		& > span.details {
 			overflow-inline: hidden;
 
-			/* [FUTURE] https://developer.mozilla.org/en-US/docs/Web/CSS/overflow-inline#browser_compatibility */
-			@supports not (overflow-inline: hidden) {
-				overflow-x: hidden;
-			}
-
 			display: inline flex;
 			flex: 1 1 fit-content;
 			flex-direction: column;
@@ -61,11 +71,6 @@
 
 			& > span {
 				overflow-inline: hidden;
-
-				/* [FUTURE] https://developer.mozilla.org/en-US/docs/Web/CSS/overflow-inline#browser_compatibility */
-				@supports not (overflow-inline: hidden) {
-					overflow-x: hidden;
-				}
 
 				color: oklch(from currentColor l c h / 0.75);
 				font-size: 12px;

@@ -1,4 +1,20 @@
-@layer reset, variables, layout, paint, components;
+@layer reset, variables, layout, paint, components, fallbacks;
+
+@layer fallbacks {
+	/* [FUTURE] https://developer.mozilla.org/en-US/docs/Web/CSS/overflow-block#browser_compatibility */
+	@supports not (overflow-block: auto) {
+		ul.base {
+			overflow-y: auto;
+		}
+	}
+
+	/* [FUTURE] https://developer.mozilla.org/en-US/docs/Web/CSS/overflow-inline#browser_compatibility */
+	@supports not (overflow-inline: hidden) {
+		article.anchor > a {
+			overflow-x: hidden;
+		}
+	}
+}
 
 @layer components {
 	a.button, button {
@@ -43,11 +59,6 @@
 
 		& > a {
 			overflow-inline: hidden;
-
-			/* [FUTURE] https://developer.mozilla.org/en-US/docs/Web/CSS/overflow-inline#browser_compatibility */
-			@supports not (overflow-inline: hidden) {
-				overflow-x: hidden;
-			}
 
 			color: inherit;
 			font-weight: 600;
@@ -100,11 +111,6 @@
 	ul.base {
 		overflow-block: auto;
 		display: flex;
-
-		/* [FUTURE] https://developer.mozilla.org/en-US/docs/Web/CSS/overflow-block#browser_compatibility */
-		@supports not (overflow-block: auto) {
-			overflow-y: auto;
-		}
 
 		& > li:hover {
 			background-color: var(--background-colour-hover, var(--background-colour, inherit));
