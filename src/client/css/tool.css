@@ -47,6 +47,10 @@
 		&[data-supported='false'] {
 			filter: saturate(0);
 			pointer-events: none;
+
+			& > menu {
+				display: none;
+			}
 		}
 
 		& > img {

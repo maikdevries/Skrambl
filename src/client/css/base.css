@@ -112,7 +112,7 @@
 		overflow-block: auto;
 		display: flex;
 
-		& > li:hover {
+		& > li:not(:has([data-supported='false'])):hover {
 			background-color: var(--background-colour-hover, var(--background-colour, inherit));
 		}
 	}
