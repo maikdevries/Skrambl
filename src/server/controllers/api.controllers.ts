@@ -10,7 +10,7 @@ const OPERATIONS = {
 
 export async function process(request: Request, context: Context): Promise<Response> {
 	// [TODO] Proper validation whether request body is JSON and has 'operation' (string) and 'items' (string[]) properties
-	const { operation, items } = await request.json() as { 'operation': keyof typeof OPERATIONS; 'items': string[] };
+	const { operation, items }: { 'operation': keyof typeof OPERATIONS; 'items': string[] } = await request.json();
 	const cache: Map<string, PlaylistItem[]> = context.session.get('cache') ?? new Map();
 
 	const promises = items.map(async (id) => {
