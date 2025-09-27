@@ -33,6 +33,8 @@
 		font-weight: 600;
 		text-decoration-line: none;
 
+		touch-action: manipulation;
+
 		&:disabled {
 			filter: saturate(0);
 			pointer-events: none;
