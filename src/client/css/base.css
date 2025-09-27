@@ -167,7 +167,7 @@
 			'footer' 32px;
 
 		& > :where(header, main, footer) {
-			padding-inline: 48px;
+			padding-inline: 32px;
 		}
 
 		& > header {
