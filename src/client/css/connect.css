@@ -34,4 +34,10 @@
 		grid: 'content' / 0.5fr;
 		place-content: center center;
 	}
+
+	@media (width <= 1024px) {
+		main {
+			grid-template-columns: 1fr;
+		}
+	}
 }

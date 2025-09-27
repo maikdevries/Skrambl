@@ -24,4 +24,10 @@
 			justify-content: center;
 		}
 	}
+
+	@media (width <= 1024px) {
+		main {
+			grid-template-columns: 1fr;
+		}
+	}
 }
