@@ -150,7 +150,7 @@
 		gap: 48px;
 		grid: 'content aside' / 1fr 0.67fr;
 
-		& > :is(section, aside) {
+		& > :where(section, aside) {
 			max-block-size: calc(100dvb - 48px - 2 * 32px);
 		}
 

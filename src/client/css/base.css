@@ -167,7 +167,7 @@
 			'main' auto
 			'footer' 32px;
 
-		& > :is(header, main, footer) {
+		& > :where(header, main, footer) {
 			padding-inline: 48px;
 		}
 
