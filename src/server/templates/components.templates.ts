@@ -14,7 +14,7 @@ export const AnchorComponent = ((url: string, text: string) => html`
 
 // deno-fmt-ignore: Results in undesired formatting of template structure
 export const BaseListComponent = ((items: unknown[]) => html`
-	<ul class='base'>
+	<ul class='base' ${ items.length ? '' : 'data-empty=true' }>
 		${ items.map((x) => html`<li class='ghost'>${ x }</li>`) }
 	</ul>
 `);

@@ -175,7 +175,7 @@
 				'content' calc((100dvb - 2 * 48px - 2 * 32px) / 2)
 				'aside' calc((100dvb - 2 * 48px - 2 * 32px) / 2);
 
-			&:has(> aside > article.list > ul.base:empty) {
+			&:has(> aside > article.list > ul.base[data-empty='true']) {
 				grid: 'content' auto;
 
 				& > aside {

@@ -3,7 +3,7 @@ import { PlaylistElement } from './elements/playlist.elements.ts';
 import type { ProgressElement } from './elements/progress.elements.ts';
 import './elements/progress.elements.ts';
 
-const [playlists, queue] = Array.from(document.querySelectorAll('main > section ul.base, main > aside ul.base'));
+const [playlists, queue] = Array.from(document.querySelectorAll<HTMLUListElement>('main > section ul.base, main > aside ul.base'));
 if (!playlists || !queue) throw new Error();
 
 document.addEventListener(
@@ -12,8 +12,11 @@ document.addEventListener(
 		const element = event.target instanceof PlaylistElement ? event.target.closest('ul.base > li') : null;
 		if (!element) return;
 
-		if (event.detail['operation'] === 'ADD') return queue.append(element);
-		else if (event.detail['operation'] === 'REMOVE') return playlists.append(element);
+		if (event.detail['operation'] === 'ADD') queue.append(element);
+		else if (event.detail['operation'] === 'REMOVE') playlists.append(element);
+
+		// [PATCH] Safari requires DOM manipulation to trigger CSS :has() pseudo-class reevaluation
+		return queue.children.length ? delete queue.dataset['empty'] : queue.dataset['empty'] = 'true';
 	}) as EventListener,
 	{
 		'passive': true,
