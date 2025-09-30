@@ -20,7 +20,7 @@
 	a.button, button {
 		touch-action: manipulation;
 
-		&:hover {
+		&:where(:active, :hover) {
 			background-color: var(--background-colour-hover, var(--background-colour, inherit));
 		}
 	}
