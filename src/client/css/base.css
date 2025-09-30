@@ -25,13 +25,13 @@
 		}
 	}
 
-	ul.base > li:hover {
-		background-color: var(--background-colour-hover, var(--background-colour, inherit));
-	}
-
 	@media (hover: hover) {
 		article.anchor:not(:hover) > svg {
 			display: none;
+		}
+
+		ul.base > li:hover {
+			background-color: var(--background-colour-hover, var(--background-colour, inherit));
 		}
 	}
 }
