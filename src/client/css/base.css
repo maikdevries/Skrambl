@@ -25,7 +25,7 @@
 		}
 	}
 
-	ul.base > li:not(:has(> [data-supported='false'])):hover {
+	ul.base > li:hover {
 		background-color: var(--background-colour-hover, var(--background-colour, inherit));
 	}
 
