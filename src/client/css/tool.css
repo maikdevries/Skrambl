@@ -21,7 +21,7 @@
 }
 
 @layer interactions {
-	@media (hover: hover) {
+	@media (hover: hover) and (pointer: fine) {
 		aside li:not(:hover) > x-playlist > menu {
 			display: none;
 		}
