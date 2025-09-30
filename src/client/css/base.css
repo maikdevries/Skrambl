@@ -25,12 +25,14 @@
 		}
 	}
 
-	article.anchor:not(:has(> a:hover)) > svg {
-		display: none;
-	}
-
 	ul.base > li:not(:has(> [data-supported='false'])):hover {
 		background-color: var(--background-colour-hover, var(--background-colour, inherit));
+	}
+
+	@media (hover: hover) {
+		article.anchor:not(:has(> a:hover)) > svg {
+			display: none;
+		}
 	}
 }
 

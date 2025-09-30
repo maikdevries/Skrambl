@@ -21,8 +21,10 @@
 }
 
 @layer interactions {
-	aside li:not(:hover) > x-playlist > menu {
-		display: none;
+	@media (hover: hover) {
+		aside li:not(:hover) > x-playlist > menu {
+			display: none;
+		}
 	}
 }
 
