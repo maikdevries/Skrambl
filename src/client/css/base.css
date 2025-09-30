@@ -30,7 +30,7 @@
 	}
 
 	@media (hover: hover) {
-		article.anchor:not(:has(> a:hover)) > svg {
+		article.anchor:not(:hover) > svg {
 			display: none;
 		}
 	}
@@ -68,6 +68,8 @@
 	}
 
 	article.anchor {
+		max-inline-size: max-content;
+
 		container-type: normal;
 		display: inline flex;
 		gap: 4px;

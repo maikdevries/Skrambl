@@ -7,8 +7,8 @@ import type { Playlist } from '../types/base.types.ts';
 // deno-fmt-ignore: Results in undesired formatting of template structure
 export const AnchorComponent = ((url: string, text: string) => html`
 	<article class='anchor'>
-		<a href='${ url }' target='_blank'>${ text }</a>
 		${ icons.Link() }
+		<a href='${ url }' target='_blank'>${ text }</a>
 	</article>
 `);
 
