@@ -1,4 +1,4 @@
-@layer layout, components, fallbacks;
+@layer layout, components, interactions, fallbacks;
 
 @layer fallbacks {
 	/* [FUTURE] https://developer.mozilla.org/en-US/docs/Web/CSS/overflow-block#browser_compatibility */
@@ -17,6 +17,12 @@
 				overflow-x: hidden;
 			}
 		}
+	}
+}
+
+@layer interactions {
+	aside li:not(:hover) > x-playlist > menu {
+		display: none;
 	}
 }
 
@@ -93,10 +99,6 @@
 			aside & button[data-action='ADD'] {
 				display: none;
 			}
-		}
-
-		aside li:not(:hover) > & > menu {
-			display: none;
 		}
 	}
 

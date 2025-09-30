@@ -1,4 +1,4 @@
-@layer reset, variables, layout, paint, components, fallbacks;
+@layer reset, variables, layout, paint, components, interactions, fallbacks;
 
 @layer fallbacks {
 	/* [FUTURE] https://developer.mozilla.org/en-US/docs/Web/CSS/overflow-block#browser_compatibility */
@@ -13,6 +13,24 @@
 		article.anchor > a {
 			overflow-x: hidden;
 		}
+	}
+}
+
+@layer interactions {
+	a.button, button {
+		touch-action: manipulation;
+
+		&:hover {
+			background-color: var(--background-colour-hover, var(--background-colour, inherit));
+		}
+	}
+
+	article.anchor:not(:has(> a:hover)) > svg {
+		display: none;
+	}
+
+	ul.base > li:not(:has(> [data-supported='false'])):hover {
+		background-color: var(--background-colour-hover, var(--background-colour, inherit));
 	}
 }
 
@@ -33,8 +51,6 @@
 		font-weight: 600;
 		text-decoration-line: none;
 
-		touch-action: manipulation;
-
 		&:disabled {
 			filter: saturate(0);
 			pointer-events: none;
@@ -42,10 +58,6 @@
 
 		&[hidden] {
 			display: none;
-		}
-
-		&:hover {
-			background-color: var(--background-colour-hover, var(--background-colour, inherit));
 		}
 
 		& > svg {
@@ -71,10 +83,6 @@
 
 		& > svg {
 			color: oklch(from currentColor l c h / 0.875);
-		}
-
-		&:not(:has(> a:hover)) > svg {
-			display: none;
 		}
 	}
 
@@ -110,10 +118,6 @@
 	ul.base {
 		overflow-block: auto;
 		display: flex;
-
-		& > li:not(:has([data-supported='false'])):hover {
-			background-color: var(--background-colour-hover, var(--background-colour, inherit));
-		}
 	}
 }
 
