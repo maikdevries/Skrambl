@@ -1,7 +1,7 @@
 // [FUTURE] https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/import/with#browser_compatibility
 // import styles from './../../css/base.css' with { 'type': 'css' };
 
-interface ComponentOptions {
+interface ElementOptions {
 	'encapsulate': boolean;
 	'events': {
 		'type': string[];
@@ -10,7 +10,7 @@ interface ComponentOptions {
 
 export class BaseElement extends HTMLElement {
 	static observedAttributes = [];
-	#options: ComponentOptions;
+	#options: ElementOptions;
 
 	// [FUTURE] https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/import/with#browser_compatibility
 	static #style: () => Node;
@@ -29,7 +29,7 @@ export class BaseElement extends HTMLElement {
 	#root: HTMLElement | ShadowRoot;
 	#slots: HTMLSlotElement[];
 
-	constructor(options: ComponentOptions) {
+	constructor(options: ElementOptions) {
 		super();
 		this.#options = options;
 
