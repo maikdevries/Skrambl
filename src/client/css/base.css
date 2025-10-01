@@ -68,7 +68,7 @@
 	}
 
 	article.anchor {
-		max-inline-size: max-content;
+		max-inline-size: fit-content;
 
 		container-type: normal;
 		display: inline flex;
