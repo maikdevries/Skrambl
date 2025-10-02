@@ -15,7 +15,7 @@ export const AnchorComponent = ((url: string, text: string) => html`
 // deno-fmt-ignore: Results in undesired formatting of template structure
 export const BaseListComponent = ((items: unknown[]) => html`
 	<ul class='base' ${ items.length ? '' : 'data-empty=true' }>
-		${ items.map((x) => html`<li class='ghost'>${ x }</li>`) }
+		${ items.map((x) => html`<li>${ x }</li>`) }
 	</ul>
 `);
 
@@ -46,7 +46,7 @@ export const ListComponent = ((heading: string, items: unknown[]) => html`
 
 // deno-fmt-ignore: Results in undesired formatting of template structure
 export const PlaylistComponent = (({ id, description, image, name, supported, url }: Playlist) => html`
-	<x-playlist data-id='${ id }' ${ supported ? '' : 'data-supported=false' }>
+	<x-playlist class='ghost' data-id='${ id }' ${ supported ? '' : 'data-supported=false' }>
 		<img src='${ image.url }' width='${ image.size }' height='${ image.size }'>
 
 		<span class='details'>

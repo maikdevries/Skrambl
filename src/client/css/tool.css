@@ -25,6 +25,10 @@
 		aside li:not(:hover) > x-playlist > menu {
 			display: none;
 		}
+
+		x-playlist:hover {
+			background-color: var(--background-colour-hover, var(--background-colour, inherit));
+		}
 	}
 }
 
