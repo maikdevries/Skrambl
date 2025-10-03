@@ -1,4 +1,4 @@
-import type { Playlist } from '../types/base.types.ts';
+import type { Playlist, User } from '../types/base.types.ts';
 
 import { html } from '@maikdevries/server-render';
 
@@ -7,10 +7,11 @@ import { AnchorComponent, BaseListComponent, CalloutComponent, ListComponent, Pl
 import * as icons from './icons.templates.ts';
 
 // deno-fmt-ignore: Results in undesired formatting of template structure
-export const Connect = (() => Base('Connect',
+export const Connect = ((user: User | undefined) => Base('Connect',
 	[
 		html`<link rel='stylesheet' href='/static/css/connect.css'>`,
 	],
+	user,
 	html`
 	<article class='dialog'>
 		<header>
@@ -45,6 +46,7 @@ export const Error = ((name: string, description: string) => Base('Error',
 	[
 		html`<link rel='stylesheet' href='/static/css/error.css'>`,
 	],
+	undefined,
 	html`
 	${
 		CalloutComponent(
@@ -62,11 +64,12 @@ export const Error = ((name: string, description: string) => Base('Error',
 `));
 
 // deno-fmt-ignore: Results in undesired formatting of template structure
-export const Tool = ((items: Playlist[]) => Base('Tool',
+export const Tool = ((user: User | undefined, items: Playlist[]) => Base('Tool',
 	[
 		html`<link rel='stylesheet' href='/static/css/tool.css'>`,
 		html`<script type='module' src='/static/js/tool.js'></script>`,
 	],
+	user,
 	html`
 	<section>
 		${ ListComponent('Playlists', items.map(PlaylistComponent)) }

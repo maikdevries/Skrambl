@@ -1,10 +1,13 @@
 import type { Template } from '@maikdevries/server-render';
 import { html } from '@maikdevries/server-render';
 
-import { AnchorComponent } from './components.templates.ts';
+import type { User } from '../types/base.types.ts';
+
+import { AnchorComponent, BaseListComponent } from './components.templates.ts';
+import * as icons from './icons.templates.ts';
 
 // deno-fmt-ignore: Results in undesired formatting of template structure
-export const Base = ((title: string, imports: Template[], content: Template) => html`
+export const Base = ((title: string, imports: Template[], user: User | undefined, content: Template) => html`
 	<!DOCTYPE html>
 	<html lang='en'>
 		<head>
@@ -22,7 +25,30 @@ export const Base = ((title: string, imports: Template[], content: Template) => 
 
 		<body>
 			<header>
-				<!-- [TODO] Define header template -->
+				${
+					!user ? '' : html`
+						<article class='user'>
+							<button type='button' class='ghost' popovertarget='dropdown'>
+								<img src='${ user.image.url }' width='${ user.image.size }' height='${ user.image.size }'>
+							</button>
+
+							<section id='dropdown' popover='auto'>
+								<section class='details'>
+									<img src='${ user.image.url }' width='${ user.image.size }' height='${ user.image.size }'>
+									${ user.name }
+								</section>
+
+								<hr>
+
+								${
+									BaseListComponent([
+										html`<a href='/auth/logout' class='button surface danger'>${ icons.Signout() } Sign out</a>`,
+									])
+								}
+							</section>
+						</article>
+					`
+				}
 			</header>
 
 			<main>

@@ -1,5 +1,5 @@
 import type { Context } from '../routes/auth.routes.ts';
-import type { Credentials } from '../types/base.types.ts';
+import type { Credentials, User } from '../types/base.types.ts';
 
 import { encodeBase64Url } from '@std/encoding';
 import * as auth from '../services/auth.services.ts';
@@ -13,9 +13,9 @@ interface PKCE {
 	'verifier': string;
 }
 
-export async function connect(_: Request, __: Context): Promise<Response> {
+export async function connect(_: Request, context: Context): Promise<Response> {
 	// [TODO] In case the user has already connected, redirect to the tool automatically
-	return new Response(await render(templates.Connect()), {
+	return new Response(await render(templates.Connect(context.session.get<User>('user'))), {
 		'headers': {
 			'Content-Type': 'text/html; charset=utf-8',
 		},
