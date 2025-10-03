@@ -1,4 +1,4 @@
-import type { Playlist } from '../types/base.types.ts';
+import type { Playlist, User } from '../types/base.types.ts';
 import type { BasePlaylist, PlaylistItem, Snapshot, UserProfile } from '../types/spotify.types.ts';
 
 import * as fetch from '../controllers/fetch.controllers.ts';
@@ -34,6 +34,15 @@ export async function removePlaylistItems(token: string, id: string, tracks: Pla
 	return await fetch.push<Snapshot>(token, 'DELETE', `playlists/${id}/tracks`, 'tracks', tracks.map((x) => ({ 'uri': x.track.uri })));
 }
 
-export async function getUser(token: string): Promise<UserProfile> {
-	return await fetch.api<UserProfile>(token, 'GET', 'me');
+export async function getUser(token: string): Promise<User> {
+	const data = await fetch.api<UserProfile>(token, 'GET', 'me');
+
+	return {
+		'id': data.id,
+		'image': {
+			'size': data.images?.at(0)?.width ?? 0,
+			'url': data.images?.at(0)?.url ?? '',
+		},
+		'name': data.display_name ?? '',
+	};
 }

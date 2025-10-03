@@ -30,3 +30,12 @@ export class ServerError extends Error {
 		return this.#code;
 	}
 }
+
+export interface User {
+	'id': string;
+	'image': {
+		'size': number;
+		'url': string;
+	};
+	'name': string;
+}
