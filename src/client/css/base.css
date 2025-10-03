@@ -97,6 +97,19 @@
 		}
 	}
 
+	article.badge {
+		container-type: normal;
+		margin-inline-start: 16px;
+		padding: 4px 8px;
+
+		background-color: var(--background-colour, inherit);
+		border: var(--border, none);
+
+		color: var(--colour, inherit);
+		font-size: 12px;
+		font-weight: 600;
+	}
+
 	article.callout {
 		display: grid;
 		gap: 8px;
