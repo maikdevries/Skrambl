@@ -93,7 +93,6 @@
 	"imports": {
 		"@maikdevries/server-render": "jsr:@maikdevries/server-render@^0.2.0",
 		"@maikdevries/server-router": "jsr:@maikdevries/server-router@^0.3.0",
-		"@maikdevries/server-sessions": "jsr:@maikdevries/server-sessions@^0.4.2",
-		"@std/encoding": "jsr:@std/encoding@^1.0.10"
+		"@maikdevries/server-sessions": "jsr:@maikdevries/server-sessions@^0.4.2"
 	}
 }

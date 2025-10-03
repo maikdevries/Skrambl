@@ -1,7 +1,6 @@
 import type { Context } from '../routes/auth.routes.ts';
 import type { Credentials, User } from '../types/base.types.ts';
 
-import { encodeBase64Url } from '@std/encoding';
 import * as auth from '../services/auth.services.ts';
 import * as spotify from '../services/spotify.services.ts';
 
@@ -12,6 +11,8 @@ interface PKCE {
 	'state': string;
 	'verifier': string;
 }
+
+const BASE64_OPTIONS = { 'alphabet': 'base64url', 'omitPadding': true };
 
 export async function connect(_: Request, context: Context): Promise<Response> {
 	// [TODO] In case the user has already connected, redirect to the tool automatically
@@ -31,12 +32,10 @@ export async function csrf(_: Request, __: Context): Promise<Response> {
 }
 
 export async function setup(_: Request, context: Context): Promise<Response> {
-	// [FUTURE] https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Uint8Array/toBase64#browser_compatibility
-	const state = encodeBase64Url(crypto.getRandomValues(new Uint8Array(128)));
+	const state = crypto.getRandomValues(new Uint8Array(128)).toBase64(BASE64_OPTIONS);
 
-	// [FUTURE] https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Uint8Array/toBase64#browser_compatibility
-	const verifier = encodeBase64Url(crypto.getRandomValues(new Uint8Array(96)));
-	const challenge = encodeBase64Url(await crypto.subtle.digest('SHA-256', new TextEncoder().encode(verifier)));
+	const verifier = crypto.getRandomValues(new Uint8Array(96)).toBase64(BASE64_OPTIONS);
+	const challenge = new Uint8Array(await crypto.subtle.digest('SHA-256', new TextEncoder().encode(verifier))).toBase64(BASE64_OPTIONS);
 
 	const params = new URLSearchParams({
 		'client_id': Deno.env.get('SPOTIFY_CLIENT_ID') ?? '',
