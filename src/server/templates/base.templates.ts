@@ -25,7 +25,10 @@ export const Base = ((title: string, imports: Template[], user: User | undefined
 
 		<body>
 			<header>
-				<h1>Skrambl.</h1>
+				<div>
+					<h1>Skrambl.</h1>
+					<article class='badge border surface warning'>Early Access</article>
+				</div>
 
 				${
 					!user ? '' : html`

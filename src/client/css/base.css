@@ -242,6 +242,10 @@
 	.safe {
 		--colour: var(--colour-green);
 	}
+
+	.warning {
+		--colour: var(--colour-yellow);
+	}
 }
 
 @layer layout {
@@ -262,6 +266,11 @@
 			grid: 'title user' / max-content 32px;
 			align-items: center;
 			justify-content: space-between;
+
+			& > div {
+				display: flex;
+				align-items: center;
+			}
 		}
 
 		& > footer {
@@ -287,6 +296,7 @@
 		--colour-green: oklch(from #3BA55C l c h);
 		--colour-red: oklch(from #ED4245 l c h);
 		--colour-white: oklch(from #FFFFFF l c h);
+		--colour-yellow: oklch(from #FFCC33 l c h);
 
 		/* Typography scale */
 		/* --font-size-xxs: 0.625rem; */
