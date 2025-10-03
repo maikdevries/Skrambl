@@ -1,6 +1,17 @@
 @layer reset, variables, layout, paint, components, interactions, fallbacks;
 
 @layer fallbacks {
+	/* [FUTURE] https://developer.mozilla.org/en-US/docs/Web/CSS/anchor-name#browser_compatibility */
+	@supports not (anchor-name: --anchor) {
+		article.user {
+			position: relative;
+
+			& > section {
+				inset: 40px 32px auto auto;
+			}
+		}
+	}
+
 	/* [FUTURE] https://developer.mozilla.org/en-US/docs/Web/CSS/overflow-block#browser_compatibility */
 	@supports not (overflow-block: auto) {
 		ul.base {
