@@ -246,9 +246,9 @@
 
 		& > header {
 			display: grid;
-			grid: 'user' / 32px;
+			grid: 'title user' / max-content 32px;
 			align-items: center;
-			justify-content: end;
+			justify-content: space-between;
 		}
 
 		& > footer {

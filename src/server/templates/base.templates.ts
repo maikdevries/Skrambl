@@ -14,7 +14,7 @@ export const Base = ((title: string, imports: Template[], user: User | undefined
 			<meta charset='UTF-8'>
 			<meta name='viewport' content='width = device-width, initial-scale = 1.0'>
 
-			<title>${ title } | Skrambl</title>
+			<title>${ title } | Skrambl.</title>
 
 			<link rel='preconnect' href='https://rsms.me'>
 			<link rel='stylesheet' href='https://rsms.me/inter/inter.css'>
@@ -25,6 +25,8 @@ export const Base = ((title: string, imports: Template[], user: User | undefined
 
 		<body>
 			<header>
+				<h1>Skrambl.</h1>
+
 				${
 					!user ? '' : html`
 						<article class='user'>
