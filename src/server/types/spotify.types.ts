@@ -148,6 +148,14 @@ interface BaseUser {
 	'uri': string;
 }
 
-export interface User extends BaseUser {
+interface User extends BaseUser {
 	'display_name': string | null;
+}
+
+export interface UserProfile extends User {
+	'followers': {
+		'href': string | null;
+		'total': number;
+	};
+	'images': Image[];
 }
