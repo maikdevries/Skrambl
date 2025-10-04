@@ -43,7 +43,7 @@ play.addEventListener(
 		try {
 			const items = Array.from(queue.querySelectorAll<PlaylistElement>('x-playlist')).map((x) => x.id);
 
-			await fetch(new URL('/api/process', document.location.origin), {
+			const response = await fetch(new URL('/api/process', document.location.origin), {
 				'method': 'POST',
 				'headers': {
 					'Content-Type': 'application/json',
@@ -54,11 +54,14 @@ play.addEventListener(
 				}),
 			});
 
+			if (!response.ok) throw new Error();
+
 			progress.percentage = 100;
 			progress.state = 'FINISHED';
 		} catch (error: unknown) {
 			// [TODO] Implement proper general error handler
 			console.error(error);
+			progress.state = 'ERROR';
 		}
 
 		button.disabled = false;
