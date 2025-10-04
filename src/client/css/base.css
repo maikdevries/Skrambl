@@ -41,6 +41,14 @@
 			display: none;
 		}
 	}
+
+	ul.base {
+		scroll-snap-type: block mandatory;
+
+		& > li {
+			scroll-snap-align: start;
+		}
+	}
 }
 
 @layer components {
