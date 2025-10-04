@@ -64,10 +64,10 @@ export const Error = ((name: string, description: string) => Base('Error',
 `));
 
 // deno-fmt-ignore: Results in undesired formatting of template structure
-export const Tool = ((user: User | undefined, items: Playlist[]) => Base('Tool',
+export const Main = ((user: User | undefined, items: Playlist[]) => Base('Main',
 	[
-		html`<link rel='stylesheet' href='/static/css/tool.css'>`,
-		html`<script type='module' src='/static/js/tool.js'></script>`,
+		html`<link rel='stylesheet' href='/static/css/main.css'>`,
+		html`<script type='module' src='/static/js/main.js'></script>`,
 	],
 	user,
 	html`

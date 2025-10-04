@@ -1,11 +1,11 @@
 import type { RouteContext } from '@maikdevries/server-router';
 import { route } from '@maikdevries/server-router';
 
-import type { BaseContext } from '../middleware/tool.middleware.ts';
-import middleware from '../middleware/tool.middleware.ts';
+import type { BaseContext } from '../middleware/main.middleware.ts';
+import middleware from '../middleware/main.middleware.ts';
 
 import { ServerError } from '../types/base.types.ts';
-import * as tool from '../controllers/tool.controllers.ts';
+import * as main from '../controllers/main.controllers.ts';
 
 export type Context = RouteContext<BaseContext>;
 
@@ -13,8 +13,8 @@ const router = route<BaseContext>(
 	[
 		{
 			'method': ['GET'],
-			'pattern': new URLPattern({ 'pathname': '/tool/' }),
-			'handler': tool.base,
+			'pattern': new URLPattern({ 'pathname': '/' }),
+			'handler': main.base,
 		},
 	],
 	(request, _) => {

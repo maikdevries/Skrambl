@@ -43,7 +43,7 @@ play.addEventListener(
 		try {
 			const items = Array.from(queue.querySelectorAll<PlaylistElement>('x-playlist')).map((x) => x.id);
 
-			await fetch(new URL('/api/tool/process', document.location.origin), {
+			await fetch(new URL('/api/process', document.location.origin), {
 				'method': 'POST',
 				'headers': {
 					'Content-Type': 'application/json',

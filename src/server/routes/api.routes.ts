@@ -18,7 +18,7 @@ const router = route<BaseContext>(
 		},
 		{
 			'method': ['POST'],
-			'pattern': new URLPattern({ 'pathname': '/api/tool/process' }),
+			'pattern': new URLPattern({ 'pathname': '/api/process' }),
 			'handler': api.process,
 		},
 	],

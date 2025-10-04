@@ -8,17 +8,12 @@ import { ServerError } from '../types/base.types.ts';
 
 import api from './api.routes.ts';
 import auth from './auth.routes.ts';
-import tool from './tool.routes.ts';
+import main from './main.routes.ts';
 
 export type Context = RouteContext<BaseContext>;
 
 const router = route<BaseContext>(
 	[
-		{
-			'method': ['GET'],
-			'pattern': new URLPattern({ 'pathname': '/' }),
-			'handler': (_, context) => Response.redirect(new URL('/auth/connect', context.url.origin)),
-		},
 		{
 			'method': ['*'],
 			'pattern': new URLPattern({ 'pathname': '/api/*' }),
@@ -31,8 +26,8 @@ const router = route<BaseContext>(
 		},
 		{
 			'method': ['*'],
-			'pattern': new URLPattern({ 'pathname': '/tool/*' }),
-			'handler': tool,
+			'pattern': new URLPattern({ 'pathname': '/*' }),
+			'handler': main,
 		},
 	],
 	(request, _) => {

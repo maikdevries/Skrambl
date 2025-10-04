@@ -15,7 +15,7 @@ interface PKCE {
 const BASE64_OPTIONS = { 'alphabet': 'base64url', 'omitPadding': true };
 
 export async function connect(_: Request, context: Context): Promise<Response> {
-	// [TODO] In case the user has already connected, redirect to the tool automatically
+	// [TODO] In case the user has already connected, redirect to the main page automatically
 	return new Response(await render(templates.Connect(context.session.get<User>('user'))), {
 		'headers': {
 			'Content-Type': 'text/html; charset=utf-8',
@@ -68,7 +68,7 @@ export async function process(_: Request, context: Context): Promise<Response> {
 	const user = await spotify.getUser(credentials.token);
 	context.session.set('user', user);
 
-	return Response.redirect(new URL('/tool/', context.url.origin));
+	return Response.redirect(new URL('/', context.url.origin));
 }
 
 export async function refresh(_: Request, context: Context): Promise<Response> {
