@@ -98,8 +98,8 @@
 	}
 
 	article.badge {
+		max-inline-size: fit-content;
 		container-type: normal;
-		margin-inline-start: 16px;
 		padding: 4px 8px;
 
 		background-color: var(--background-colour, inherit);
@@ -269,6 +269,7 @@
 
 			& > div {
 				display: flex;
+				gap: 16px;
 				align-items: center;
 			}
 		}

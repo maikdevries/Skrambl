@@ -54,6 +54,8 @@ export const PlaylistComponent = (({ id, description, image, name, supported, ur
 			<span>${ description }</span>
 		</span>
 
+		${ supported ? '' : html`<article class='badge surface warning'>Unsupported</article>` }
+
 		<menu>
 			<li>
 				<button type='button' class='ghost' data-action='ADD'>${ icons.Add() }</button>
