@@ -56,6 +56,11 @@ export class BaseElement extends HTMLElement {
 		return this.#slots;
 	}
 
+	get states(): Set<string> {
+		// @ts-expect-error: Type signature of CustomStateSet does not properly extend Set interface
+		return this.#internals.states;
+	}
+
 	connectedCallback(): void {
 		if (document.readyState !== 'loading') this.init();
 		else document.addEventListener('DOMContentLoaded', () => this.init(), { 'once': true });
