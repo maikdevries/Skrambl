@@ -19,7 +19,7 @@ export class ListElement extends BaseElement {
 
 		this.#element = element;
 		this.#items = this.#element.getElementsByTagName('x-playlist') as HTMLCollectionOf<PlaylistElement>;
-		this.#observer = new MutationObserver(() => this.#items.length ? this.states.delete('empty') : this.states.add('empty'));
+		this.#observer = new MutationObserver(() => this.render());
 	}
 
 	get items(): PlaylistElement[] {
@@ -36,12 +36,26 @@ export class ListElement extends BaseElement {
 		if (!this.#items.length) this.states.add('empty');
 		this.#observer.observe(this.#element, { 'childList': true });
 
+		// [NOTE] Enqueue render call at the end of the task queue to ensure elements have been initialised
+		setTimeout(() => this.render());
+
 		return this.initialised = true;
 	}
 
 	override disconnectedCallback(): void {
 		this.#observer.disconnect();
 		return super.disconnectedCallback();
+	}
+
+	render(): void {
+		this.#items.length ? this.states.delete('empty') : this.states.add('empty');
+
+		const position = this.#element.scrollTop;
+		this.#element.append(...this.items.sort((a, b) => a.name.localeCompare(b.name)).map((x) => x.parentElement ?? x));
+		this.#element.scrollTop = position;
+
+		// [NOTE] Clear observer's event queue from mutations triggered by sort operation
+		this.#observer.takeRecords();
 	}
 }
 
