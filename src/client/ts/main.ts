@@ -33,7 +33,7 @@ if (!progress || !stop || !play) throw new Error();
 play.addEventListener(
 	'click',
 	async (event: Event) => {
-		const button = event.target instanceof HTMLButtonElement ? event.target : null;
+		const button = event.target instanceof Element ? event.target.closest('button') : null;
 		if (!button) return;
 
 		button.disabled = true;
