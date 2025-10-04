@@ -1,9 +1,12 @@
+import type { ListElement } from './elements/list.elements.ts';
+import './elements/list.elements.ts';
+
 import { PlaylistElement } from './elements/playlist.elements.ts';
 
 import type { ProgressElement } from './elements/progress.elements.ts';
 import './elements/progress.elements.ts';
 
-const [playlists, queue] = Array.from(document.querySelectorAll<HTMLUListElement>('main > section ul.base, main > aside ul.base'));
+const [playlists, queue] = Array.from(document.querySelectorAll<ListElement>('main > section > x-list, main > aside > x-list'));
 if (!playlists || !queue) throw new Error();
 
 document.addEventListener(
@@ -12,11 +15,8 @@ document.addEventListener(
 		const element = event.target instanceof PlaylistElement ? event.target.closest('ul.base > li') : null;
 		if (!element) return;
 
-		if (event.detail['operation'] === 'ADD') queue.append(element);
-		else if (event.detail['operation'] === 'REMOVE') playlists.append(element);
-
-		// [PATCH] Safari requires DOM manipulation to trigger CSS :has() pseudo-class reevaluation
-		return queue.children.length ? delete queue.dataset['empty'] : queue.dataset['empty'] = 'true';
+		if (event.detail['operation'] === 'ADD') return queue.list.append(element);
+		else if (event.detail['operation'] === 'REMOVE') return playlists.list.append(element);
 	}) as EventListener,
 	{
 		'passive': true,
@@ -41,8 +41,6 @@ play.addEventListener(
 		progress.state = 'PROCESSING';
 
 		try {
-			const items = Array.from(queue.querySelectorAll<PlaylistElement>('x-playlist')).map((x) => x.id);
-
 			const response = await fetch(new URL('/api/process', document.location.origin), {
 				'method': 'POST',
 				'headers': {
@@ -50,7 +48,7 @@ play.addEventListener(
 				},
 				'body': JSON.stringify({
 					'operation': 'SHUFFLE',
-					'items': items,
+					'items': queue.items.map((x) => x.id),
 				}),
 			});
 

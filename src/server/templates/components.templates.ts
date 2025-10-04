@@ -14,7 +14,7 @@ export const AnchorComponent = ((url: string, text: string) => html`
 
 // deno-fmt-ignore: Results in undesired formatting of template structure
 export const BaseListComponent = ((items: unknown[]) => html`
-	<ul class='base' ${ items.length ? '' : 'data-empty=true' }>
+	<ul class='base'>
 		${ items.map((x) => html`<li>${ x }</li>`) }
 	</ul>
 `);
@@ -35,13 +35,13 @@ export const CalloutComponent = ((classes: string, icon: Template, heading: stri
 
 // deno-fmt-ignore: Results in undesired formatting of template structure
 export const ListComponent = ((heading: string, items: unknown[]) => html`
-	<article class='list'>
+	<x-list>
 		<header>
 			<h2>${ heading }</h2>
 		</header>
 
 		${ BaseListComponent(items) }
-	</article>
+	</x-list>
 `);
 
 // deno-fmt-ignore: Results in undesired formatting of template structure

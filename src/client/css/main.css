@@ -3,7 +3,7 @@
 @layer fallbacks {
 	/* [FUTURE] https://developer.mozilla.org/en-US/docs/Web/CSS/overflow-block#browser_compatibility */
 	@supports not (overflow-block: hidden) {
-		article.list {
+		x-list {
 			overflow-y: hidden;
 		}
 	}
@@ -33,7 +33,7 @@
 }
 
 @layer components {
-	article.list {
+	x-list {
 		max-block-size: 100%;
 		overflow-block: hidden;
 
@@ -184,7 +184,7 @@
 				'content' calc((100dvb - 2 * 48px - 2 * 32px) / 2)
 				'aside' calc((100dvb - 2 * 48px - 2 * 32px) / 2);
 
-			&:has(> aside > article.list > ul.base[data-empty='true']) {
+			&:has(> aside > x-list:state(empty)) {
 				grid: 'content' auto;
 
 				& > aside {
