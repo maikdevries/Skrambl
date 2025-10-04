@@ -2,6 +2,7 @@ import { BaseElement } from './base.elements.ts';
 
 export class PlaylistElement extends BaseElement {
 	#id = '';
+	#name = '';
 
 	constructor() {
 		super({
@@ -16,10 +17,16 @@ export class PlaylistElement extends BaseElement {
 		return this.#id;
 	}
 
+	get name(): string {
+		return this.#name;
+	}
+
 	override init(): boolean {
 		if (!super.init()) return false;
 
 		this.#id = this.dataset['id'] ?? '';
+		this.#name = this.dataset['name'] ?? '';
+
 		return this.initialised = true;
 	}
 
