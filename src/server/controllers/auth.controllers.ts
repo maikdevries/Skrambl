@@ -2,7 +2,6 @@ import type { Context } from '../routes/auth.routes.ts';
 import type { Credentials, User } from '../types/base.types.ts';
 
 import * as auth from '../services/auth.services.ts';
-import * as spotify from '../services/spotify.services.ts';
 
 import { stringify as render } from '@maikdevries/server-render';
 import * as templates from '../templates/pages.templates.ts';
@@ -64,9 +63,6 @@ export async function process(_: Request, context: Context): Promise<Response> {
 
 	const credentials = await auth.retrieve(code, pkce.verifier, context.url.origin);
 	context.session.regenerate().set('credentials', credentials);
-
-	const user = await spotify.getUser(credentials.token);
-	context.session.set('user', user);
 
 	return Response.redirect(new URL('/', context.url.origin));
 }

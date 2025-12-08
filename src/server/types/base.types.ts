@@ -1,3 +1,7 @@
+export interface Cache {
+	'user': User;
+}
+
 export interface Credentials {
 	'expires': number;
 	'refresh': string;

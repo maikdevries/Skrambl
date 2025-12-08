@@ -2,11 +2,10 @@ import type { Middleware } from '@maikdevries/server-router';
 import { chain } from '@maikdevries/server-router';
 
 import type { BaseContext as BC } from './base.middleware.ts';
-import type { Cache, Credentials } from '../types/base.types.ts';
+import type { Credentials } from '../types/base.types.ts';
 
 export interface BaseContext extends BC {
 	'credentials': Credentials;
-	'cache': Cache;
 }
 
 const authorised: Middleware<BC & { 'url': URL }, { 'credentials': Credentials }> = async (request, context, next) => {
@@ -18,11 +17,4 @@ const authorised: Middleware<BC & { 'url': URL }, { 'credentials': Credentials }
 	return await next(request, { ...context, 'credentials': credentials });
 };
 
-const cached: Middleware<BC & { 'url': URL }, { 'cache': Cache }> = async (request, context, next) => {
-	const cache = context.session.get<Cache>('cache');
-	if (!cache) return Response.redirect(new URL('/cache/refresh', context.url.origin));
-
-	return await next(request, { ...context, 'cache': cache });
-};
-
-export default chain(authorised).add(cached);
+export default chain(authorised);
