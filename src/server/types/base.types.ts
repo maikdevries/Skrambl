@@ -1,4 +1,5 @@
 export interface Cache {
+	'playlists': Playlist[];
 	'user': User;
 }
 
