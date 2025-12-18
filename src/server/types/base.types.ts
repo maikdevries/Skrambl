@@ -1,5 +1,5 @@
 export interface Cache {
-	'playlists': Playlist[];
+	'playlists': Promise<Playlist[]>;
 	'user': User;
 }
 

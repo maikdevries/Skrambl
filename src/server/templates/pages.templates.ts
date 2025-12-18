@@ -64,7 +64,7 @@ export const Error = ((name: string, description: string) => Base('Error',
 `));
 
 // deno-fmt-ignore: Results in undesired formatting of template structure
-export const Main = ((user: User, items: Playlist[]) => Base(user.name,
+export const Main = ((user: User, items: Promise<Playlist[]>) => Base(user.name,
 	[
 		html`<link rel='stylesheet' href='/static/css/main.css'>`,
 		html`<script type='module' src='/static/js/main.js'></script>`,
@@ -72,7 +72,7 @@ export const Main = ((user: User, items: Playlist[]) => Base(user.name,
 	user,
 	html`
 	<section>
-		${ ListComponent('Playlists', items.map(PlaylistComponent)) }
+		${ ListComponent('Playlists', items.then((xs) => xs.map(PlaylistComponent))) }
 	</section>
 
 	<aside>
