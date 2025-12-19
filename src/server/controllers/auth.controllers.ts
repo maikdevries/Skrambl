@@ -46,7 +46,7 @@ export async function setup(_: Request, context: Context): Promise<Response> {
 		'code_challenge': challenge,
 	});
 
-	context.session.flash('pkce', {
+	context.session.flash<PKCE>('pkce', {
 		'state': state,
 		'verifier': verifier,
 	});
@@ -62,7 +62,7 @@ export async function process(_: Request, context: Context): Promise<Response> {
 	else if (context.url.searchParams.get('state') !== pkce.state) return Response.redirect(new URL('/auth/csrf', context.url.origin));
 
 	const credentials = await auth.retrieve(code, pkce.verifier, context.url.origin);
-	context.session.regenerate().set('credentials', credentials);
+	context.session.regenerate().set<Credentials>('credentials', credentials);
 
 	return Response.redirect(new URL('/', context.url.origin));
 }
@@ -72,7 +72,7 @@ export async function refresh(_: Request, context: Context): Promise<Response> {
 	if (!token) return Response.redirect(new URL('/auth/connect', context.url.origin));
 
 	const credentials = await auth.refresh(token);
-	context.session.regenerate().set('credentials', credentials);
+	context.session.regenerate().set<Credentials>('credentials', credentials);
 
 	return Response.redirect(new URL('/', context.url.origin));
 }
