@@ -1,8 +1,6 @@
-import type { PlaylistItem } from './spotify.types.ts';
-
 export interface Cache {
 	'playlists': Promise<Playlist[]>;
-	'tracks': Map<Playlist['id'], PlaylistItem[]>;
+	'tracks': Map<Playlist['id'], Track[]>;
 	'user': User;
 }
 
@@ -37,6 +35,10 @@ export class ServerError extends Error {
 	get code(): number {
 		return this.#code;
 	}
+}
+
+export interface Track {
+	'uri': string;
 }
 
 export interface User {
