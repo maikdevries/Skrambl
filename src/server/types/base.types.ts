@@ -1,5 +1,8 @@
+import type { PlaylistItem } from './spotify.types.ts';
+
 export interface Cache {
 	'playlists': Promise<Playlist[]>;
+	'tracks': Map<Playlist['id'], PlaylistItem[]>;
 	'user': User;
 }
 

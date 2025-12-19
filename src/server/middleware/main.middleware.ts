@@ -5,8 +5,8 @@ import type { BaseContext as BC } from './base.middleware.ts';
 import type { Cache, Credentials } from '../types/base.types.ts';
 
 export interface BaseContext extends BC {
-	'credentials': Credentials;
 	'cache': Cache;
+	'credentials': Credentials;
 }
 
 const authorised: Middleware<BC & { 'url': URL }, { 'credentials': Credentials }> = async (request, context, next) => {

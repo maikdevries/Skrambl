@@ -8,6 +8,7 @@ export async function refresh(_: Request, context: Context): Promise<Response> {
 
 	context.session.set('cache', {
 		'playlists': playlists,
+		'tracks': new Map(),
 		'user': user,
 	});
 

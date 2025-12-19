@@ -3,10 +3,11 @@ import { chain } from '@maikdevries/server-router';
 
 import type { BaseContext as BC } from './base.middleware.ts';
 
-import type { Credentials } from '../types/base.types.ts';
+import type { Cache, Credentials } from '../types/base.types.ts';
 import { ServerError } from '../types/base.types.ts';
 
 export interface BaseContext extends BC {
+	'cache': Cache;
 	'credentials': Credentials;
 }
 
@@ -19,6 +20,13 @@ const authorised: Middleware<BC, { 'credentials': Credentials }> = async (reques
 	}
 
 	return await next(request, { ...context, 'credentials': credentials });
+};
+
+const cached: Middleware<BC, { 'cache': Cache }> = async (request, context, next) => {
+	const cache = context.session.get<Cache>('cache');
+	if (!cache) return Response.json({ 'description': 'Something went terribly wrong on our side of the internet' }, { 'status': 500 });
+
+	return await next(request, { ...context, 'cache': cache });
 };
 
 const DESCRIPTIONS: { [code: number]: string } = {
@@ -42,4 +50,4 @@ const error: Middleware = async (request, context, next) => {
 	}
 };
 
-export default chain(authorised).add(error);
+export default chain(error).add(authorised).add(cached);
