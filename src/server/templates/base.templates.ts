@@ -61,7 +61,7 @@ export const Base = ((title: string, imports: Template[], user: User | undefined
 			</main>
 
 			<footer>
-				&copy; 2025
+				&copy; 2026
 				${ AnchorComponent('https://maikdevries.com', 'Maik de Vries') }
 			</footer>
 		</body>
