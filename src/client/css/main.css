@@ -116,7 +116,7 @@
 		gap: 4px;
 
 		&[data-state='ERROR'] {
-			--colour: var(--colour-red);
+			--accent-colour: var(--colour-red);
 		}
 
 		&[data-state='HIDDEN'] {
@@ -124,7 +124,7 @@
 		}
 
 		&[data-state='FINISHED'] {
-			--colour: var(--colour-green);
+			--accent-colour: var(--colour-green);
 		}
 
 		& > header {
@@ -143,11 +143,11 @@
 			border: none;
 
 			&::-moz-progress-bar {
-				background-color: var(--colour, currentColor);
+				background-color: var(--accent-colour, currentColor);
 			}
 
 			&::-webkit-progress-value {
-				background-color: var(--colour, currentColor);
+				background-color: var(--accent-colour, currentColor);
 			}
 		}
 	}
