@@ -2,16 +2,18 @@ import type { Context } from '../routes/api.routes.ts';
 
 import { ServerError } from '../types/base.types.ts';
 import * as spotify from '../services/spotify.services.ts';
+import * as validate from '../controllers/validate.controllers.ts';
 
-const OPERATIONS = {
+export const OPERATIONS = {
 	'SHUFFLE': shuffle,
 };
 
 export async function process(request: Request, context: Context): Promise<Response> {
-	// [TODO] Proper validation whether request body is JSON and has 'operation' (string) and 'items' (string[]) properties
-	const { operation, items }: { 'operation': keyof typeof OPERATIONS; 'items': string[] } = await request.json();
+	// [TODO] Proper validation whether request body is JSON
+	const data = await request.json();
+	if (!validate.operation(data)) throw new ServerError(400, request.method, request.url);
 
-	const promises = items.map(async (id) => {
+	const promises = data.items.map(async (id) => {
 		const tracks = context.cache.tracks.get(id) ?? await spotify.getPlaylistItems(context.credentials.token, id);
 		if (!tracks.length) return;
 
@@ -19,7 +21,7 @@ export async function process(request: Request, context: Context): Promise<Respo
 		if (!context.cache.tracks.has(id)) context.cache.tracks.set(id, tracks);
 
 		await spotify.removePlaylistItems(context.credentials.token, id, tracks);
-		await spotify.addPlaylistItems(context.credentials.token, id, OPERATIONS[operation](tracks));
+		await spotify.addPlaylistItems(context.credentials.token, id, OPERATIONS[data.operation](tracks));
 
 		// [NOTE] When successful, clear cache from current playlist
 		return context.cache.tracks.delete(id);

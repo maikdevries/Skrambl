@@ -30,6 +30,7 @@ const cached: Middleware<BC, { 'cache': Cache }> = async (request, context, next
 };
 
 const DESCRIPTIONS: { [code: number]: string } = {
+	400: 'The request or its payload is malformed',
 	401: 'The authorisation for this request is missing or has expired',
 	403: 'The authorisation for this request denies access to the requested resource',
 	404: 'The requested resource could not be found',
