@@ -119,12 +119,12 @@
 			--accent-colour: var(--colour-red);
 		}
 
-		&[data-state='HIDDEN'] {
-			visibility: hidden;
-		}
-
 		&[data-state='FINISHED'] {
 			--accent-colour: var(--colour-green);
+		}
+
+		&[data-state='HIDDEN'] {
+			visibility: hidden;
 		}
 
 		& > header {
