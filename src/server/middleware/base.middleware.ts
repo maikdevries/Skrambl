@@ -13,14 +13,6 @@ export interface BaseContext {
 	'session': Session;
 }
 
-const DESCRIPTIONS: { [code: number]: string } = {
-	401: 'The authorisation for this request is missing or has expired',
-	403: 'The authorisation for this request denies access to the requested resource',
-	404: 'The requested resource could not be found',
-	502: 'The server located upstream encountered a problem while handling this request',
-	503: 'The server located upstream is currently unavailable',
-};
-
 const error: Middleware = async (request, context, next) => {
 	try {
 		return await next(request, context);
@@ -28,7 +20,7 @@ const error: Middleware = async (request, context, next) => {
 		console.error(error);
 
 		const code = error instanceof ServerError ? error.code === 500 ? 502 : error.code : 500;
-		const description = DESCRIPTIONS[code] ?? 'Something went terribly wrong on our side of the internet';
+		const description = ServerError.DESCRIPTIONS[code] ?? 'Something went terribly wrong on our side of the internet';
 
 		return new Response(await render(templates.Error(String(code), description)), {
 			'status': code,
