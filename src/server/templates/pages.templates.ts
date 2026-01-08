@@ -34,7 +34,7 @@ export const Connect = ((user: User | undefined) => Base('Connect',
 					'safe surface',
 					icons.Secure(),
 					'Privacy',
-					"Don't worry, none of your private information is ever shared with us"
+					"Don't worry, none of your private information is ever shared with us",
 				)
 			}
 		</footer>
