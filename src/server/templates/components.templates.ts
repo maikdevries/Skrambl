@@ -47,7 +47,7 @@ export const ListComponent = ((heading: string, items: unknown[] | Promise<unkno
 // deno-fmt-ignore: Results in undesired formatting of template structure
 export const PlaylistComponent = (({ id, description, image, name, supported, url }: Playlist) => html`
 	<x-playlist class='ghost' data-id='${ id }' data-name='${ name }' ${ supported ? '' : 'data-supported=false' }>
-		<img src='${ image.url }' width='${ image.size }' height='${ image.size }'>
+		<img src='${ image.url }' width='${ image.size }' height='${ image.size }' loading='lazy'>
 
 		<span class='details'>
 			${ AnchorComponent(url, name) }
