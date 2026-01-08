@@ -101,6 +101,12 @@
 		}
 
 		& > svg {
+			min-block-size: 14px;
+			max-block-size: 14px;
+
+			min-inline-size: 14px;
+			max-inline-size: 14px;
+
 			color: oklch(from currentColor l c h / 0.875);
 		}
 	}
