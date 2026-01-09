@@ -33,7 +33,6 @@ export class ListElement extends BaseElement {
 	override init(): boolean {
 		if (!super.init()) return false;
 
-		if (!this.#items.length) this.states.add('empty');
 		this.#observer.observe(this.#element, { 'childList': true });
 
 		// [NOTE] Enqueue render call at the end of the task queue to ensure elements have been initialised
