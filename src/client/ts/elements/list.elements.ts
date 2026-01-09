@@ -48,13 +48,6 @@ export class ListElement extends BaseElement {
 
 	render(): void {
 		this.#items.length ? this.states.delete('empty') : this.states.add('empty');
-
-		const position = this.#element.scrollTop;
-		this.#element.append(...this.items.sort((a, b) => a.name.localeCompare(b.name)).map((x) => x.parentElement ?? x));
-		this.#element.scrollTop = position;
-
-		// [NOTE] Clear observer's event queue from mutations triggered by sort operation
-		this.#observer.takeRecords();
 	}
 }
 
