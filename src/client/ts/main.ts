@@ -27,6 +27,14 @@ const progress = document.querySelector<ProgressElement>('x-progress');
 const [stop, play] = Array.from(document.querySelectorAll<HTMLButtonElement>('main > aside > footer > button'));
 if (!progress || !stop || !play) throw new Error();
 
+queue.addEventListener(
+	'list:states',
+	((event: CustomEvent) => play.disabled = event.detail.includes('EMPTY')) as EventListener,
+	{
+		'passive': true,
+	},
+);
+
 // [TODO] Support for aborting ongoing operation
 // stop.addEventListener('click', async (event: Event) => {});
 

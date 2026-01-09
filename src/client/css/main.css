@@ -184,7 +184,7 @@
 				'content' calc((100dvb - 2 * 48px - 2 * 32px) / 2)
 				'aside' calc((100dvb - 2 * 48px - 2 * 32px) / 2);
 
-			&:has(> aside > x-list:state(empty)) {
+			&:has(> aside > x-list:state(EMPTY)) {
 				grid: 'content' auto;
 
 				& > aside {

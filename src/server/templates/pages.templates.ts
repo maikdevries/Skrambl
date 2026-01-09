@@ -93,7 +93,7 @@ export const Main = ((user: User, items: Promise<Playlist[]>) => Base(user.name,
 				STOP
 			</button>
 
-			<button type='button' class='safe border surface' data-action='PLAY'>
+			<button type='button' class='safe border surface' data-action='PLAY' disabled>
 				${ icons.Play() }
 				PLAY
 			</button>

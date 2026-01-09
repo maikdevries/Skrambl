@@ -47,7 +47,8 @@ export class ListElement extends BaseElement {
 	}
 
 	render(): void {
-		this.#items.length ? this.states.delete('empty') : this.states.add('empty');
+		if (this.#items.length) this.states.delete('EMPTY') && this.emitEvent('list:states', Array.from(this.states.values()));
+		else this.states.add('EMPTY'), this.emitEvent('list:states', Array.from(this.states.values()));
 	}
 }
 
