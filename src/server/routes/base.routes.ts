@@ -16,6 +16,11 @@ export type Context = RouteContext<BaseContext>;
 const router = route<BaseContext>(
 	[
 		{
+			'method': ['GET'],
+			'pattern': new URLPattern({ 'pathname': '/status' }),
+			'handler': () => new Response('OK'),
+		},
+		{
 			'method': ['*'],
 			'pattern': new URLPattern({ 'pathname': '/api/*' }),
 			'handler': api,
