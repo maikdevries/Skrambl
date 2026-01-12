@@ -7,12 +7,7 @@ export class ListElement extends BaseElement {
 	#observer: MutationObserver;
 
 	constructor() {
-		super({
-			'encapsulate': false,
-			'events': {
-				'type': [],
-			},
-		});
+		super();
 
 		const element = this.root.querySelector<HTMLUListElement>('ul.base');
 		if (!element) throw new Error();

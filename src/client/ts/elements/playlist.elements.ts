@@ -6,7 +6,6 @@ export class PlaylistElement extends BaseElement {
 
 	constructor() {
 		super({
-			'encapsulate': false,
 			'events': {
 				'type': ['click'],
 			},

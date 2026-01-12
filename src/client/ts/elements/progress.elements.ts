@@ -6,12 +6,7 @@ export class ProgressElement extends BaseElement {
 	#state: HTMLSlotElement;
 
 	constructor() {
-		super({
-			'encapsulate': false,
-			'events': {
-				'type': [],
-			},
-		});
+		super();
 
 		const element = this.root.querySelector('progress');
 		const [state, percentage] = this.slots.filter((x) => x.name === 'state' || x.name === 'percentage');

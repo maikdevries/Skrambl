@@ -29,9 +29,15 @@ export class BaseElement extends HTMLElement {
 	#root: HTMLElement | ShadowRoot;
 	#slots: HTMLSlotElement[];
 
-	constructor(options: ElementOptions) {
+	constructor(options: Partial<ElementOptions> = {}) {
 		super();
-		this.#options = options;
+		this.#options = {
+			'encapsulate': false,
+			'events': {
+				'type': [],
+			},
+			...options,
+		};
 
 		this.#internals = this.attachInternals();
 		this.#shadow = this.#internals.shadowRoot ?? this.#options.encapsulate ? this.attachShadow({ 'mode': 'open' }) : null;
