@@ -5,7 +5,10 @@
 		"checkJs": false,
 		"erasableSyntaxOnly": true,
 		"exactOptionalPropertyTypes": true,
-		"lib": ["dom", "deno.ns"],
+		"lib": [
+			"dom",
+			"deno.ns"
+		],
 		"noErrorTruncation": true,
 		"noFallthroughCasesInSwitch": true,
 		"noImplicitAny": true,
@@ -26,7 +29,10 @@
 		"verbatimModuleSyntax": true
 	},
 	"fmt": {
-		"include": ["app.ts", "src/**/*.ts"],
+		"include": [
+			"app.ts",
+			"src/**/*.ts"
+		],
 		"bracePosition": "sameLine",
 		"indentWidth": 4,
 		"lineWidth": 140,
@@ -46,7 +52,10 @@
 		"useTabs": true
 	},
 	"lint": {
-		"include": ["app.ts", "src/**/*.ts"],
+		"include": [
+			"app.ts",
+			"src/**/*.ts"
+		],
 		"rules": {
 			"include": [
 				"camelcase",
@@ -75,7 +84,10 @@
 				"triple-slash-reference",
 				"verbatim-module-syntax"
 			],
-			"tags": ["recommended", "workspace"]
+			"tags": [
+				"recommended",
+				"workspace"
+			]
 		}
 	},
 	"lock": false,
