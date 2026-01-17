@@ -92,8 +92,8 @@
 	},
 	"lock": false,
 	"imports": {
-		"@maikdevries/server-render": "jsr:@maikdevries/server-render@^0.2.0",
-		"@maikdevries/server-router": "jsr:@maikdevries/server-router@^0.3.0",
-		"@maikdevries/server-sessions": "jsr:@maikdevries/server-sessions@^0.5.0"
+		"@maikdevries/server-render": "jsr:@maikdevries/server-render@^0.2.1",
+		"@maikdevries/server-router": "jsr:@maikdevries/server-router@^0.4.0",
+		"@maikdevries/server-sessions": "jsr:@maikdevries/server-sessions@^0.5.1"
 	}
 }
