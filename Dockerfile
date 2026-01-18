@@ -8,7 +8,8 @@ WORKDIR /app
 COPY deno.json .
 RUN deno install
 
-COPY . .
+COPY app.ts .
+COPY src/server/ ./src/server/
 RUN deno cache app.ts
 
 CMD ["run", "-EN", "app.ts"]
