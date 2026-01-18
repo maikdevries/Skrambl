@@ -22,9 +22,11 @@ services:
 
   nginx:
     container_name: nginx
-    image: nginx:alpine
     env_file:
       - .env
+    build:
+      context: .
+      dockerfile: ./nginx/Dockerfile
     expose:
       - ${NGINX_PORT:?error}
     networks:
@@ -32,7 +34,6 @@ services:
       - external
     volumes:
       - ./nginx/templates/:/etc/nginx/templates/:ro
-      - ./src/client/:/usr/share/nginx/static/:ro
     healthcheck:
       test: ['CMD-SHELL', 'curl -f "http://127.0.0.1:${NGINX_PORT:?error}/status" || exit 1']
       interval: 30s
