@@ -1,5 +1,5 @@
-import type { Middleware } from '@maikdevries/server-router';
-import { chain } from '@maikdevries/server-router';
+import type { Middleware } from '@maikdevries/server-middleware';
+import { chain } from '@maikdevries/server-middleware';
 
 import type { Session } from '@maikdevries/server-sessions';
 import { session } from '@maikdevries/server-sessions';
