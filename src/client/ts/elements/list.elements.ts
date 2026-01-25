@@ -44,6 +44,15 @@ export class ListElement extends BaseElement {
 	render(): void {
 		if (this.#items.length) this.states.delete('EMPTY') && this.emitEvent('list:states', Array.from(this.states.values()));
 		else this.states.add('EMPTY'), this.emitEvent('list:states', Array.from(this.states.values()));
+
+		return this.sort();
+	}
+
+	sort(): void {
+		this.list.append(...this.items.sort((a, b) => a.name.localeCompare(b.name)).map((x) => x.parentElement ?? x));
+
+		// [NOTE] Clear MutationObserver event queue from mutations triggered by sort operation
+		this.#observer.takeRecords();
 	}
 }
 
