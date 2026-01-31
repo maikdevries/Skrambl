@@ -49,6 +49,8 @@ play.addEventListener(
 		progress.state = 'PROCESSING';
 
 		try {
+			for (const x of queue.items) x.states.add('PROCESSING');
+
 			const response = await fetch(new URL('/api/process', document.location.origin), {
 				'method': 'POST',
 				'headers': {
@@ -61,6 +63,7 @@ play.addEventListener(
 			});
 
 			if (!response.ok) throw new Error();
+			for (const x of queue.items) x.states.delete('PROCESSING');
 
 			progress.percentage = 100;
 			progress.state = 'FINISHED';
