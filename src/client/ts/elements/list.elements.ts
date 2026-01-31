@@ -49,7 +49,11 @@ export class ListElement extends BaseElement {
 	}
 
 	sort(): void {
+		// [NOTE] Store user scroll progress to restore scroll position to after appending sorted items
+		const position = this.list.scrollTop;
+
 		this.list.append(...this.items.sort((a, b) => a.name.localeCompare(b.name)).map((x) => x.parentElement ?? x));
+		this.list.scrollTop = position;
 
 		// [NOTE] Clear MutationObserver event queue from mutations triggered by sort operation
 		this.#observer.takeRecords();
