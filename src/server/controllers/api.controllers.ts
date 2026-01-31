@@ -14,6 +14,9 @@ export async function process(request: Request, context: Context): Promise<Respo
 	if (!validate.operation(data)) throw new ServerError(400, request.method, request.url);
 
 	const promises = data.items.map(async (id) => {
+		// [NOTE] Check whether user-provided ID is a known playlist ID
+		if (!(await context.cache.playlists).some((playlist) => playlist.id === id)) return;
+
 		const tracks = context.cache.tracks.get(id) ?? await spotify.getPlaylistItems(context.credentials.token, id);
 		if (!tracks.length) return;
 
@@ -29,6 +32,7 @@ export async function process(request: Request, context: Context): Promise<Respo
 
 	const results = await Promise.allSettled(promises);
 
+	// [TODO] Respond with fine-grained processing status information per playlist
 	if (results.every((x) => x.status === 'fulfilled')) {
 		return Response.json({ 'description': 'The operation has been processed successfully' });
 	} else throw new ServerError(500, request.method, request.url);
