@@ -9,6 +9,7 @@ export async function refresh(_: Request, context: Context): Promise<Response> {
 	const playlists = spotify.getPlaylists(context.credentials.token, user.id);
 
 	context.session.set<Cache>('cache', {
+		'allowed': playlists.then((xs) => new Set(xs.map((playlist) => playlist.id))),
 		'playlists': playlists,
 		'tracks': new Map(),
 		'user': user,

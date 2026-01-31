@@ -13,22 +13,21 @@ export async function process(request: Request, context: Context): Promise<Respo
 	const data = await request.json();
 	if (!validate.operation(data)) throw new ServerError(400, request.method, request.url);
 
-	const promises = data.items.map(async (id) => {
-		// [NOTE] Check whether user-provided ID is a known playlist ID
-		if (!(await context.cache.playlists).some((playlist) => playlist.id === id)) return;
+	const promises = data.items
+		.filter(async (id) => (await context.cache.allowed).has(id))
+		.map(async (id) => {
+			const tracks = context.cache.tracks.get(id) ?? await spotify.getPlaylistItems(context.credentials.token, id);
+			if (!tracks.length) return;
 
-		const tracks = context.cache.tracks.get(id) ?? await spotify.getPlaylistItems(context.credentials.token, id);
-		if (!tracks.length) return;
+			// [NOTE] Create cache entry for current playlist to avoid loss of data when error is thrown hereafter
+			if (!context.cache.tracks.has(id)) context.cache.tracks.set(id, tracks);
 
-		// [NOTE] Create cache entry for current playlist to avoid loss of data when error is thrown hereafter
-		if (!context.cache.tracks.has(id)) context.cache.tracks.set(id, tracks);
+			await spotify.removePlaylistItems(context.credentials.token, id, tracks);
+			await spotify.addPlaylistItems(context.credentials.token, id, OPERATIONS[data.operation](tracks));
 
-		await spotify.removePlaylistItems(context.credentials.token, id, tracks);
-		await spotify.addPlaylistItems(context.credentials.token, id, OPERATIONS[data.operation](tracks));
-
-		// [NOTE] When successful, clear cache from current playlist
-		return context.cache.tracks.delete(id);
-	});
+			// [NOTE] When successful, clear cache from current playlist
+			return context.cache.tracks.delete(id);
+		});
 
 	const results = await Promise.allSettled(promises);
 

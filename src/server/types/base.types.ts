@@ -1,4 +1,5 @@
 export interface Cache {
+	'allowed': Promise<Set<Playlist['id']>>;
 	'playlists': Promise<Playlist[]>;
 	'tracks': Map<Playlist['id'], Track[]>;
 	'user': User;
