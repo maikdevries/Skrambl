@@ -13,8 +13,9 @@ export async function process(request: Request, context: Context): Promise<Respo
 	const data = await request.json();
 	if (!validate.operation(data)) throw new ServerError(400, request.method, request.url);
 
+	const allowed = await context.cache.allowed;
 	const promises = data.items
-		.filter(async (id) => (await context.cache.allowed).has(id))
+		.filter((id) => allowed.has(id))
 		.map(async (id) => {
 			const tracks = context.cache.tracks.get(id) ?? await spotify.getPlaylistItems(context.credentials.token, id);
 			if (!tracks.length) return;
