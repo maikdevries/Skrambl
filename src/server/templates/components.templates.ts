@@ -46,15 +46,13 @@ export const ListComponent = ((heading: string, items: unknown[] | Promise<unkno
 
 // deno-fmt-ignore: Results in undesired formatting of template structure
 export const PlaylistComponent = (({ id, description, image, name, supported, url }: Playlist) => html`
-	<x-playlist class='ghost' data-id='${ id }' data-name='${ name }' ${ supported ? '' : 'data-supported=false' }>
+	<x-playlist class='ghost' data-id='${ id }' data-name='${ name }' ${ supported ? '' : 'disabled' }>
 		<img src='${ image.url }' width='${ image.size }' height='${ image.size }' loading='lazy'>
 
 		<span class='details'>
 			${ AnchorComponent(url, name) }
 			<span>${ description }</span>
 		</span>
-
-		${ supported ? '' : html`<article class='badge surface warning'>Unsupported</article>` }
 
 		<menu>
 			<li>
@@ -64,5 +62,7 @@ export const PlaylistComponent = (({ id, description, image, name, supported, ur
 				<button type='button' class='danger ghost' data-action='REMOVE'>${ icons.Close() }</button>
 			</li>
 		</menu>
+
+		${ supported ? '' : html`<article class='badge surface warning'>Unsupported</article>` }
 	</x-playlist>
 `);
