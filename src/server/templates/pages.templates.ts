@@ -24,14 +24,14 @@ export const Connect = ((user: User | undefined) => Base('Connect',
 
 		${
 			BaseListComponent([
-				html`<a href='/auth/setup' class='button spotify border surface'>Connect with Spotify</a>`,
+				html`<a href='/auth/setup' class='button border surface spotify'>Connect with Spotify</a>`,
 			])
 		}
 
 		<footer>
 			${
 				CalloutComponent(
-					'safe surface',
+					'surface safe',
 					icons.Secure(),
 					'Privacy',
 					"Don't worry, none of your private information is ever shared with us",
@@ -50,7 +50,7 @@ export const Error = ((name: string, description: string) => Base('Error',
 	html`
 	${
 		CalloutComponent(
-			'danger border surface',
+			'border surface danger',
 			icons.Error(),
 			name,
 			description,
@@ -88,12 +88,12 @@ export const Main = ((user: User, items: Promise<Playlist[]>) => Base(user.name,
 				<progress class='surface' max='100'></progress>
 			</x-progress>
 
-			<button type='button' class='danger border surface' data-action='STOP' hidden>
+			<button type='button' class='border surface danger' data-action='STOP' hidden>
 				${ icons.Stop() }
 				STOP
 			</button>
 
-			<button type='button' class='safe border surface' data-action='PLAY' disabled>
+			<button type='button' class='border surface safe' data-action='PLAY' disabled>
 				${ icons.Play() }
 				PLAY
 			</button>
