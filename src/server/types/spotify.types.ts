@@ -1,30 +1,27 @@
-interface BaseAlbum {
-	'album_type': 'album' | 'compilation' | 'single';
-	'artists': BaseArtist[];
-	'available_markets': string[];
+interface Base {
 	'external_urls': {
 		'spotify': string;
 	};
 	'href': string;
 	'id': string;
+	'uri': string;
+}
+
+interface BaseAlbum extends Base {
+	'album_type': 'album' | 'compilation' | 'single';
+	'artists': BaseArtist[];
+	'available_markets': string[];
 	'images': Image[];
 	'name': string;
 	'release_date': string;
 	'release_date_precision': 'day' | 'month' | 'year';
 	'total_tracks': number;
 	'type': 'album';
-	'uri': string;
 }
 
-interface BaseArtist {
-	'external_urls': {
-		'spotify': string;
-	};
-	'href': string;
-	'id': string;
+interface BaseArtist extends Base {
 	'name': string;
 	'type': 'artist';
-	'uri': string;
 }
 
 interface Copyright {
@@ -32,16 +29,11 @@ interface Copyright {
 	'type': 'C' | 'P';
 }
 
-interface Episode {
+interface Episode extends Base {
 	'description': string;
 	'duration_ms': number;
 	'explicit': boolean;
-	'external_urls': {
-		'spotify': string;
-	};
-	'href': string;
 	'html_description': string;
-	'id': string;
 	'images': Image[];
 	'is_externally_hosted': boolean;
 	'languages': string[];
@@ -50,7 +42,6 @@ interface Episode {
 	'release_date_precision': string;
 	'show': BaseShow;
 	'type': 'episode';
-	'uri': string;
 }
 
 interface Image {
@@ -59,14 +50,9 @@ interface Image {
 	'width': number | null;
 }
 
-export interface BasePlaylist {
+export interface BasePlaylist extends Base {
 	'collaborative': boolean;
 	'description': string;
-	'external_urls': {
-		'spotify': string;
-	};
-	'href': string;
-	'id': string;
 	'images': Image[] | null;
 	'name': string;
 	'owner': User;
@@ -77,7 +63,6 @@ export interface BasePlaylist {
 		'total': number;
 	};
 	'type': 'playlist';
-	'uri': string;
 }
 
 export interface PlaylistItem {
@@ -87,17 +72,12 @@ export interface PlaylistItem {
 	'track': Episode | Track;
 }
 
-interface BaseShow {
+interface BaseShow extends Base {
 	'available_markets': string[];
 	'copyrights': Copyright[];
 	'description': string;
 	'explicit': boolean;
-	'external_urls': {
-		'spotify': string;
-	};
-	'href': string;
 	'html_description': string;
-	'id': string;
 	'images': Image[];
 	'is_externally_hosted': boolean;
 	'languages': string[];
@@ -106,14 +86,13 @@ interface BaseShow {
 	'publisher': string;
 	'total_episodes': number;
 	'type': 'show';
-	'uri': string;
 }
 
 export interface Snapshot {
 	'snapshot_id': string;
 }
 
-interface Track {
+interface Track extends Base {
 	'album': BaseAlbum;
 	'artists': BaseArtist[];
 	'available_markets': string[];
@@ -125,27 +104,15 @@ interface Track {
 		'ean': string;
 		'upc': string;
 	};
-	'external_urls': {
-		'spotify': string;
-	};
-	'href': string;
-	'id': string;
 	'is_local': boolean;
 	'name': string;
 	'popularity': number;
 	'track_number': number;
 	'type': 'track';
-	'uri': string;
 }
 
-interface BaseUser {
-	'external_urls': {
-		'spotify': string;
-	};
-	'href': string;
-	'id': string;
+interface BaseUser extends Base {
 	'type': 'user';
-	'uri': string;
 }
 
 interface User extends BaseUser {
