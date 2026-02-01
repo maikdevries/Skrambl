@@ -30,7 +30,7 @@ export class ProgressElement extends BaseElement {
 	override init(): boolean {
 		if (!super.init()) return false;
 
-		this.percentage = Number.parseInt(this.dataset['percentage'] ?? '0');
+		this.percentage = Number.parseInt(this.dataset['percentage'] ?? '0') || 0;
 		this.state = this.dataset['state'] as 'ERROR' | 'FINISHED' | 'HIDDEN' | 'PROCESSING' ?? 'HIDDEN';
 
 		return this.initialised = true;
