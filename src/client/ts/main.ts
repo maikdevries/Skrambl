@@ -1,22 +1,27 @@
 import type { ListElement } from './elements/list.elements.ts';
 import './elements/list.elements.ts';
 
-import { PlaylistElement } from './elements/playlist.elements.ts';
+import { ListItemElement } from './elements/list.item.elements.ts';
+
+import type { PlaylistElement } from './elements/playlist.elements.ts';
+import './elements/playlist.elements.ts';
 
 import type { ProgressElement } from './elements/progress.elements.ts';
 import './elements/progress.elements.ts';
 
-const [playlists, queue] = Array.from(document.querySelectorAll<ListElement>('main > section > x-list, main > aside > x-list'));
+const [playlists, queue] = Array.from(
+	document.querySelectorAll<ListElement<PlaylistElement>>('main > section > x-list, main > aside > x-list'),
+);
 if (!playlists || !queue) throw new Error();
 
 document.addEventListener(
-	'playlist:button-click',
+	'list-item:action',
 	((event: CustomEvent) => {
-		const element = event.target instanceof PlaylistElement ? event.target.closest('ul.base > li') : null;
+		const element = event.target instanceof ListItemElement ? event.target.element : null;
 		if (!element) return;
 
-		if (event.detail['operation'] === 'ADD') return queue.list.append(element);
-		else if (event.detail['operation'] === 'REMOVE') return playlists.list.append(element);
+		if (event.detail['action'] === 'ADD') return queue.list.append(element);
+		else if (event.detail['action'] === 'REMOVE') return playlists.list.append(element);
 	}) as EventListener,
 	{
 		'passive': true,
@@ -58,7 +63,7 @@ play.addEventListener(
 				},
 				'body': JSON.stringify({
 					'operation': 'SHUFFLE',
-					'items': queue.items.map((x) => x.id),
+					'items': queue.items.map((x) => x.content.id),
 				}),
 			});
 

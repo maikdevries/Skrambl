@@ -22,11 +22,11 @@
 
 @layer interactions {
 	@media (hover: hover) and (pointer: fine) {
-		aside li:not(:hover) > x-playlist > menu {
+		aside li:not(:hover) > x-list-item > menu {
 			display: none;
 		}
 
-		x-playlist:hover {
+		x-list-item:hover {
 			background-color: var(--background-colour-hover, var(--background-colour, inherit));
 		}
 	}
@@ -51,13 +51,16 @@
 		}
 	}
 
-	x-playlist {
-		display: flex;
+	x-list-item {
+		display: grid;
 		gap: 16px;
+		grid: 'content menu' / auto max-content;
 		align-items: center;
 		padding: 16px 16px;
 
-		&:is([disabled], :state(PROCESSING)) {
+		&:state(PROCESSING), &:has(> slot[name='content'] > [disabled]) {
+			grid: 'content' / auto;
+
 			filter: saturate(0);
 			pointer-events: none;
 
@@ -65,6 +68,28 @@
 				display: none;
 			}
 		}
+
+		& > slot[name='content'] > * {
+			overflow-inline: hidden;
+		}
+
+		& > menu {
+			display: inline flex;
+
+			section & button[data-action='REMOVE'] {
+				display: none;
+			}
+
+			aside & button[data-action='ADD'] {
+				display: none;
+			}
+		}
+	}
+
+	x-playlist {		
+		display: flex;
+		gap: 16px;
+		align-items: center;
 
 		& > img {
 			min-block-size: 48px;
@@ -93,18 +118,6 @@
 				font-size: 12px;
 				text-overflow: ellipsis;
 				white-space: nowrap;
-			}
-		}
-
-		& > menu {
-			display: inline flex;
-
-			section & button[data-action='REMOVE'] {
-				display: none;
-			}
-
-			aside & button[data-action='ADD'] {
-				display: none;
 			}
 		}
 	}

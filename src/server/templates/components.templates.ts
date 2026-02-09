@@ -40,19 +40,14 @@ export const ListComponent = ((heading: string, items: unknown[] | Promise<unkno
 			<h2>${ heading }</h2>
 		</header>
 
-		${ BaseListComponent(items) }
+		${ BaseListComponent(items instanceof Promise ? items.then((xs) => xs.map(ListItemComponent)) : items.map(ListItemComponent)) }
 	</x-list>
 `);
 
 // deno-fmt-ignore: Results in undesired formatting of template structure
-export const PlaylistComponent = (({ id, description, image, name, supported, url }: Playlist) => html`
-	<x-playlist class='ghost' data-id='${ id }' data-name='${ name }' ${ supported ? '' : 'disabled' }>
-		<img src='${ image.url }' width='${ image.size }' height='${ image.size }' loading='lazy'>
-
-		<span class='details'>
-			${ AnchorComponent(url, name) }
-			<span>${ description }</span>
-		</span>
+export const ListItemComponent = ((content: unknown) => html`
+	<x-list-item class='ghost'>
+		<slot name='content'>${ content }</slot>
 
 		<menu>
 			<li>
@@ -62,6 +57,18 @@ export const PlaylistComponent = (({ id, description, image, name, supported, ur
 				<button type='button' class='ghost danger' data-action='REMOVE'>${ icons.Close() }</button>
 			</li>
 		</menu>
+	</x-list-item>
+`);
+
+// deno-fmt-ignore: Results in undesired formatting of template structure
+export const PlaylistComponent = (({ id, description, image, name, supported, url }: Playlist) => html`
+	<x-playlist data-id='${ id }' data-name='${ name }' ${ supported ? '' : 'disabled' }>
+		<img src='${ image.url }' width='${ image.size }' height='${ image.size }' loading='lazy'>
+
+		<span class='details'>
+			${ AnchorComponent(url, name) }
+			<span>${ description }</span>
+		</span>
 
 		${ supported ? '' : html`<article class='badge surface warning'>Unsupported</article>` }
 	</x-playlist>

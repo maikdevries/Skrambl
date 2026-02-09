@@ -1,16 +1,9 @@
 import { BaseElement } from './base.elements.ts';
+import type { Comparable } from './list.elements.ts';
 
-export class PlaylistElement extends BaseElement {
+export class PlaylistElement extends BaseElement implements Comparable<PlaylistElement> {
 	#id = '';
 	#name = '';
-
-	constructor() {
-		super({
-			'events': {
-				'type': ['click'],
-			},
-		});
-	}
 
 	override get id(): string {
 		return this.#id;
@@ -29,13 +22,8 @@ export class PlaylistElement extends BaseElement {
 		return this.initialised = true;
 	}
 
-	handleClick(event: PointerEvent): void {
-		const button = event.target instanceof Element ? event.target.closest('button') : null;
-		if (!button) return;
-
-		this.emitEvent('playlist:button-click', {
-			'operation': button.dataset['action'],
-		});
+	compare(other: PlaylistElement): number {
+		return this.name.localeCompare(other.name);
 	}
 }
 

@@ -1,9 +1,15 @@
-import type { PlaylistElement } from './playlist.elements.ts';
 import { BaseElement } from './base.elements.ts';
 
-export class ListElement extends BaseElement {
+import type { ListItemElement } from './list.item.elements.ts';
+import './list.item.elements.ts';
+
+export interface Comparable<T> {
+	'compare': (other: T) => number;
+}
+
+export class ListElement<T extends Element & Comparable<T>> extends BaseElement {
 	#element: HTMLUListElement;
-	#items: HTMLCollectionOf<PlaylistElement>;
+	#items: HTMLCollectionOf<ListItemElement<T>>;
 	#observer: MutationObserver;
 
 	constructor() {
@@ -13,11 +19,11 @@ export class ListElement extends BaseElement {
 		if (!element) throw new Error();
 
 		this.#element = element;
-		this.#items = this.#element.getElementsByTagName('x-playlist') as HTMLCollectionOf<PlaylistElement>;
+		this.#items = this.#element.getElementsByTagName('x-list-item') as HTMLCollectionOf<ListItemElement<T>>;
 		this.#observer = new MutationObserver(() => this.render());
 	}
 
-	get items(): PlaylistElement[] {
+	get items(): ListItemElement<T>[] {
 		return Array.from(this.#items);
 	}
 
@@ -52,7 +58,7 @@ export class ListElement extends BaseElement {
 		// [NOTE] Store user scroll progress to restore scroll position to after appending sorted items
 		const position = this.list.scrollTop;
 
-		this.list.append(...this.items.sort((a, b) => a.name.localeCompare(b.name)).map((x) => x.parentElement ?? x));
+		this.list.append(...this.items.sort((a, b) => a.compare(b)).map((x) => x.element));
 		this.list.scrollTop = position;
 
 		// [NOTE] Clear MutationObserver event queue from mutations triggered by sort operation
