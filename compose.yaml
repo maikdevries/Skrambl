@@ -21,7 +21,7 @@ services:
       - no-new-privileges:true
 
   nginx:
-    container_name: nginx
+    container_name: nginx.skrambl
     env_file:
       - .env
     build:
