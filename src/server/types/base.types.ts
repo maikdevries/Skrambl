@@ -6,7 +6,7 @@ export interface Cache {
 }
 
 export interface Credentials {
-	'expires': number;
+	'expires': Temporal.Instant;
 	'refresh': string;
 	'token': string;
 }

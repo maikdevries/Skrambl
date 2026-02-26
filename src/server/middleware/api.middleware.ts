@@ -15,7 +15,7 @@ const authorised: Middleware<BC, { 'credentials': Credentials }> = async (reques
 	const credentials = context.session.get<Credentials>('credentials');
 	if (!credentials) return Response.json({ 'description': 'The authorisation for this request is missing' }, { 'status': 401 });
 
-	if (credentials.expires <= Date.now()) {
+	if (Temporal.Instant.compare(credentials.expires, Temporal.Now.instant()) <= 0) {
 		return Response.json({ 'description': 'The authorisation for this request has expired' }, { 'status': 401 });
 	}
 

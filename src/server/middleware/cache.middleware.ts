@@ -12,7 +12,9 @@ const authorised: Middleware<BC & { 'url': URL }, { 'credentials': Credentials }
 	const credentials = context.session.get<Credentials>('credentials');
 	if (!credentials) return Response.redirect(new URL('/auth/connect', context.url.origin));
 
-	if (credentials.expires <= Date.now()) return Response.redirect(new URL('/auth/refresh', context.url.origin));
+	if (Temporal.Instant.compare(credentials.expires, Temporal.Now.instant()) <= 0) {
+		return Response.redirect(new URL('/auth/refresh', context.url.origin));
+	}
 
 	return await next(request, { ...context, 'credentials': credentials });
 };

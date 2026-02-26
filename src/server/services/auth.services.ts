@@ -14,7 +14,7 @@ export async function retrieve(code: string, verifier: string, origin: string): 
 	const data = await fetch.auth(params);
 
 	return {
-		'expires': Date.now() + data.expires_in * 1000,
+		'expires': Temporal.Now.instant().add({ 'seconds': data.expires_in }),
 		'refresh': data.refresh_token ?? '',
 		'token': data.access_token,
 	};
@@ -30,7 +30,7 @@ export async function refresh(token: string): Promise<Credentials> {
 	const data = await fetch.auth(params);
 
 	return {
-		'expires': Date.now() + data.expires_in * 1000,
+		'expires': Temporal.Now.instant().add({ 'seconds': data.expires_in }),
 		'refresh': data.refresh_token ?? token,
 		'token': data.access_token,
 	};
