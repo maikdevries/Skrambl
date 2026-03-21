@@ -44,6 +44,7 @@ services:
       - deno
     restart: unless-stopped
     attach: false
+    # read_only: true
     security_opt:
       - no-new-privileges:true
 
