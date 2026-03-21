@@ -24,8 +24,8 @@ interface Page<T> {
 	'total': number;
 }
 
-export async function api<T>(token: string, method: HTTP_METHOD, endpoint: string, payload?: JSON): Promise<T> {
-	return await json<T>(
+export function api<T>(token: string, method: HTTP_METHOD, endpoint: string, payload?: JSON): Promise<T> {
+	return json<T>(
 		method,
 		new URL(endpoint, 'https://api.spotify.com/v1/'),
 		{
@@ -36,8 +36,8 @@ export async function api<T>(token: string, method: HTTP_METHOD, endpoint: strin
 	);
 }
 
-export async function auth(params: URLSearchParams): Promise<AuthorisationResponse> {
-	return await json<AuthorisationResponse>(
+export function auth(params: URLSearchParams): Promise<AuthorisationResponse> {
+	return json<AuthorisationResponse>(
 		'POST',
 		new URL('https://accounts.spotify.com/api/token'),
 		{
@@ -70,7 +70,7 @@ export async function push<T>(
 		[key]: payload.slice(0, 100),
 	});
 
-	if (payload.length > 100) return await push<T>(token, method, endpoint, key, payload.slice(100, payload.length));
+	if (payload.length > 100) return push<T>(token, method, endpoint, key, payload.slice(100, payload.length));
 	else return response;
 }
 
@@ -94,9 +94,9 @@ async function json<T>(method: HTTP_METHOD, url: URL, headers: HeadersInit, body
 		await new Promise((resolve) =>
 			setTimeout(() => resolve, Number.parseInt(response.headers.get('Retry-After') ?? '0') * 1000)
 		);
-		return await json<T>(method, url, headers, body, retries + 1);
+		return json<T>(method, url, headers, body, retries + 1);
 	}
 
-	if (response.ok) return await response.json() as T;
+	if (response.ok) return response.json() as Promise<T>;
 	else throw new ServerError(response.status, method, response.url);
 }

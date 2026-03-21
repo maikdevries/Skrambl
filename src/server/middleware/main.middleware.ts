@@ -9,7 +9,7 @@ export interface BaseContext extends BC {
 	'credentials': Credentials;
 }
 
-const authorised: Middleware<BC & { 'url': URL }, { 'credentials': Credentials }> = async (request, context, next) => {
+const authorised: Middleware<BC & { 'url': URL }, { 'credentials': Credentials }> = (request, context, next) => {
 	const credentials = context.session.get<Credentials>('credentials');
 	if (!credentials) return Response.redirect(new URL('/auth/connect', context.url.origin));
 
@@ -17,14 +17,14 @@ const authorised: Middleware<BC & { 'url': URL }, { 'credentials': Credentials }
 		return Response.redirect(new URL('/auth/refresh', context.url.origin));
 	}
 
-	return await next(request, { ...context, 'credentials': credentials });
+	return next(request, { ...context, 'credentials': credentials });
 };
 
-const cached: Middleware<BC & { 'url': URL }, { 'cache': Cache }> = async (request, context, next) => {
+const cached: Middleware<BC & { 'url': URL }, { 'cache': Cache }> = (request, context, next) => {
 	const cache = context.session.get<Cache>('cache');
 	if (!cache) return Response.redirect(new URL('/cache/refresh', context.url.origin));
 
-	return await next(request, { ...context, 'cache': cache });
+	return next(request, { ...context, 'cache': cache });
 };
 
 export default chain(authorised).add(cached);

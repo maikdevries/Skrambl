@@ -15,7 +15,7 @@ export interface BaseContext {
 
 const error: Middleware = async (request, context, next) => {
 	try {
-		return await next(request, context);
+		return next(request, context);
 	} catch (error: unknown) {
 		console.error(error);
 

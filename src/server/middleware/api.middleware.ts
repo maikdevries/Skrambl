@@ -11,7 +11,7 @@ export interface BaseContext extends BC {
 	'credentials': Credentials;
 }
 
-const authorised: Middleware<BC, { 'credentials': Credentials }> = async (request, context, next) => {
+const authorised: Middleware<BC, { 'credentials': Credentials }> = (request, context, next) => {
 	const credentials = context.session.get<Credentials>('credentials');
 	if (!credentials) {
 		return Response.json({ 'description': 'The authorisation for this request is missing' }, { 'status': 401 });
@@ -21,10 +21,10 @@ const authorised: Middleware<BC, { 'credentials': Credentials }> = async (reques
 		return Response.json({ 'description': 'The authorisation for this request has expired' }, { 'status': 401 });
 	}
 
-	return await next(request, { ...context, 'credentials': credentials });
+	return next(request, { ...context, 'credentials': credentials });
 };
 
-const cached: Middleware<BC, { 'cache': Cache }> = async (request, context, next) => {
+const cached: Middleware<BC, { 'cache': Cache }> = (request, context, next) => {
 	const cache = context.session.get<Cache>('cache');
 	if (!cache) {
 		return Response.json({ 'description': 'Something went terribly wrong on our side of the internet' }, {
@@ -32,12 +32,12 @@ const cached: Middleware<BC, { 'cache': Cache }> = async (request, context, next
 		});
 	}
 
-	return await next(request, { ...context, 'cache': cache });
+	return next(request, { ...context, 'cache': cache });
 };
 
-const error: Middleware = async (request, context, next) => {
+const error: Middleware = (request, context, next) => {
 	try {
-		return await next(request, context);
+		return next(request, context);
 	} catch (error: unknown) {
 		console.error(error);
 

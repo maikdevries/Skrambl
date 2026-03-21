@@ -19,8 +19,8 @@ export async function getPlaylists(token: string, owner: string): Promise<Playli
 	}));
 }
 
-export async function addPlaylistItems(token: string, id: string, tracks: Track[]): Promise<Snapshot> {
-	return await fetch.push<Snapshot>(token, 'POST', `playlists/${id}/tracks`, 'uris', tracks.map((x) => x.uri));
+export function addPlaylistItems(token: string, id: string, tracks: Track[]): Promise<Snapshot> {
+	return fetch.push<Snapshot>(token, 'POST', `playlists/${id}/tracks`, 'uris', tracks.map((x) => x.uri));
 }
 
 export async function getPlaylistItems(token: string, id: string): Promise<Track[]> {
@@ -32,8 +32,8 @@ export async function getPlaylistItems(token: string, id: string): Promise<Track
 	}));
 }
 
-export async function removePlaylistItems(token: string, id: string, tracks: Track[]): Promise<Snapshot> {
-	return await fetch.push<Snapshot>(
+export function removePlaylistItems(token: string, id: string, tracks: Track[]): Promise<Snapshot> {
+	return fetch.push<Snapshot>(
 		token,
 		'DELETE',
 		`playlists/${id}/tracks`,
