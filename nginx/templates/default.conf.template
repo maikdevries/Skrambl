@@ -6,7 +6,7 @@ server {
 		proxy_set_header X-Forwarded-Proto $scheme;
 		proxy_set_header X-Forwarded-Host $host;
 
-		proxy_pass http://skrambl:${DENO_PORT};
+		proxy_pass http://deno:${DENO_PORT};
 	}
 
 	location /static/ {
