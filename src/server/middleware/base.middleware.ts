@@ -2,7 +2,7 @@ import type { Middleware } from '@maikdevries/server-middleware';
 import { chain } from '@maikdevries/server-middleware';
 
 import type { Session } from '@maikdevries/server-sessions';
-import { session } from '@maikdevries/server-sessions';
+import { middleware as session } from '@maikdevries/server-sessions';
 
 import { stringify as render } from '@maikdevries/server-render';
 import * as templates from '../templates/pages.templates.ts';
