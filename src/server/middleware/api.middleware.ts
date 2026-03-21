@@ -13,7 +13,9 @@ export interface BaseContext extends BC {
 
 const authorised: Middleware<BC, { 'credentials': Credentials }> = async (request, context, next) => {
 	const credentials = context.session.get<Credentials>('credentials');
-	if (!credentials) return Response.json({ 'description': 'The authorisation for this request is missing' }, { 'status': 401 });
+	if (!credentials) {
+		return Response.json({ 'description': 'The authorisation for this request is missing' }, { 'status': 401 });
+	}
 
 	if (Temporal.Instant.compare(credentials.expires, Temporal.Now.instant()) <= 0) {
 		return Response.json({ 'description': 'The authorisation for this request has expired' }, { 'status': 401 });
@@ -24,7 +26,11 @@ const authorised: Middleware<BC, { 'credentials': Credentials }> = async (reques
 
 const cached: Middleware<BC, { 'cache': Cache }> = async (request, context, next) => {
 	const cache = context.session.get<Cache>('cache');
-	if (!cache) return Response.json({ 'description': 'Something went terribly wrong on our side of the internet' }, { 'status': 500 });
+	if (!cache) {
+		return Response.json({ 'description': 'Something went terribly wrong on our side of the internet' }, {
+			'status': 500,
+		});
+	}
 
 	return await next(request, { ...context, 'cache': cache });
 };
@@ -36,7 +42,8 @@ const error: Middleware = async (request, context, next) => {
 		console.error(error);
 
 		const code = error instanceof ServerError ? error.code === 500 ? 502 : error.code : 500;
-		const description = ServerError.DESCRIPTIONS[code] ?? 'Something went terribly wrong on our side of the internet';
+		const description = ServerError.DESCRIPTIONS[code]
+			?? 'Something went terribly wrong on our side of the internet';
 
 		return Response.json({ 'description': description }, { 'status': code });
 	}

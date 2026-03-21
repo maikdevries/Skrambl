@@ -33,7 +33,13 @@ export async function getPlaylistItems(token: string, id: string): Promise<Track
 }
 
 export async function removePlaylistItems(token: string, id: string, tracks: Track[]): Promise<Snapshot> {
-	return await fetch.push<Snapshot>(token, 'DELETE', `playlists/${id}/tracks`, 'tracks', tracks.map((x) => ({ 'uri': x.uri })));
+	return await fetch.push<Snapshot>(
+		token,
+		'DELETE',
+		`playlists/${id}/tracks`,
+		'tracks',
+		tracks.map((x) => ({ 'uri': x.uri })),
+	);
 }
 
 export async function getUser(token: string): Promise<User> {

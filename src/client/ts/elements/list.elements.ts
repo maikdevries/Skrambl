@@ -45,8 +45,9 @@ export class ListElement<T extends Element & Comparable<T>> extends BaseElement 
 	}
 
 	render(): void {
-		if (this.#items.length) this.states.delete('EMPTY') && this.emitEvent('list:states', Array.from(this.states.values()));
-		else this.states.add('EMPTY'), this.emitEvent('list:states', Array.from(this.states.values()));
+		if (this.#items.length) {
+			this.states.delete('EMPTY') && this.emitEvent('list:states', Array.from(this.states.values()));
+		} else this.states.add('EMPTY'), this.emitEvent('list:states', Array.from(this.states.values()));
 
 		return this.states.has('EMPTY') ? void null : this.sort();
 	}
@@ -63,7 +64,8 @@ export class ListElement<T extends Element & Comparable<T>> extends BaseElement 
 	}
 }
 
-export class ListItemElement<T extends Element & Comparable<T>> extends BaseElement implements Comparable<ListItemElement<T>> {
+export class ListItemElement<T extends Element & Comparable<T>> extends BaseElement
+	implements Comparable<ListItemElement<T>> {
 	#content: T;
 	#element: HTMLLIElement;
 

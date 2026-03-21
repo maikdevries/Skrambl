@@ -40,7 +40,9 @@ export class BaseElement extends HTMLElement {
 		};
 
 		this.#internals = this.attachInternals();
-		this.#shadow = this.#internals.shadowRoot ?? this.#options.encapsulate ? this.attachShadow({ 'mode': 'open' }) : null;
+		this.#shadow = this.#internals.shadowRoot ?? this.#options.encapsulate
+			? this.attachShadow({ 'mode': 'open' })
+			: null;
 
 		// [FUTURE] https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/import/with#browser_compatibility
 		// this.#shadow.adoptedStyleSheets = [styles];

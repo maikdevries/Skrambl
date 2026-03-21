@@ -23,18 +23,22 @@ export async function connect(_: Request, context: Context): Promise<Response> {
 }
 
 export async function csrf(_: Request, __: Context): Promise<Response> {
-	return new Response(await render(templates.Error('CSRF', 'Someone might have tried to tamper with your connection')), {
-		'headers': {
-			'Content-Type': 'text/html; charset=utf-8',
+	return new Response(
+		await render(templates.Error('CSRF', 'Someone might have tried to tamper with your connection')),
+		{
+			'headers': {
+				'Content-Type': 'text/html; charset=utf-8',
+			},
 		},
-	});
+	);
 }
 
 export async function setup(_: Request, context: Context): Promise<Response> {
 	const state = crypto.getRandomValues(new Uint8Array(128)).toBase64(BASE64_OPTIONS);
 
 	const verifier = crypto.getRandomValues(new Uint8Array(96)).toBase64(BASE64_OPTIONS);
-	const challenge = new Uint8Array(await crypto.subtle.digest('SHA-256', new TextEncoder().encode(verifier))).toBase64(BASE64_OPTIONS);
+	const challenge = new Uint8Array(await crypto.subtle.digest('SHA-256', new TextEncoder().encode(verifier)))
+		.toBase64(BASE64_OPTIONS);
 
 	const params = new URLSearchParams({
 		'client_id': Deno.env.get('SPOTIFY_CLIENT_ID') ?? '',
@@ -59,7 +63,9 @@ export async function process(_: Request, context: Context): Promise<Response> {
 	const pkce = context.session.get<PKCE>('pkce');
 
 	if (!code || !pkce) return Response.redirect(new URL('/auth/connect', context.url.origin));
-	else if (context.url.searchParams.get('state') !== pkce.state) return Response.redirect(new URL('/auth/csrf', context.url.origin));
+	else if (context.url.searchParams.get('state') !== pkce.state) {
+		return Response.redirect(new URL('/auth/csrf', context.url.origin));
+	}
 
 	const credentials = await auth.retrieve(code, pkce.verifier, context.url.origin);
 	context.session.regenerate().set<Credentials>('credentials', credentials);

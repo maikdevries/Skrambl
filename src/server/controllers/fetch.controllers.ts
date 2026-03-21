@@ -59,7 +59,13 @@ export async function pull<T>(token: string, method: HTTP_METHOD, endpoint: stri
 	else return data.items;
 }
 
-export async function push<T>(token: string, method: HTTP_METHOD, endpoint: string, key: string, payload: JSON[]): Promise<T> {
+export async function push<T>(
+	token: string,
+	method: HTTP_METHOD,
+	endpoint: string,
+	key: string,
+	payload: JSON[],
+): Promise<T> {
 	const response = await api<T>(token, method, endpoint, {
 		[key]: payload.slice(0, 100),
 	});
@@ -85,7 +91,9 @@ async function json<T>(method: HTTP_METHOD, url: URL, headers: HeadersInit, body
 	}
 
 	if (response.status === 429 && retries < 3) {
-		await new Promise((resolve) => setTimeout(() => resolve, Number.parseInt(response.headers.get('Retry-After') ?? '0') * 1000));
+		await new Promise((resolve) =>
+			setTimeout(() => resolve, Number.parseInt(response.headers.get('Retry-After') ?? '0') * 1000)
+		);
 		return await json<T>(method, url, headers, body, retries + 1);
 	}
 

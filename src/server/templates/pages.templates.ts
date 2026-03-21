@@ -3,7 +3,13 @@ import type { Playlist, User } from '../types/base.types.ts';
 import { html } from '@maikdevries/server-render';
 
 import { Base } from './base.templates.ts';
-import { AnchorComponent, BaseListComponent, CalloutComponent, ListComponent, PlaylistComponent } from './components.templates.ts';
+import {
+	AnchorComponent,
+	BaseListComponent,
+	CalloutComponent,
+	ListComponent,
+	PlaylistComponent,
+} from './components.templates.ts';
 import * as icons from './icons.templates.ts';
 
 // deno-fmt-ignore: Results in undesired formatting of template structure

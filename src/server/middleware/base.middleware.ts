@@ -20,7 +20,8 @@ const error: Middleware = async (request, context, next) => {
 		console.error(error);
 
 		const code = error instanceof ServerError ? error.code === 500 ? 502 : error.code : 500;
-		const description = ServerError.DESCRIPTIONS[code] ?? 'Something went terribly wrong on our side of the internet';
+		const description = ServerError.DESCRIPTIONS[code]
+			?? 'Something went terribly wrong on our side of the internet';
 
 		return new Response(await render(templates.Error(String(code), description)), {
 			'status': code,

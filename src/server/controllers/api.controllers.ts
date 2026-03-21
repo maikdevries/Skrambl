@@ -17,7 +17,8 @@ export async function process(request: Request, context: Context): Promise<Respo
 	const promises = data.items
 		.filter((id) => allowed.has(id))
 		.map(async (id) => {
-			const tracks = context.cache.tracks.get(id) ?? await spotify.getPlaylistItems(context.credentials.token, id);
+			const tracks = context.cache.tracks.get(id)
+				?? await spotify.getPlaylistItems(context.credentials.token, id);
 			if (!tracks.length) return;
 
 			// [NOTE] Create cache entry for current playlist to avoid loss of data when error is thrown hereafter
