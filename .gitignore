@@ -4,9 +4,5 @@
 # Ignore environment variables
 .env
 
-# Ignore transpiled client-side code
-src/client/js
-
 # Ignore IDE configuration files
-.vscode
 .zed
