@@ -1,5 +1,4 @@
 import type { Context } from '../routes/cache.routes.ts';
-
 import type { Cache } from '../types/base.types.ts';
 
 import * as spotify from '../services/spotify.services.ts';

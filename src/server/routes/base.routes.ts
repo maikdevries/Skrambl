@@ -1,9 +1,5 @@
-import type { RouteContext } from '@maikdevries/server-router';
-import { route } from '@maikdevries/server-router';
-
-import type { BaseContext } from '../middleware/base.middleware.ts';
-import middleware from '../middleware/base.middleware.ts';
-
+import { route, type RouteContext } from '@maikdevries/server-router';
+import { type BaseContext, middleware } from '../middleware/base.middleware.ts';
 import { ServerError } from '../types/base.types.ts';
 
 import api from './api.routes.ts';

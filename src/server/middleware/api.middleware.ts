@@ -1,10 +1,6 @@
-import type { Middleware } from '@maikdevries/server-middleware';
-import { chain } from '@maikdevries/server-middleware';
-
+import { chain, type Middleware } from '@maikdevries/server-middleware';
 import type { BaseContext as BC } from './base.middleware.ts';
-
-import type { Cache, Credentials } from '../types/base.types.ts';
-import { ServerError } from '../types/base.types.ts';
+import { type Cache, type Credentials, ServerError } from '../types/base.types.ts';
 
 export interface BaseContext extends BC {
 	'cache': Cache;
@@ -49,4 +45,4 @@ const error: Middleware = (request, context, next) => {
 	}
 };
 
-export default chain(error).add(authorised).add(cached);
+export const middleware = chain(error).add(authorised).add(cached);

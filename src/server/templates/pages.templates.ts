@@ -1,16 +1,9 @@
-import type { Playlist, User } from '../types/base.types.ts';
-
 import { html } from '@maikdevries/server-render';
 
 import { Base } from './base.templates.ts';
-import {
-	AnchorComponent,
-	BaseListComponent,
-	CalloutComponent,
-	ListComponent,
-	PlaylistComponent,
-} from './components.templates.ts';
+import * as components from './components.templates.ts';
 import * as icons from './icons.templates.ts';
+import type { Playlist, User } from '../types/base.types.ts';
 
 // deno-fmt-ignore: Results in undesired formatting of template structure
 export const Connect = ((user: User | undefined) => Base('Connect',
@@ -29,14 +22,14 @@ export const Connect = ((user: User | undefined) => Base('Connect',
 		</header>
 
 		${
-			BaseListComponent([
+			components.BaseListComponent([
 				html`<a href='/auth/setup' class='button border surface spotify'>Connect with Spotify</a>`,
 			])
 		}
 
 		<footer>
 			${
-				CalloutComponent(
+				components.CalloutComponent(
 					'surface safe',
 					icons.Secure(),
 					'Privacy',
@@ -55,7 +48,7 @@ export const Error = ((name: string, description: string) => Base('Error',
 	undefined,
 	html`
 	${
-		CalloutComponent(
+		components.CalloutComponent(
 			'border surface danger',
 			icons.Error(),
 			name,
@@ -65,7 +58,7 @@ export const Error = ((name: string, description: string) => Base('Error',
 
 	<section>
 		If you keep finding your way back to this place, consider
-		${ AnchorComponent('mailto:support@maikdevries.com', 'sending an email') } for support
+		${ components.AnchorComponent('mailto:support@maikdevries.com', 'sending an email') } for support
 	</section>
 `));
 
@@ -78,11 +71,11 @@ export const Main = ((user: User, items: Promise<Playlist[]>) => Base(user.name,
 	user,
 	html`
 	<section>
-		${ ListComponent('Playlists', items.then((xs) => xs.map(PlaylistComponent))) }
+		${ components.ListComponent('Playlists', items.then((xs) => xs.map(components.PlaylistComponent))) }
 	</section>
 
 	<aside>
-		${ ListComponent('Queue', []) }
+		${ components.ListComponent('Queue', []) }
 
 		<footer>
 			<x-progress data-state='HIDDEN'>

@@ -1,9 +1,7 @@
-import type { RouteContext } from '@maikdevries/server-router';
-import { route } from '@maikdevries/server-router';
-
+import { route, type RouteContext } from '@maikdevries/server-router';
 import type { BaseContext } from '../middleware/base.middleware.ts';
-
 import { ServerError } from '../types/base.types.ts';
+
 import * as auth from '../controllers/auth.controllers.ts';
 
 export type Context = RouteContext<BaseContext>;

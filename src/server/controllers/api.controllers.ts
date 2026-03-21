@@ -1,6 +1,6 @@
 import type { Context } from '../routes/api.routes.ts';
-
 import { ServerError } from '../types/base.types.ts';
+
 import * as spotify from '../services/spotify.services.ts';
 import * as validate from '../controllers/validate.controllers.ts';
 

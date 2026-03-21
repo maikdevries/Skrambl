@@ -1,6 +1,5 @@
-import type { Context } from '../routes/main.routes.ts';
-
 import { stream as render } from '@maikdevries/server-render';
+import type { Context } from '../routes/main.routes.ts';
 
 import * as templates from '../templates/pages.templates.ts';
 

@@ -1,5 +1,4 @@
-import type { Template } from '@maikdevries/server-render';
-import { html } from '@maikdevries/server-render';
+import { html, type Template } from '@maikdevries/server-render';
 
 import * as icons from './icons.templates.ts';
 import type { Playlist } from '../types/base.types.ts';

@@ -1,5 +1,4 @@
-import type { ListElement } from './elements/list.elements.ts';
-import { ListItemElement } from './elements/list.elements.ts';
+import { type ListElement, ListItemElement } from './elements/list.elements.ts';
 
 import type { PlaylistElement } from './elements/playlist.elements.ts';
 import './elements/playlist.elements.ts';

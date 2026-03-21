@@ -1,10 +1,8 @@
-import type { Template } from '@maikdevries/server-render';
-import { html } from '@maikdevries/server-render';
-
-import type { User } from '../types/base.types.ts';
+import { html, type Template } from '@maikdevries/server-render';
 
 import { AnchorComponent, BaseListComponent } from './components.templates.ts';
 import * as icons from './icons.templates.ts';
+import type { User } from '../types/base.types.ts';
 
 // deno-fmt-ignore: Results in undesired formatting of template structure
 export const Base = ((title: string, imports: Template[], user: User | undefined, content: Template) => html`

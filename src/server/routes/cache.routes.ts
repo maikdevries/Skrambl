@@ -1,10 +1,7 @@
-import type { RouteContext } from '@maikdevries/server-router';
-import { route } from '@maikdevries/server-router';
-
-import type { BaseContext } from '../middleware/cache.middleware.ts';
-import middleware from '../middleware/cache.middleware.ts';
-
+import { route, type RouteContext } from '@maikdevries/server-router';
+import { type BaseContext, middleware } from '../middleware/cache.middleware.ts';
 import { ServerError } from '../types/base.types.ts';
+
 import * as cache from '../controllers/cache.controllers.ts';
 
 export type Context = RouteContext<BaseContext>;

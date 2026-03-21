@@ -1,5 +1,4 @@
-import type { Middleware } from '@maikdevries/server-middleware';
-import { chain } from '@maikdevries/server-middleware';
+import { chain, type Middleware } from '@maikdevries/server-middleware';
 
 import type { BaseContext as BC } from './base.middleware.ts';
 import type { Credentials } from '../types/base.types.ts';
@@ -19,4 +18,4 @@ const authorised: Middleware<BC & { 'url': URL }, { 'credentials': Credentials }
 	return next(request, { ...context, 'credentials': credentials });
 };
 
-export default chain(authorised);
+export const middleware = chain(authorised);

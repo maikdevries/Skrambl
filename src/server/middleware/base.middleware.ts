@@ -1,12 +1,8 @@
-import type { Middleware } from '@maikdevries/server-middleware';
-import { chain } from '@maikdevries/server-middleware';
-
-import type { Session } from '@maikdevries/server-sessions';
-import { middleware as session } from '@maikdevries/server-sessions';
-
+import { chain, type Middleware } from '@maikdevries/server-middleware';
+import { middleware as session, type Session } from '@maikdevries/server-sessions';
 import { stringify as render } from '@maikdevries/server-render';
-import * as templates from '../templates/pages.templates.ts';
 
+import * as templates from '../templates/pages.templates.ts';
 import { ServerError } from '../types/base.types.ts';
 
 export interface BaseContext {
@@ -41,4 +37,4 @@ const logger: Middleware = async (request, context, next) => {
 	return response;
 };
 
-export default chain(error).add(logger).add(session());
+export const middleware = chain(error).add(logger).add(session());
