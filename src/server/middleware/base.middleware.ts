@@ -1,11 +1,13 @@
 import { chain, type Middleware } from '@maikdevries/server-middleware';
-import { middleware as session, type Session } from '@maikdevries/server-sessions';
+import { type Log, logger } from '@maikdevries/server-middleware/middleware';
 import { stringify as render } from '@maikdevries/server-render';
+import { middleware as session, type Session } from '@maikdevries/server-sessions';
 
 import * as templates from '../templates/pages.templates.ts';
 import { ServerError } from '../types/base.types.ts';
 
 export interface BaseContext {
+	'log': Log;
 	'session': Session;
 }
 
@@ -28,13 +30,4 @@ const error: Middleware = async (request, context, next) => {
 	}
 };
 
-const logger: Middleware = async (request, context, next) => {
-	const start = performance.now();
-	const response = await next(request, context);
-	const end = performance.now();
-
-	console.log(`[${(end - start).toFixed(2)} ms] ${request.method} ${request.url} - ${response.status}`);
-	return response;
-};
-
-export const middleware = chain(error).add(logger).add(session());
+export const middleware = chain(error).add(logger()).add(session());
