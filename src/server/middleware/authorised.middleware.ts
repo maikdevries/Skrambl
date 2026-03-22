@@ -1,5 +1,5 @@
 import { chain, type Middleware } from '@maikdevries/server-middleware';
-import { RouteError } from '../routes/types.ts';
+import { RouteError } from '@self/server/types';
 import type { Credentials } from '../types/base.types.ts';
 import type { BaseContext as BC } from './base.middleware.ts';
 

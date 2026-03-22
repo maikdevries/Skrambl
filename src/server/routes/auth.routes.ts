@@ -1,6 +1,6 @@
 import { route, type RouteContext } from '@maikdevries/server-router';
+import { RouteError } from '@self/server/types';
 import type { BaseContext } from '../middleware/base.middleware.ts';
-import { RouteError } from './types.ts';
 
 import * as auth from '../controllers/auth.controllers.ts';
 
