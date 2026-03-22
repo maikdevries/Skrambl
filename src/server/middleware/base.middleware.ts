@@ -1,7 +1,6 @@
 import { chain, type Middleware } from '@maikdevries/server-middleware';
 import { type Log, logger } from '@maikdevries/server-middleware/middleware';
 import { middleware as session, type Session } from '@maikdevries/server-sessions';
-
 import { BaseError } from '@self/common/types';
 
 export interface BaseContext {
@@ -16,8 +15,8 @@ const error: Middleware<{ 'log': Log }> = (request, context, next) => {
 		// [NOTE] Unknown errors must be rethrown to force process to panic
 		if (error instanceof BaseError === false) throw error;
 
-		context.log.error = error.snippet;
-		return Response.json(error.snippet, { 'status': error.snippet.status_code });
+		context.log.error = error.details;
+		return Response.json(error.details, { 'status': error.details.status_code });
 	}
 };
 

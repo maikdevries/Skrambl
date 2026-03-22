@@ -1,4 +1,4 @@
-interface Snippet {
+interface ErrorDetails {
 	'message': Error['message'];
 	'reason': string;
 	'retriable': false | Temporal.Instant;
@@ -7,16 +7,16 @@ interface Snippet {
 }
 
 export class BaseError extends Error {
-	#snippet: Snippet;
+	#details: ErrorDetails;
 
-	constructor(snippet: Omit<Snippet, 'type'>) {
-		super(snippet.message);
+	constructor(details: Omit<ErrorDetails, 'type'>) {
+		super(details.message);
 		this.name = this.constructor.name;
 
-		this.#snippet = { ...snippet, 'type': this.name };
+		this.#details = { ...details, 'type': this.name };
 	}
 
-	get snippet(): Snippet {
-		return this.#snippet;
+	get details(): ErrorDetails {
+		return this.#details;
 	}
 }
