@@ -64,8 +64,7 @@ export class BaseElement extends HTMLElement {
 		return this.#slots;
 	}
 
-	get states(): Set<string> {
-		// @ts-expect-error: Type signature of CustomStateSet does not properly extend Set interface
+	get states(): CustomStateSet {
 		return this.#internals.states;
 	}
 
