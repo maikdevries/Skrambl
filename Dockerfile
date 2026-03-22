@@ -5,6 +5,7 @@ COPY deno.json .
 RUN deno install
 
 COPY app.ts .
+COPY src/common/ ./src/common/
 COPY src/server/ ./src/server/
 RUN deno cache app.ts
 

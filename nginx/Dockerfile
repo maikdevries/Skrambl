@@ -4,6 +4,7 @@ WORKDIR /app
 RUN npm install typescript
 
 COPY src/client/ .
+# COPY src/common/ ./common/
 RUN npx tsc -p ./ts/tsconfig.json
 
 # ---
