@@ -1,18 +1,18 @@
 import { chain, type Middleware } from '@maikdevries/server-middleware';
-
-import type { BaseContext as BC } from './base.middleware.ts';
+import { RouteError } from '../routes/types.ts';
 import type { Credentials } from '../types/base.types.ts';
+import type { BaseContext as BC } from './base.middleware.ts';
 
 export interface BaseContext extends BC {
 	'credentials': Credentials;
 }
 
-const authorised: Middleware<BC & { 'url': URL }, { 'credentials': Credentials }> = (request, context, next) => {
+const authorised: Middleware<BC, { 'credentials': Credentials }> = (request, context, next) => {
 	const credentials = context.session.get<Credentials>('credentials');
-	if (!credentials) return Response.redirect(new URL('/auth/connect', context.url.origin));
+	if (!credentials) throw new RouteError('authorisation_missing');
 
 	if (Temporal.Instant.compare(credentials.expires, Temporal.Now.instant()) <= 0) {
-		return Response.redirect(new URL('/auth/refresh', context.url.origin));
+		throw new RouteError('authorisation_expired');
 	}
 
 	return next(request, { ...context, 'credentials': credentials });
