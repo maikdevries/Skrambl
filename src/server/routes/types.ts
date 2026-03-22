@@ -1,13 +1,17 @@
 import { BaseError } from '@self/common/types';
 
-type RouteReason = 'resource_not_found';
+type RouteReason = 'authorisation_expired' | 'authorisation_missing' | 'resource_not_found';
 
 export class RouteError extends BaseError {
 	static CODES = {
+		'authorisation_expired': 401,
+		'authorisation_missing': 401,
 		'resource_not_found': 404,
 	} as const satisfies Record<RouteReason, number>;
 
 	static DESCRIPTIONS = {
+		'authorisation_expired': 'The authorisation for this request has expired',
+		'authorisation_missing': 'The authorisation for this request is missing',
 		'resource_not_found': 'The requested resource could not be found',
 	} as const satisfies Record<RouteReason, string>;
 
