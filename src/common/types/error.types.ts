@@ -1,4 +1,4 @@
-interface ErrorDetails {
+export interface ErrorDetails {
 	'message': Error['message'];
 	'reason': string;
 	'retriable': false | Temporal.Instant;
