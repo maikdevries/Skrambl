@@ -1,6 +1,6 @@
 import { route, type RouteContext } from '@maikdevries/server-router';
 import { type BaseContext, middleware } from '../middleware/base.middleware.ts';
-import { ServerError } from '../types/base.types.ts';
+import { RouteError } from './types.ts';
 
 import api from './api.routes.ts';
 import auth from './auth.routes.ts';
@@ -37,8 +37,8 @@ const router = route<BaseContext>(
 			'handler': main,
 		},
 	],
-	(request, _) => {
-		throw new ServerError(404, request.method, request.url);
+	() => {
+		throw new RouteError('resource_not_found');
 	},
 );
 

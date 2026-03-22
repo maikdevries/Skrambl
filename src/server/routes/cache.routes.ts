@@ -1,6 +1,6 @@
 import { route, type RouteContext } from '@maikdevries/server-router';
 import { type BaseContext, middleware } from '../middleware/cache.middleware.ts';
-import { ServerError } from '../types/base.types.ts';
+import { RouteError } from './types.ts';
 
 import * as cache from '../controllers/cache.controllers.ts';
 
@@ -14,8 +14,8 @@ const router = route<BaseContext>(
 			'handler': cache.refresh,
 		},
 	],
-	(request, _) => {
-		throw new ServerError(404, request.method, request.url);
+	() => {
+		throw new RouteError('resource_not_found');
 	},
 );
 

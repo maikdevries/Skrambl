@@ -1,6 +1,6 @@
 import { route, type RouteContext } from '@maikdevries/server-router';
 import type { BaseContext } from '../middleware/base.middleware.ts';
-import { ServerError } from '../types/base.types.ts';
+import { RouteError } from './types.ts';
 
 import * as auth from '../controllers/auth.controllers.ts';
 
@@ -39,8 +39,8 @@ const router = route<BaseContext>(
 			'handler': auth.logout,
 		},
 	],
-	(request, _) => {
-		throw new ServerError(404, request.method, request.url);
+	() => {
+		throw new RouteError('resource_not_found');
 	},
 );
 
