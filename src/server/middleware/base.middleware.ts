@@ -8,9 +8,9 @@ export interface BaseContext {
 	'session': Session;
 }
 
-const error: Middleware<{ 'log': Log }> = (request, context, next) => {
+const error: Middleware<{ 'log': Log }> = async (request, context, next) => {
 	try {
-		return next(request, context);
+		return await next(request, context);
 	} catch (error: unknown) {
 		const details: ErrorDetails = error instanceof BaseError ? error.details : {
 			'message': 'Something went terribly wrong on our side of the internet',
