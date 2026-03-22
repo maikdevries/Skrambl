@@ -1,6 +1,6 @@
 import { chain, type Middleware } from '@maikdevries/server-middleware';
 import type { BaseContext as BC } from './base.middleware.ts';
-import { type Cache, type Credentials, ServerError } from '../types/base.types.ts';
+import type { Cache, Credentials } from '../types/base.types.ts';
 
 export interface BaseContext extends BC {
 	'cache': Cache;
@@ -31,18 +31,4 @@ const cached: Middleware<BC, { 'cache': Cache }> = (request, context, next) => {
 	return next(request, { ...context, 'cache': cache });
 };
 
-const error: Middleware = (request, context, next) => {
-	try {
-		return next(request, context);
-	} catch (error: unknown) {
-		console.error(error);
-
-		const code = error instanceof ServerError ? error.code === 500 ? 502 : error.code : 500;
-		const description = ServerError.DESCRIPTIONS[code]
-			?? 'Something went terribly wrong on our side of the internet';
-
-		return Response.json({ 'description': description }, { 'status': code });
-	}
-};
-
-export const middleware = chain(error).add(authorised).add(cached);
+export const middleware = chain(authorised).add(cached);
