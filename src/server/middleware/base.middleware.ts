@@ -1,7 +1,7 @@
 import { chain, type Middleware } from '@maikdevries/server-middleware';
 import { type Log, logger } from '@maikdevries/server-middleware/middleware';
 import { middleware as session, type Session } from '@maikdevries/server-sessions';
-import { BaseError } from '@self/common/types';
+import { BaseError, type ErrorDetails } from '@self/common/types';
 
 export interface BaseContext {
 	'log': Log;
@@ -12,11 +12,16 @@ const error: Middleware<{ 'log': Log }> = (request, context, next) => {
 	try {
 		return next(request, context);
 	} catch (error: unknown) {
-		// [NOTE] Unknown errors must be rethrown to force process to panic
-		if (error instanceof BaseError === false) throw error;
+		const details: ErrorDetails = error instanceof BaseError ? error.details : {
+			'message': 'Something went terribly wrong on our side of the internet',
+			'reason': 'internal_server_error',
+			'retriable': false,
+			'status_code': 500,
+			'type': Error.name,
+		};
 
-		context.log.error = error.details;
-		return Response.json(error.details, { 'status': error.details.status_code });
+		context.log.error = details;
+		return Response.json(details, { 'status': details.status_code });
 	}
 };
 
