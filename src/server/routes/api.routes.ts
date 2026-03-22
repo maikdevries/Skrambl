@@ -1,12 +1,13 @@
 import { route, type RouteContext } from '@maikdevries/server-router';
-import { type BaseContext, middleware } from '../middleware/api.middleware.ts';
+import { type BaseContext as AC, middleware as authorised } from '../middleware/authorised.middleware.ts';
+import { type BaseContext as CC, middleware as cached } from '../middleware/cached.middleware.ts';
 import { RouteError } from './types.ts';
 
 import * as api from '../controllers/api.controllers.ts';
 
-export type Context = RouteContext<BaseContext>;
+export type Context = RouteContext<AC & CC>;
 
-const router = route<BaseContext>(
+const router = route<AC & CC>(
 	[
 		{
 			'method': ['POST'],
@@ -19,4 +20,4 @@ const router = route<BaseContext>(
 	},
 );
 
-export default middleware.add(router);
+export default authorised.add(cached).add(router);

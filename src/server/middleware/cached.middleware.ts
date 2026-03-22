@@ -1,5 +1,6 @@
 import { chain, type Middleware } from '@maikdevries/server-middleware';
-import type { BaseContext as BC } from './authorised.middleware.ts';
+import type { Cache } from '../types/base.types.ts';
+import type { BaseContext as BC } from './base.middleware.ts';
 
 export interface BaseContext extends BC {
 	'cache': Cache;
