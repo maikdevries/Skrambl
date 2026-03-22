@@ -94,6 +94,7 @@
 	},
 	"lock": false,
 	"imports": {
+		"@self/common/types": "./src/common/types/mod.ts",
 		"@maikdevries/server-middleware": "jsr:@maikdevries/server-middleware@^0.3.1",
 		"@maikdevries/server-render": "jsr:@maikdevries/server-render@^0.2.1",
 		"@maikdevries/server-router": "jsr:@maikdevries/server-router@^0.5.0",
