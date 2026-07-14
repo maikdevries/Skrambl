@@ -11,7 +11,7 @@ interface PKCE {
 	'verifier': string;
 }
 
-const BASE64_OPTIONS = { 'alphabet': 'base64url', 'omitPadding': true };
+const BASE64_OPTIONS = { 'alphabet': 'base64url', 'omitPadding': true } as const;
 
 export async function connect(_: Request, context: Context): Promise<Response> {
 	// [TODO] In case the user has already connected, redirect to the main page automatically
