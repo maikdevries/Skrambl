@@ -1,7 +1,7 @@
 import type { Playlist, Track, User } from '../types/base.types.ts';
 import type { BasePlaylist, PlaylistItem, Snapshot, UserProfile } from '../types/spotify.types.ts';
 
-import * as fetch from '../controllers/fetch.controllers.ts';
+import * as fetch from './fetch.services.ts';
 
 export async function getPlaylists(token: string, owner: string): Promise<Playlist[]> {
 	const items = await fetch.pull<BasePlaylist>(token, 'GET', 'me/playlists');
