@@ -1,4 +1,4 @@
-import { ServerError } from '../types/base.types.ts';
+import { ServiceError } from '@self/server/types';
 
 interface AuthorisationResponse {
 	'access_token': string;
@@ -87,7 +87,7 @@ async function json<T>(method: HTTP_METHOD, url: URL, headers: HeadersInit, body
 			...(body ? { 'body': body } : {}),
 		});
 	} catch {
-		throw new ServerError(503, method, url.toString());
+		throw new ServiceError('external_request_error');
 	}
 
 	if (response.status === 429 && retries < 3) {
@@ -98,5 +98,5 @@ async function json<T>(method: HTTP_METHOD, url: URL, headers: HeadersInit, body
 	}
 
 	if (response.ok) return response.json() as Promise<T>;
-	else throw new ServerError(response.status, method, response.url);
+	else throw new ServiceError('external_service_error');
 }
