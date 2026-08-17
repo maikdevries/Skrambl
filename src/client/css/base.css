@@ -1,4 +1,4 @@
-@layer reset, variables, layout, paint, components, interactions, fallbacks;
+@layer reset, variables, layout, paint, elements, interactions, fallbacks;
 
 @layer fallbacks {
 	/* [FUTURE] https://developer.mozilla.org/en-US/docs/Web/CSS/anchor-name#browser_compatibility */
@@ -51,7 +51,7 @@
 	}
 }
 
-@layer components {
+@layer elements {
 	a.button, button {
 		min-inline-size: max-content;
 

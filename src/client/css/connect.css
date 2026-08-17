@@ -1,6 +1,6 @@
-@layer layout, paint, components;
+@layer layout, paint, elements;
 
-@layer components {
+@layer elements {
 	article.dialog {
 		display: grid;
 		gap: 24px;

@@ -1,7 +1,7 @@
 import { html, type Template } from '@maikdevries/server-render';
 
 import { Base } from './base.views.ts';
-import * as components from './components.views.ts';
+import * as elements from './elements.views.ts';
 import * as icons from './icons.views.ts';
 import type { Playlist, User } from '../types/base.types.ts';
 
@@ -22,12 +22,12 @@ export const Connect = (user: User | undefined): Template =>
 					<button type='button' class='ghost'>${icons.Close()}</button>
 				</header>
 
-				${components.BaseListComponent([
+				${elements.BaseListElement([
 					html`<a href='/auth/setup' class='button border surface spotify'>Connect with Spotify</a>`,
 				])}
 
 				<footer>
-					${components.CalloutComponent(
+					${elements.CalloutElement(
 						'surface safe',
 						icons.Secure(),
 						'Privacy',
@@ -46,7 +46,7 @@ export const Error = (name: string, description: string): Template =>
 		],
 		undefined,
 		html`
-			${components.CalloutComponent(
+			${elements.CalloutElement(
 				'border surface danger',
 				icons.Error(),
 				name,
@@ -55,7 +55,7 @@ export const Error = (name: string, description: string): Template =>
 
 			<section>
 				If you keep finding your way back to this place, consider
-				${components.AnchorComponent('mailto:support@maikdevries.com', 'sending an email')} for support
+				${elements.AnchorElement('mailto:support@maikdevries.com', 'sending an email')} for support
 			</section>
 		`,
 	);
@@ -70,11 +70,11 @@ export const Main = (user: User, items: Promise<Playlist[]>): Template =>
 		user,
 		html`
 			<section>
-				${components.ListComponent('Playlists', items.then((xs) => xs.map(components.PlaylistComponent)))}
+				${elements.ListElement('Playlists', items.then((xs) => xs.map(elements.PlaylistElement)))}
 			</section>
 
 			<aside>
-				${components.ListComponent('Queue', [])}
+				${elements.ListElement('Queue', [])}
 
 				<footer>
 					<x-progress data-state='HIDDEN'>

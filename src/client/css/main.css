@@ -1,4 +1,4 @@
-@layer layout, components, interactions, fallbacks;
+@layer layout, elements, interactions, fallbacks;
 
 @layer fallbacks {
 	/* [FUTURE] https://developer.mozilla.org/en-US/docs/Web/CSS/overflow-block#browser_compatibility */
@@ -32,7 +32,7 @@
 	}
 }
 
-@layer components {
+@layer elements {
 	x-list {
 		max-block-size: 100%;
 		overflow-block: hidden;

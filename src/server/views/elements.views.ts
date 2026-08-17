@@ -3,7 +3,7 @@ import { html, type Template } from '@maikdevries/server-render';
 import * as icons from './icons.views.ts';
 import type { Playlist } from '../types/base.types.ts';
 
-export const AnchorComponent = (url: string, text: string): Template =>
+export const AnchorElement = (url: string, text: string): Template =>
 	html`
 		<article class='anchor'>
 			${icons.Link()}
@@ -11,7 +11,7 @@ export const AnchorComponent = (url: string, text: string): Template =>
 		</article>
 	`;
 
-export const BaseListComponent = (items: unknown[] | Promise<unknown[]>): Template =>
+export const BaseListElement = (items: unknown[] | Promise<unknown[]>): Template =>
 	html`
 		<ul class='base'>
 			${items instanceof Promise
@@ -20,7 +20,7 @@ export const BaseListComponent = (items: unknown[] | Promise<unknown[]>): Templa
 		</ul>
 	`;
 
-export const CalloutComponent = (classes: string, icon: Template, heading: string, description: string): Template =>
+export const CalloutElement = (classes: string, icon: Template, heading: string, description: string): Template =>
 	html`
 		<article class='callout ${classes}'>
 			<header>
@@ -34,20 +34,20 @@ export const CalloutComponent = (classes: string, icon: Template, heading: strin
 		</article>
 	`;
 
-export const ListComponent = (heading: string, items: unknown[] | Promise<unknown[]>): Template =>
+export const ListElement = (heading: string, items: unknown[] | Promise<unknown[]>): Template =>
 	html`
 		<x-list>
 			<header>
 				<h2>${heading}</h2>
 			</header>
 
-			${BaseListComponent(
-				items instanceof Promise ? items.then((xs) => xs.map(ListItemComponent)) : items.map(ListItemComponent),
+			${BaseListElement(
+				items instanceof Promise ? items.then((xs) => xs.map(ListItemElement)) : items.map(ListItemElement),
 			)}
 		</x-list>
 	`;
 
-export const ListItemComponent = (content: unknown): Template =>
+export const ListItemElement = (content: unknown): Template =>
 	html`
 		<x-list-item class='ghost'>
 			<slot name='content'>${content}</slot>
@@ -63,13 +63,13 @@ export const ListItemComponent = (content: unknown): Template =>
 		</x-list-item>
 	`;
 
-export const PlaylistComponent = ({ id, description, image, name, supported, url }: Playlist): Template =>
+export const PlaylistElement = ({ id, description, image, name, supported, url }: Playlist): Template =>
 	html`
 		<x-playlist data-id='${id}' data-name='${name}' ${supported ? '' : 'disabled'}>
 			<img src='${image.url}' width='${image.size}' height='${image.size}' loading='lazy'>
 
 			<span class='details'>
-				${AnchorComponent(url, name)}
+				${AnchorElement(url, name)}
 				<span>${description}</span>
 			</span>
 

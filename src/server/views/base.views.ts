@@ -1,6 +1,6 @@
 import { html, type Template } from '@maikdevries/server-render';
 
-import { AnchorComponent, BaseListComponent } from './components.views.ts';
+import { AnchorElement, BaseListElement } from './elements.views.ts';
 import * as icons from './icons.views.ts';
 import type { User } from '../types/base.types.ts';
 
@@ -42,7 +42,7 @@ export const Base = (title: string, imports: Template[], user: User | undefined,
 
 								<hr>
 
-								${BaseListComponent([
+								${BaseListElement([
 									html`<a href='/auth/logout' class='button surface danger'>${icons.Signout()} Sign out</a>`,
 								])}
 							</section>
@@ -56,7 +56,7 @@ export const Base = (title: string, imports: Template[], user: User | undefined,
 
 				<footer>
 					&copy; 2026
-					${AnchorComponent('https://maikdevries.com', 'Maik de Vries')}
+					${AnchorElement('https://maikdevries.com', 'Maik de Vries')}
 				</footer>
 			</body>
 		</html>
