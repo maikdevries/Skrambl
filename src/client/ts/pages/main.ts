@@ -7,11 +7,11 @@ import type { ProgressElement } from '../elements/progress.elements.ts';
 import '../elements/progress.elements.ts';
 
 const [playlists, queue] = Array.from(
-	document.querySelectorAll<ListElement<PlaylistElement>>('main > section > x-list, main > aside > x-list'),
+	self.document.querySelectorAll<ListElement<PlaylistElement>>('main > section > x-list, main > aside > x-list'),
 );
 if (!playlists || !queue) throw new Error();
 
-document.addEventListener(
+self.document.addEventListener(
 	'list-item:action',
 	((event: CustomEvent) => {
 		const element = event.target instanceof ListItemElement ? event.target.element : null;
@@ -25,8 +25,8 @@ document.addEventListener(
 	},
 );
 
-const progress = document.querySelector<ProgressElement>('x-progress');
-const [stop, play] = Array.from(document.querySelectorAll<HTMLButtonElement>('main > aside > footer > button'));
+const progress = self.document.querySelector<ProgressElement>('x-progress');
+const [stop, play] = Array.from(self.document.querySelectorAll<HTMLButtonElement>('main > aside > footer > button'));
 if (!progress || !stop || !play) throw new Error();
 
 queue.addEventListener(
@@ -53,12 +53,12 @@ play.addEventListener(
 		try {
 			for (const x of queue.items) x.states.add('PROCESSING');
 
-			const response = await fetch(new URL('/api/process', document.location.origin), {
+			const response = await self.fetch(new URL('/api/process', self.document.location.origin), {
 				'method': 'POST',
 				'headers': {
 					'Content-Type': 'application/json',
 				},
-				'body': JSON.stringify({
+				'body': self.JSON.stringify({
 					'operation': 'SHUFFLE',
 					'items': queue.items.map((x) => x.content.id),
 				}),
@@ -71,7 +71,7 @@ play.addEventListener(
 			progress.state = 'FINISHED';
 		} catch (error: unknown) {
 			// [TODO] Implement proper general error handler
-			console.error(error);
+			self.console.error(error);
 			progress.state = 'ERROR';
 		}
 

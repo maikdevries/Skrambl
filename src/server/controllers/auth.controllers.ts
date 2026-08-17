@@ -34,10 +34,10 @@ export async function csrf(_: Request, __: Context): Promise<Response> {
 }
 
 export async function setup(_: Request, context: Context): Promise<Response> {
-	const state = crypto.getRandomValues(new Uint8Array(128)).toBase64(BASE64_OPTIONS);
+	const state = self.crypto.getRandomValues(new Uint8Array(128)).toBase64(BASE64_OPTIONS);
 
-	const verifier = crypto.getRandomValues(new Uint8Array(96)).toBase64(BASE64_OPTIONS);
-	const challenge = new Uint8Array(await crypto.subtle.digest('SHA-256', new TextEncoder().encode(verifier)))
+	const verifier = self.crypto.getRandomValues(new Uint8Array(96)).toBase64(BASE64_OPTIONS);
+	const challenge = new Uint8Array(await self.crypto.subtle.digest('SHA-256', new TextEncoder().encode(verifier)))
 		.toBase64(BASE64_OPTIONS);
 
 	const params = new URLSearchParams({

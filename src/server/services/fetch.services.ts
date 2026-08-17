@@ -32,7 +32,7 @@ export function api<T>(token: string, method: HTTP_METHOD, endpoint: string, pay
 			'Authorization': `Bearer ${token}`,
 			'Content-Type': 'application/json',
 		},
-		payload ? JSON.stringify(payload) : undefined,
+		payload ? self.JSON.stringify(payload) : undefined,
 	);
 }
 
@@ -78,7 +78,7 @@ async function json<T>(method: HTTP_METHOD, url: URL, headers: HeadersInit, body
 	let response: Response;
 
 	try {
-		response = await fetch(url, {
+		response = await self.fetch(url, {
 			'method': method,
 			'headers': {
 				'Accept': 'application/json',

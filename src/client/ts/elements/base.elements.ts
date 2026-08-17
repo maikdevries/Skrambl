@@ -15,7 +15,7 @@ export class BaseElement extends HTMLElement {
 	// [FUTURE] https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/import/with#browser_compatibility
 	static #style: () => Node;
 	static {
-		const style = document.createElement('link');
+		const style = self.document.createElement('link');
 		style.rel = 'stylesheet';
 		style.href = '/static/css/base.css';
 
@@ -69,8 +69,8 @@ export class BaseElement extends HTMLElement {
 	}
 
 	connectedCallback(): void {
-		if (document.readyState !== 'loading') this.init();
-		else document.addEventListener('DOMContentLoaded', () => this.init(), { 'once': true });
+		if (self.document.readyState !== 'loading') this.init();
+		else self.document.addEventListener('DOMContentLoaded', () => this.init(), { 'once': true });
 	}
 
 	disconnectedCallback(): void {
