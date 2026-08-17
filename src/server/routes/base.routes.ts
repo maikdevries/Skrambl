@@ -5,7 +5,7 @@ import { type BaseContext, middleware } from '../middleware/base.middleware.ts';
 import api from './api.routes.ts';
 import auth from './auth.routes.ts';
 import cache from './cache.routes.ts';
-import main from './main.routes.ts';
+import pages from './pages.routes.ts';
 
 export type Context = RouteContext<BaseContext>;
 
@@ -34,7 +34,7 @@ const router = route<BaseContext>(
 		{
 			'method': ['*'],
 			'pattern': new URLPattern({ 'pathname': '/*' }),
-			'handler': main,
+			'handler': pages,
 		},
 	],
 	() => {
