@@ -1,7 +1,7 @@
 FROM denoland/deno:alpine AS builder
 WORKDIR /app
 
-COPY deno.json .
+COPY deno.jsonc .
 RUN deno install
 
 COPY app.ts .
