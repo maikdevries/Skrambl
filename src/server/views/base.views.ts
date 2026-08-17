@@ -1,7 +1,7 @@
 import { html, type Template } from '@maikdevries/server-render';
 
-import { AnchorComponent, BaseListComponent } from './components.templates.ts';
-import * as icons from './icons.templates.ts';
+import { AnchorComponent, BaseListComponent } from './components.views.ts';
+import * as icons from './icons.views.ts';
 import type { User } from '../types/base.types.ts';
 
 // deno-fmt-ignore: Results in undesired formatting of template structure

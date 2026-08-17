@@ -4,7 +4,7 @@ import type { Credentials, User } from '../types/base.types.ts';
 import * as auth from '../services/auth.services.ts';
 
 import { stringify as render } from '@maikdevries/server-render';
-import * as templates from '../templates/pages.templates.ts';
+import * as views from '../views/pages.views.ts';
 
 interface PKCE {
 	'state': string;
@@ -15,7 +15,7 @@ const BASE64_OPTIONS = { 'alphabet': 'base64url', 'omitPadding': true } as const
 
 export async function connect(_: Request, context: Context): Promise<Response> {
 	// [TODO] In case the user has already connected, redirect to the main page automatically
-	return new Response(await render(templates.Connect(context.session.get<User>('user'))), {
+	return new Response(await render(views.Connect(context.session.get<User>('user'))), {
 		'headers': {
 			'Content-Type': 'text/html; charset=utf-8',
 		},
@@ -24,7 +24,7 @@ export async function connect(_: Request, context: Context): Promise<Response> {
 
 export async function csrf(_: Request, __: Context): Promise<Response> {
 	return new Response(
-		await render(templates.Error('CSRF', 'Someone might have tried to tamper with your connection')),
+		await render(views.Error('CSRF', 'Someone might have tried to tamper with your connection')),
 		{
 			'headers': {
 				'Content-Type': 'text/html; charset=utf-8',

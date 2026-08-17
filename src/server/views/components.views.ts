@@ -1,6 +1,6 @@
 import { html, type Template } from '@maikdevries/server-render';
 
-import * as icons from './icons.templates.ts';
+import * as icons from './icons.views.ts';
 import type { Playlist } from '../types/base.types.ts';
 
 // deno-fmt-ignore: Results in undesired formatting of template structure
