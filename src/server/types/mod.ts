@@ -1,1 +1,1 @@
-export { RouteError } from './error.types.ts';
+export { RouteError, ServiceError } from './error.types.ts';

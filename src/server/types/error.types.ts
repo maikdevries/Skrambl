@@ -24,3 +24,27 @@ export class RouteError extends BaseError {
 		});
 	}
 }
+
+type ServiceReason = 'external_request_error' | 'external_service_error';
+
+export class ServiceError extends BaseError {
+	static CODES = {
+		'external_request_error': 500,
+		'external_service_error': 502,
+	} as const satisfies Record<ServiceReason, number>;
+
+	static DESCRIPTIONS = {
+		'external_request_error':
+			'The server could not communicate with an external service while handling this request',
+		'external_service_error': 'An external service encountered a problem while handling this request',
+	} as const satisfies Record<ServiceReason, string>;
+
+	constructor(reason: ServiceReason, duration?: Temporal.Duration) {
+		super({
+			'message': ServiceError.DESCRIPTIONS[reason],
+			'reason': reason,
+			'retriable': duration ? Temporal.Now.instant().add(duration) : false,
+			'status_code': ServiceError.CODES[reason],
+		});
+	}
+}
