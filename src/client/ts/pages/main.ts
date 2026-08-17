@@ -1,10 +1,10 @@
-import { type ListElement, ListItemElement } from './elements/list.elements.ts';
+import { type ListElement, ListItemElement } from '../elements/list.elements.ts';
 
-import type { PlaylistElement } from './elements/playlist.elements.ts';
-import './elements/playlist.elements.ts';
+import type { PlaylistElement } from '../elements/playlist.elements.ts';
+import '../elements/playlist.elements.ts';
 
-import type { ProgressElement } from './elements/progress.elements.ts';
-import './elements/progress.elements.ts';
+import type { ProgressElement } from '../elements/progress.elements.ts';
+import '../elements/progress.elements.ts';
 
 const [playlists, queue] = Array.from(
 	document.querySelectorAll<ListElement<PlaylistElement>>('main > section > x-list, main > aside > x-list'),

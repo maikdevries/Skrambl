@@ -9,7 +9,7 @@ export const Connect = (user: User | undefined): Template =>
 	Base(
 		'Connect',
 		[
-			html`<link rel='stylesheet' href='/static/css/connect.css'>`,
+			html`<link rel='stylesheet' href='/static/css/pages/connect.css'>`,
 		],
 		user,
 		html`
@@ -42,7 +42,7 @@ export const Error = (name: string, description: string): Template =>
 	Base(
 		'Error',
 		[
-			html`<link rel='stylesheet' href='/static/css/error.css'>`,
+			html`<link rel='stylesheet' href='/static/css/pages/error.css'>`,
 		],
 		undefined,
 		html`
@@ -64,8 +64,8 @@ export const Main = (user: User, items: Promise<Playlist[]>): Template =>
 	Base(
 		user.name,
 		[
-			html`<link rel='stylesheet' href='/static/css/main.css'>`,
-			html`<script type='module' src='/static/js/main.js'></script>`,
+			html`<link rel='stylesheet' href='/static/css/pages/main.css'>`,
+			html`<script type='module' src='/static/js/pages/main.js'></script>`,
 		],
 		user,
 		html`
