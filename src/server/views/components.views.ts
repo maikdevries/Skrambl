@@ -3,72 +3,76 @@ import { html, type Template } from '@maikdevries/server-render';
 import * as icons from './icons.views.ts';
 import type { Playlist } from '../types/base.types.ts';
 
-// deno-fmt-ignore: Results in undesired formatting of template structure
-export const AnchorComponent = ((url: string, text: string) => html`
-	<article class='anchor'>
-		${ icons.Link() }
-		<a href='${ url }' target='_blank'>${ text }</a>
-	</article>
-`);
+export const AnchorComponent = (url: string, text: string): Template =>
+	html`
+		<article class='anchor'>
+			${icons.Link()}
+			<a href='${url}' target='_blank'>${text}</a>
+		</article>
+	`;
 
-// deno-fmt-ignore: Results in undesired formatting of template structure
-export const BaseListComponent = ((items: unknown[] | Promise<unknown[]>) => html`
-	<ul class='base'>
-		${ items instanceof Promise ? items.then((xs) => xs.map((x) => html`<li>${ x }</li>`)) : items.map((x) => html`<li>${ x }</li>`) }
-	</ul>
-`);
+export const BaseListComponent = (items: unknown[] | Promise<unknown[]>): Template =>
+	html`
+		<ul class='base'>
+			${items instanceof Promise
+				? items.then((xs) => xs.map((x) => html`<li>${x}</li>`))
+				: items.map((x) => html`<li>${x}</li>`)}
+		</ul>
+	`;
 
-// deno-fmt-ignore: Results in undesired formatting of template structure
-export const CalloutComponent = ((classes: string, icon: Template, heading: string, description: string) => html`
-	<article class='callout ${ classes }'>
-		<header>
-			${ icon }
-			<h2>${ heading }</h2>
-		</header>
+export const CalloutComponent = (classes: string, icon: Template, heading: string, description: string): Template =>
+	html`
+		<article class='callout ${classes}'>
+			<header>
+				${icon}
+				<h2>${heading}</h2>
+			</header>
 
-		<p>
-			${ description }
-		</p>
-	</article>
-`);
+			<p>
+				${description}
+			</p>
+		</article>
+	`;
 
-// deno-fmt-ignore: Results in undesired formatting of template structure
-export const ListComponent = ((heading: string, items: unknown[] | Promise<unknown[]>) => html`
-	<x-list>
-		<header>
-			<h2>${ heading }</h2>
-		</header>
+export const ListComponent = (heading: string, items: unknown[] | Promise<unknown[]>): Template =>
+	html`
+		<x-list>
+			<header>
+				<h2>${heading}</h2>
+			</header>
 
-		${ BaseListComponent(items instanceof Promise ? items.then((xs) => xs.map(ListItemComponent)) : items.map(ListItemComponent)) }
-	</x-list>
-`);
+			${BaseListComponent(
+				items instanceof Promise ? items.then((xs) => xs.map(ListItemComponent)) : items.map(ListItemComponent),
+			)}
+		</x-list>
+	`;
 
-// deno-fmt-ignore: Results in undesired formatting of template structure
-export const ListItemComponent = ((content: unknown) => html`
-	<x-list-item class='ghost'>
-		<slot name='content'>${ content }</slot>
+export const ListItemComponent = (content: unknown): Template =>
+	html`
+		<x-list-item class='ghost'>
+			<slot name='content'>${content}</slot>
 
-		<menu>
-			<li>
-				<button type='button' class='ghost' data-action='ADD'>${ icons.Add() }</button>
-			</li>
-			<li>
-				<button type='button' class='ghost danger' data-action='REMOVE'>${ icons.Close() }</button>
-			</li>
-		</menu>
-	</x-list-item>
-`);
+			<menu>
+				<li>
+					<button type='button' class='ghost' data-action='ADD'>${icons.Add()}</button>
+				</li>
+				<li>
+					<button type='button' class='ghost danger' data-action='REMOVE'>${icons.Close()}</button>
+				</li>
+			</menu>
+		</x-list-item>
+	`;
 
-// deno-fmt-ignore: Results in undesired formatting of template structure
-export const PlaylistComponent = (({ id, description, image, name, supported, url }: Playlist) => html`
-	<x-playlist data-id='${ id }' data-name='${ name }' ${ supported ? '' : 'disabled' }>
-		<img src='${ image.url }' width='${ image.size }' height='${ image.size }' loading='lazy'>
+export const PlaylistComponent = ({ id, description, image, name, supported, url }: Playlist): Template =>
+	html`
+		<x-playlist data-id='${id}' data-name='${name}' ${supported ? '' : 'disabled'}>
+			<img src='${image.url}' width='${image.size}' height='${image.size}' loading='lazy'>
 
-		<span class='details'>
-			${ AnchorComponent(url, name) }
-			<span>${ description }</span>
-		</span>
+			<span class='details'>
+				${AnchorComponent(url, name)}
+				<span>${description}</span>
+			</span>
 
-		${ supported ? '' : html`<article class='badge surface warning'>Unsupported</article>` }
-	</x-playlist>
-`);
+			${supported ? '' : html`<article class='badge surface warning'>Unsupported</article>`}
+		</x-playlist>
+	`;

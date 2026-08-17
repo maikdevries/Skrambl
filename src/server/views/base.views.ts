@@ -4,64 +4,60 @@ import { AnchorComponent, BaseListComponent } from './components.views.ts';
 import * as icons from './icons.views.ts';
 import type { User } from '../types/base.types.ts';
 
-// deno-fmt-ignore: Results in undesired formatting of template structure
-export const Base = ((title: string, imports: Template[], user: User | undefined, content: Template) => html`
-	<!DOCTYPE html>
-	<html lang='en'>
-		<head>
-			<meta charset='UTF-8'>
-			<meta name='viewport' content='width = device-width, initial-scale = 1.0'>
+export const Base = (title: string, imports: Template[], user: User | undefined, content: Template): Template =>
+	html`
+		<!DOCTYPE html>
+		<html lang='en'>
+			<head>
+				<meta charset='UTF-8'>
+				<meta name='viewport' content='width = device-width, initial-scale = 1.0'>
 
-			<title>${ title } | Skrambl.</title>
+				<title>${title} | Skrambl.</title>
 
-			<link rel='preconnect' href='https://rsms.me'>
-			<link rel='stylesheet' href='https://rsms.me/inter/inter.css'>
+				<link rel='preconnect' href='https://rsms.me'>
+				<link rel='stylesheet' href='https://rsms.me/inter/inter.css'>
 
-			<link rel='stylesheet' href='/static/css/base.css'>
-			${ imports }
-		</head>
+				<link rel='stylesheet' href='/static/css/base.css'>
+				${imports}
+			</head>
 
-		<body>
-			<header>
-				<div>
-					<h1>Skrambl.</h1>
-					<article class='badge border surface warning'>Early Access</article>
-				</div>
+			<body>
+				<header>
+					<div>
+						<h1>Skrambl.</h1>
+						<article class='badge border surface warning'>Early Access</article>
+					</div>
 
-				${
-					!user ? '' : html`
+					${!user ? '' : html`
 						<article class='user'>
 							<button type='button' class='ghost' popovertarget='dropdown'>
-								<img src='${ user.image.url }' width='${ user.image.size }' height='${ user.image.size }'>
+								<img src='${user.image.url}' width='${user.image.size}' height='${user.image.size}'>
 							</button>
 
 							<section id='dropdown' popover='auto'>
 								<section class='details'>
-									<img src='${ user.image.url }' width='${ user.image.size }' height='${ user.image.size }'>
-									${ user.name }
+									<img src='${user.image.url}' width='${user.image.size}' height='${user.image.size}'>
+									${user.name}
 								</section>
 
 								<hr>
 
-								${
-									BaseListComponent([
-										html`<a href='/auth/logout' class='button surface danger'>${ icons.Signout() } Sign out</a>`,
-									])
-								}
+								${BaseListComponent([
+									html`<a href='/auth/logout' class='button surface danger'>${icons.Signout()} Sign out</a>`,
+								])}
 							</section>
 						</article>
-					`
-				}
-			</header>
+					`}
+				</header>
 
-			<main>
-				 ${ content }
-			</main>
+				<main>
+					 ${content}
+				</main>
 
-			<footer>
-				&copy; 2026
-				${ AnchorComponent('https://maikdevries.com', 'Maik de Vries') }
-			</footer>
-		</body>
-	</html>
-`);
+				<footer>
+					&copy; 2026
+					${AnchorComponent('https://maikdevries.com', 'Maik de Vries')}
+				</footer>
+			</body>
+		</html>
+	`;
