@@ -101,6 +101,15 @@
 			],
 		},
 	},
+	"permissions": {
+		"default": {
+			"env": true,
+			"net": true,
+		},
+	},
+	"lock": {
+		"frozen": true,
+	},
 	"imports": {
 		"@self/common/types": "./src/common/types/mod.ts",
 		"@self/server/types": "./src/server/types/mod.ts",

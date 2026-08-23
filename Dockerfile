@@ -18,4 +18,4 @@ WORKDIR /app
 COPY --from=builder ${DENO_DIR} ${DENO_DIR}
 
 COPY --from=builder /app .
-CMD ["run", "-EN", "app.ts"]
+CMD ["run", "-P", "app.ts"]
