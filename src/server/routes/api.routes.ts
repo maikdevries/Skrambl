@@ -1,4 +1,4 @@
-import { route, type RouteContext } from '@maikdevries/server-router';
+import { route, type RouteContext } from '@disconnected/web-router';
 import { RouteError } from '@self/server/types';
 import { type BaseContext as AC, middleware as authorised } from '../middleware/authorised.middleware.ts';
 import { type BaseContext as CC, middleware as cached } from '../middleware/cached.middleware.ts';

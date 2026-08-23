@@ -1,4 +1,4 @@
-import { route, type RouteContext } from '@maikdevries/server-router';
+import { route, type RouteContext } from '@disconnected/web-router';
 import { RouteError } from '@self/server/types';
 import { type BaseContext, middleware } from '../middleware/base.middleware.ts';
 
@@ -31,8 +31,9 @@ const router = route<BaseContext>(
 			'pattern': new URLPattern({ 'pathname': '/cache/*' }),
 			'handler': cache,
 		},
+		// [NOTE] Top-level path router must be last to avoid 404's for other sub-level path routers
 		{
-			'method': ['*'],
+			'method': '*',
 			'pattern': new URLPattern({ 'pathname': '/*' }),
 			'handler': pages,
 		},

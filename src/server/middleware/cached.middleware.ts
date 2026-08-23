@@ -1,4 +1,4 @@
-import { chain, type Middleware } from '@maikdevries/server-middleware';
+import { chain, type Middleware } from '@disconnected/web-middleware';
 import type { Cache } from '../types/base.types.ts';
 import type { BaseContext as BC } from './base.middleware.ts';
 

@@ -1,38 +1,34 @@
 {
   "version": "5",
   "specifiers": {
-    "jsr:@maikdevries/server-middleware@0.2": "0.2.0",
-    "jsr:@maikdevries/server-middleware@~0.3.1": "0.3.1",
-    "jsr:@maikdevries/server-render@~0.2.1": "0.2.1",
-    "jsr:@maikdevries/server-router@0.5": "0.5.0",
-    "jsr:@maikdevries/server-sessions@0.7": "0.7.0"
+    "jsr:@disconnected/web-middleware@~0.3.5": "0.3.5",
+    "jsr:@disconnected/web-render@~0.2.2": "0.2.2",
+    "jsr:@disconnected/web-router@~0.5.1": "0.5.1",
+    "jsr:@disconnected/web-sessions@~0.7.1": "0.7.1"
   },
   "jsr": {
-    "@maikdevries/server-middleware@0.2.0": {
-      "integrity": "281d4a44b0cbd3beac8035abb1b3f67a91c8583f122a2477e41560d36f9e2884"
+    "@disconnected/web-middleware@0.3.5": {
+      "integrity": "8b242ee0852e2419af4f4ae62386e4c4f740a89dab358cacb44b5c1b1560138c"
     },
-    "@maikdevries/server-middleware@0.3.1": {
-      "integrity": "52208e0bb2f93f36e0a954bf975c567a1a094527bc28da09452ecbf39c087736"
+    "@disconnected/web-render@0.2.2": {
+      "integrity": "6a8d11b2a3cfa2977bfd58371870762534f2f40f7ff1dc73daa692df47d3386b"
     },
-    "@maikdevries/server-render@0.2.1": {
-      "integrity": "6124614d1d1c5150df78592928bd667baaaa3098cd2a143f4a143c18c4449cf8"
+    "@disconnected/web-router@0.5.1": {
+      "integrity": "a1f50961d949c3781023128bc452f71f6b50ad53dccfae2bbe636453db5f679d"
     },
-    "@maikdevries/server-router@0.5.0": {
-      "integrity": "1e8a4acd1941118b33f33a9aee3561e19c1b2a48d01339bf5e8d90925c18d7bc"
-    },
-    "@maikdevries/server-sessions@0.7.0": {
-      "integrity": "2b6033754347afa0ce454fea342616a509b5f5a3bcc74c9e7f10a9a5afcb9545",
+    "@disconnected/web-sessions@0.7.1": {
+      "integrity": "ab9b710911b952043c790fb23a205faff39b8bd4109164e00e923039dd627b29",
       "dependencies": [
-        "jsr:@maikdevries/server-middleware@0.2"
+        "jsr:@disconnected/web-middleware"
       ]
     }
   },
   "workspace": {
     "dependencies": [
-      "jsr:@maikdevries/server-middleware@~0.3.1",
-      "jsr:@maikdevries/server-render@~0.2.1",
-      "jsr:@maikdevries/server-router@0.5",
-      "jsr:@maikdevries/server-sessions@0.7"
+      "jsr:@disconnected/web-middleware@~0.3.5",
+      "jsr:@disconnected/web-render@~0.2.2",
+      "jsr:@disconnected/web-router@~0.5.1",
+      "jsr:@disconnected/web-sessions@~0.7.1"
     ]
   }
 }

@@ -1,4 +1,4 @@
-import { html, type Template } from '@maikdevries/server-render';
+import { html, type Template } from '@disconnected/web-render';
 
 import * as icons from './icons.views.ts';
 import type { Playlist } from '../types/base.types.ts';

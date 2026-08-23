@@ -3,7 +3,7 @@ import type { Credentials, User } from '../types/base.types.ts';
 
 import * as auth from '../services/auth.services.ts';
 
-import { stringify as render } from '@maikdevries/server-render';
+import { stringify as render } from '@disconnected/web-render';
 import * as views from '../views/pages.views.ts';
 
 interface PKCE {

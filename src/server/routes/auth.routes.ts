@@ -1,4 +1,4 @@
-import { route, type RouteContext } from '@maikdevries/server-router';
+import { route, type RouteContext } from '@disconnected/web-router';
 import { RouteError } from '@self/server/types';
 import type { BaseContext } from '../middleware/base.middleware.ts';
 

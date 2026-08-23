@@ -104,9 +104,9 @@
 	"imports": {
 		"@self/common/types": "./src/common/types/mod.ts",
 		"@self/server/types": "./src/server/types/mod.ts",
-		"@maikdevries/server-middleware": "jsr:@maikdevries/server-middleware@^0.3.1",
-		"@maikdevries/server-render": "jsr:@maikdevries/server-render@^0.2.1",
-		"@maikdevries/server-router": "jsr:@maikdevries/server-router@^0.5.0",
-		"@maikdevries/server-sessions": "jsr:@maikdevries/server-sessions@^0.7.0",
+		"@disconnected/web-middleware": "jsr:@disconnected/web-middleware@^0.3.5",
+		"@disconnected/web-render": "jsr:@disconnected/web-render@^0.2.2",
+		"@disconnected/web-router": "jsr:@disconnected/web-router@^0.5.1",
+		"@disconnected/web-sessions": "jsr:@disconnected/web-sessions@^0.7.1",
 	},
 }

@@ -1,4 +1,4 @@
-import { html, type Template } from '@maikdevries/server-render';
+import { html, type Template } from '@disconnected/web-render';
 
 import { Base } from './base.views.ts';
 import * as elements from './elements.views.ts';

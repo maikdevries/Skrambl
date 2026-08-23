@@ -1,4 +1,4 @@
-import { stream as render } from '@maikdevries/server-render';
+import { stream as render } from '@disconnected/web-render';
 import type { Context } from '../routes/pages.routes.ts';
 
 import * as views from '../views/pages.views.ts';

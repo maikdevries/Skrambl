@@ -1,6 +1,6 @@
-import { chain, type Middleware } from '@maikdevries/server-middleware';
-import { type Log, logger } from '@maikdevries/server-middleware/middleware';
-import { middleware as session, type Session } from '@maikdevries/server-sessions';
+import { chain, type Middleware } from '@disconnected/web-middleware';
+import { type Log, logger } from '@disconnected/web-middleware/middleware';
+import { middleware as session, type Session } from '@disconnected/web-sessions';
 import { BaseError, type ErrorDetails } from '@self/common/types';
 
 export interface BaseContext {

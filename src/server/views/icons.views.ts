@@ -1,4 +1,4 @@
-import { html, type Template } from '@maikdevries/server-render';
+import { html, type Template } from '@disconnected/web-render';
 
 export const Add = (): Template =>
 	html`
