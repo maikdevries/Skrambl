@@ -27,9 +27,11 @@ export async function getPlaylistItems(token: string, id: string): Promise<Track
 	const items = await fetch.pull<PlaylistItem>(token, 'GET', `playlists/${id}/tracks`);
 
 	// [NOTE] Operations on local files are not (fully) supported
-	return items.filter((x) => x.is_local === false).map((x) => ({
-		'uri': x.track.uri,
-	}));
+	return items.flatMap((x) =>
+		x.is_local ? [] : ({
+			'uri': x.track.uri,
+		})
+	);
 }
 
 export function removePlaylistItems(token: string, id: string, tracks: Track[]): Promise<Snapshot> {
